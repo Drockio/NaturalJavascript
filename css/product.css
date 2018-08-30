@@ -1,0 +1,284 @@
+.shoppingCart {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.shoppingCart .productsAndTotals {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.productsAndTotals > div {
+    display: flex;
+    flex-direction: column;
+}
+.container .products {
+    grid-area: products;
+    min-height: 350px;
+    /*background-color: hsla(115, 100%, 98%, 1);*/
+}
+.products > div {
+    height: 100%;
+}
+.product-list {
+    justify-content: space-around;
+    font-variant: small-caps;
+    padding: 16px 0px;
+}
+.productInfo {
+    min-width: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.productInfo p {
+    margin: 5px 0;
+}
+.productInfo input.purchase {
+    width: 5em;
+    height: 2.3em;
+    align-self: flex-end;
+    margin-top: 5px;
+}
+.productInfo input[type='button'] {
+    background-color: var(--productButton);
+    border: .5px solid var(--productBorder);
+}
+.product {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 49%;
+    margin: 40px 0;
+    padding: 0 20px 20px 10px;
+    border-top: .5px solid var(--inputBorder);
+    border-left: .5px solid var(--inputBorder);
+    -webkit-box-shadow: 6px 6px 15px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 6px 6px 15px 0px rgba(0,0,0,0.3);
+    box-shadow: 6px 6px 15px 0px rgba(0,0,0,0.3);
+}
+.product h3 {
+    margin-bottom: 0px;
+    text-align: center;
+}
+.product img {
+    max-height: 170px;
+    border-radius: 5px;
+    align-self: center;
+    margin: 0 auto 0 auto;
+}
+.product p {
+    text-align: justify;
+}
+.product p.description {
+    border-top: 1px solid var(--productButton);
+    border-bottom: 1px solid var(--productButton);
+    padding: 17px 0;
+}
+.productsInCart {
+    grid-area: productsInCart;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.productsInCart h2 {
+    margin-bottom: 40px;
+}
+.crediCardContainer::first{
+    padding-right: ;
+}
+.shipToChoiceContainer {
+    display: flex;
+    flex-direction: column;
+}
+.shipToHorizontal {
+    display: block;
+}
+.shipToVertical {
+    display: none;
+}
+.totals {
+    height: 100%;
+    align-self: flex-end;
+    margin: 20px 60px;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+.checkoutTotals {
+    font-size: 1.3em;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+.price {
+    padding: 0 33px;
+    font-size: 1.2em;
+}
+.grandTotal {
+    display: inline-block;
+}
+.modal-body .productsInCart img {
+    height: 50px;
+}
+.modal-body .product-container img {
+    max-height: 110px;
+}
+.modal-body .productsInCart h3 {
+    font-size: 1em;
+}
+.modal-body .productsInCart p {
+    font-size: 1em;
+    margin-left: 5px;
+}
+.modal-body .productsInCart .product-details {
+    margin: 10px 13px 5px 0;
+}
+.product-container .imageContainer {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-body .product-container {
+    display: flex;
+    justify-content: center;
+    border: 1px solid var(--inputBorder);
+    background-color: hsl(0,0%,100%,1);
+}
+.productsAndTotals .product-container {
+    justify-content: center;
+    padding: 50px 10px;
+}
+.modal-body .product-modifier {
+    align-items: center;
+    display: flex;
+    width: 15%;
+}
+.product-modifier input {
+    border: 1px solid gray;
+    width: 1.5em;
+    font-size: 1.8em;
+    height: 1.8em;
+    text-align: center;
+}
+.modal-body .product-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: hsla(0,0%,100%,1);
+    width: 65%;
+}
+.modal-body .product-details-info h3 {
+    font-size: 1.5em;
+}
+.modal-body .product-details-info p {
+    font-size: 1.5em;
+    white-space: nowrap;
+}
+.modal-body .product-details-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.deleteContainer {
+    width: 7%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 14px;
+}
+.delete {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--inputText);
+}
+.delete:hover,
+.delete:focus {
+    color: #gray;
+    text-decoration: none;
+    cursor: pointer;
+}
+.product-info input.purchase {
+    width: 7em;
+    display: block;
+    margin: auto;
+    margin-top: 19px;
+}
+.minus, .plus {
+    font-size: 1.8em;
+    width: 4em;
+}
+.green-dots {
+    background-image: url('../img/green-dots.jpg');
+    background-size: cover;
+}
+@media (min-width: 1200px) {
+    .product {
+        width: 40%;
+    }
+}
+@media (max-width: 850px) {
+    .productsInCart {
+        max-width: inherit;
+    }
+    .product {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        padding: 20px 0px;
+        margin: 1% 1%;
+    }
+    .product img {
+        max-width: 130px;
+        margin: 0;
+    }
+    .product .productInfo {
+        min-width: 100px;
+        width: 80%;
+    }
+    .product p.description {
+        height: inherit;
+    }
+    .modal-body .product-container {
+        justify-content: center;
+    }
+    .modal-body .product-container {
+        justify-content: center;
+    }
+    .container .product-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media (max-width: 600px) {
+    .shoppingCart .productsAndTotals {
+        width: 96%;
+    }
+    .modal-body .product-details {
+        margin: 20px 7px 20px 10px;
+    }
+    .modal-body .product-details-info h3 {
+        font-size: 1.0em;
+    }
+    .modal-body .product-details-info p {
+        font-size: 1.0em;
+    }
+    .product-list {
+        margin: 0;
+    }
+    .container .product-list {
+        padding: inherit;
+    }
+    .product-modifier input {
+        width: 1.5em;
+        font-size: 1.6em;
+        height: 1.5em;
+    }
+}

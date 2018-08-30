@@ -1,0 +1,12 @@
+<script id="mainProduct" type="text/x-handlebars-template">
+	<div class="product">
+		<img src="{{productImagePath}}" alt="{{productName}}" />
+		<div class="productInfo">
+			<h3>{{productName}}</h3>
+			<p class="description">{{productDescription}}</p>
+			<input type="button" class="purchase" data-campaignId={{campaignId}} data-productId={{productId}} value="{{currencySymbol}} {{price}}"></input> 
+		</div>
+	</div>
+</script>
+
+

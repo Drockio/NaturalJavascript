@@ -1,0 +1,53 @@
+<script id="checkoutForm" type="text/x-handlebars-template">
+   <div id="registration">
+      <form id="{{formName}}-form" novalidate>
+      	<fieldset>
+      		<h2 class="underline">{{title}}</h2>
+      		{{#unless includeEmail}}
+      		<div class="field" for="email">
+		      	<label for="email">Email*</label>
+		      	<input type="email" id="email" placeholder="Email" name="emailAddress" data-required-type="email" data-required-message="Please provide a valid."></input>
+	      	</div>
+	      	{{/unless}}
+	      	<div class="field">
+		      	<label for="first-name">First name*</label>
+		      	<input type="text" id="first-name" placeholder="First name" name="firstName" data-required-type="name" data-required-message="Please provide a first name."></input>
+	      	</div>
+	      	<div class="field">
+		      	<label for="last-name">Last name*</label>
+		      	<input type="text" id="last-name" placeholder="Last name" name="lastName" data-required-type="name" data-required-message="Please provide a last name."></input>
+	      	</div>
+	      	<div class="field">
+		      	<label for="address">Address*</label>
+		      	<input type="text" id="address" placeholder="Address" name="address1" data-required-type="address" data-required-message="Please provide a valid address."></input>
+	      	</div>
+	      	<div class="field">
+		      	<label for="apartment-suite">Apartment or suite</label>
+		      	<input type="text" id="apartment-suite" placeholder="Apt, suite, etc. (optional)" name="address2"></input>
+	      	</div>
+	      	<div class="field">
+		      	<label for="city">City*</label>
+		      	<input type="text" id="city" placeholder="City" name="city" data-required-type="city" data-required-message="Please provide a city."></input>
+	      	</div>
+	      	<div class="field">
+		      	<label for="country">Country</label>
+		      	<select id="country" name="country"></select>
+	      	</div>
+	      	<div class="field">
+		      	<label for="state">State</label>
+		      	<select id="state" name="state"></select>
+	      	</div>
+	      	<div class="field">
+		      	<label for="zip">Zip code*</label>
+		      	<input type="text" id="zip" placeholder="ZIP code" name="postalCode" data-required-type="zip" data-required-message="Please provide a valid zip code."></input>
+	      	</div>
+	      	<div class="field" for="phone">
+		      	<label for="phone">Phone*</label>
+		      	<input type="tel" id="phone" placeholder="Phone" name="phoneNumber" data-required-type="phone" data-required-message="Please enter a phone number."></input>
+	      	</div>
+	      </fieldset>
+      </form>
+   </div>
+</script>
+
+

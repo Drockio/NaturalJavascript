@@ -1,0 +1,4 @@
+/node_modules/
+/libs/
+/_disregard/
+package-lock.json

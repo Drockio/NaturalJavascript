@@ -1,0 +1,131 @@
+label {
+    color: var(--labelColor);
+}
+select, input, option {
+    height: 2.5em;
+    outline: none;
+    font-size: 1.1em;
+    color: var(--inputText);
+    letter-spacing: var(--letter-spacing);
+    border: 1px solid var(--inputBorder);
+}
+
+.field .validation-error::placeholder {
+    color: #B22222;
+}
+.field{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.field input {
+    line-height: inherit;
+    color: var(--inputText);
+    background-color: hsla(0,0%,100%,1);
+    padding: 18px 0 18px 8px;
+    border-radius: calc(var(--borderRadius) / 2);
+}
+.field, .horizontalRow select, .horizontalRow input {
+    width: 100%;
+}
+.field.short input, #creditCard .field.short input {
+    width: 12em;
+}
+.horizontalRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.horizontalRow .spacer {
+    width: calc(100% - 2px);
+}
+.shipToChoiceContainer {
+    grid-area: shipToChoice;
+}
+.shipToChoiceContainer .visualBackground {
+    background-color: hsl(0,0%,100%,1);
+    border: 1px solid var(--inputBorder);
+}
+.shipToChoiceRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2% 10% 1% 5%;
+    border: 1px solid var(--inputBorder);
+    align-items: center;
+}
+.shipToChoiceRow input[type="radio"]{
+    width: 20px;
+    align-self: center;
+}
+.shipToChoiceRow.narrow {
+    padding: 0% 10% 0% 5%;
+    height: 2.8em;
+}
+.shipToChoiceRow .edit {
+    align-self: center;
+    width: 11%;
+}
+.altShipAddressLabel {
+    width: 89%;
+}
+#registration fieldset {
+    display: flex;
+    flex-direction: column;
+    border: 0px solid #d8d8d8;
+    border-radius: 4px;
+}
+#creditCard #registration fieldset {
+    margin: 0 0;
+    padding: 0 0;
+}
+#creditCard #registration fieldset div[for="email"],
+#creditCard #registration fieldset div[for="phone"]{
+    display: none;
+}
+#registration select {
+    border: 1px solid var(--inputBorder);
+    border-bottom: 1px solid #d8d8d8;
+}
+#registration option, #registration select {
+    width: 100%;
+}
+.checkoutForm-container {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 48% 48%;
+    grid-template-areas: 
+        "checkoutForm productsInCart"
+}
+.checkoutForm {
+    grid-area: checkoutForm;
+    display: flex;
+    justify-content: center;
+}
+#creditCard {
+    grid-area: creditCard;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.addressBlock {
+    width: 75%;
+    line-height: 1.1em;
+    margin-left: 8px;
+}
+.addressBlock > p {
+    margin: 0;
+}
+
+@media (max-width: var(--mediaBreakPoint600)) {
+    .creditCardContainer, .checkoutForm-container  {
+        width: 98%;
+    }
+    .horizontalRow {
+        flex-direction: column;
+    }
+    .horizontalRow select, .horizontalRow input {
+        width: inherit;
+    }
+}
+
