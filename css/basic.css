@@ -1,17 +1,12 @@
 /*resets*/
+body {
+    box-sizing: borderbox;
+}
 fieldset, p {
     margin: 0;
     padding: 0;
     border: 0;
 }
-body {
-    font-family: 'Nunito', sans-serif;
-    font-size: 14px;
-    font-variant: small-caps;
-    font-weight: bold;
-    letter-spacing: var(--letter-spacing);
-}
-
 .removeScroll {
     overflow: hidden;
 }
@@ -27,18 +22,6 @@ body {
 .error h3 {
     margin: 2px;
 }
-h1, h1 a {
-    font-size: 2em;
-}
-h2 {
-    font-size: 1.8em;
-}
-h4 {
-    font-size: 1.4em;
-}
-.underline {
-    text-decoration: underline;
-}
 input[type="button"] {
     background: hsl(111,36%,38%);
     border: none;
@@ -48,6 +31,9 @@ input[type="text"]::placeholder, input[type="email"]::placeholder {
     color: #fff;
 }
 
+.underline {
+    text-decoration: underline;
+}
 
 /* remove google yellow filled in fields */
 select:-webkit-autofill,
