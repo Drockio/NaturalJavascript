@@ -1,0 +1,17 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-variant: small-caps;
+    font-weight: bold;
+    letter-spacing: var(--letter-spacing);
+}
+
+h1, h1 a {
+    font-size: 2em;
+}
+h2 {
+    font-size: 1.8em;
+}
+h4 {
+    font-size: 1.4em;
+}
