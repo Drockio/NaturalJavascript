@@ -1,17 +1,38 @@
-body {
-    font-family: 'Nunito', sans-serif;
+:root {
+    font-family: Helvetica, sans-serif;
     font-size: 14px;
-    font-variant: small-caps;
+    color: #4c4e4d;
+    /*font-variant: small-caps;*/
     font-weight: bold;
     letter-spacing: var(--letter-spacing);
 }
 
-h1, h1 a {
-    font-size: 2em;
+/* this seems excessive to have to 'inherit override' a link. */
+a:-webkit-any-link {
+	color: inherit;
 }
-h2 {
-    font-size: 1.8em;
+
+h1,h2,h3,h4,h5,h6 h1 a,h2 a,h3 a,h4 a,h5 a,h6 a {
+	font-family: 'Balto', Helvetica, sans-serif;
 }
-h4 {
-    font-size: 1.4em;
+
+h1 a:hover, h3:hover, a:hover {
+	color: #292A2A;
 }
+
+a:link {
+    color: #4F7177;
+    font-weight: 600;
+}
+
+
+/* flex-grow, flex-shrink, flex-basis */
+
+h1 {
+	font-weight: 700;
+	font-size: 2.5em;
+	flex: 1,1,0;
+}
+
+
+

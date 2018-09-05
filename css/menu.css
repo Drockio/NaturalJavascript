@@ -8,12 +8,6 @@ ul {
   list-style: none;
 }
 
-h2,
-h3,
-a {
-    color: #34495e;
-}
-
 a {
     text-decoration: none;
 }
@@ -36,12 +30,7 @@ a {
 }
 
 .main-nav a {
-    color: #34495e;
     font-size: .99em;
-}
-
-.main-nav a:hover {
-    color: #718daa;
 }
 
 .header {
