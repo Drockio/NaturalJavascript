@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Greens!</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+
+    <!-- Dependencies -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+    <!-- Handlebars templates -->
+    <script type="text/javascript" src="templates/compiledHandlebars.js"></script>
+
+    <!-- Main project -->
+    <script type="module" src="js/main.js"></script>
+    <link rel="stylesheet" href="css/includes.css"/>
+    
+    <!-- Less necessary -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"/>
+
+    <style>
+        :root {
+          --labelColor: hsl(120, 1%, 46%, 1);
+          --inputText: hsl(0, 0%, 33%,1);
+          --lightText: hsla(184, 6%, 83%, 1);
+          --headerText: hsla(118, 6%, 30%, 1);
+          --modalHeader: hsla(131, 12%, 38%, 1);
+          --rowHeightMin: 150px;
+          --inputBorder: hsla(120,1%,46%,.38);
+          --borderRadius: 8px;
+          --letter-spacing: .10em;
+          --formBreakWidth850: 60%;
+          --formBreakWidth700: 70%;
+          --errorColor: #ff0033;
+          --shroudColor: hsla(115, 24%, 68%, 0.4);
+          --shroudAnimationColor: #ff5a50;
+          --mediaBreakPoint600: 600px;
+          --productButton: hsla(120,1%,46%,.38);
+          --productBorder: hsla(120,1%,46%,.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo"><a href="#">Greens!</a></h1>
+            <ul class="main-nav">
+                <li><a id="click-home" href="#">Home</a></li>
+                <li><a id="click-about" href="#">About</a></li>
+                <li><a id="click-products" href="#">Products</a></li>
+                <li><a id="click-contact" href="#">Contact</a></li>
+                <li><a id="shopping-cart-click" href="#"><i class="fas fa-shopping-cart"></i></a></li>
+            </ul>
+        </header> 
+        <div class="banner green-dots animated fadeIn">
+            <h2>Hungry for some greens?</h2>
+            <span>nutritious products for a healthier you</span>
+        </div>
+        <div class="about"><h2>About</h2></div>
+        <div class="products animated fadeIn delay-1s">
+            <div class="product-list flex-row flex-wrap">
+            </div>
+        </div>
+        <div class="email padding">        
+            <div class="loss_leader">
+                <!-- <img style="height: 120px; margin: 10px 0 10px" src="img/veggie-heart.jpeg" alt="loss leader!" class="rounded"> -->
+                <p>Call for a free consultation!</p>
+            </div>
+            <form id="email-contact">
+              <select>
+                <option>Free Consultation</option> 
+                <option>Product</option>
+                <option>Learn more</option>
+              </select>
+              <input type="text" placeholder="Email Address"/>
+              <input type="button" value="Send"/>
+            </form>
+        </div>
+        <div class="footer"></div>
+        <div class="copyright"><span>Copyright 2018 Level Ads, LLC. All rights reserved.</span> | <a href="#">Terms of Use</a>
+        </div>
+    </div>
+    <div id="main-modal" class="modal">
+      <div class="modal-content">
+      </div>
+    </div>
+    <div id="shroud">
+        <div id="loader">Loading...</div>
+    </div>
+</body>
+</html>
