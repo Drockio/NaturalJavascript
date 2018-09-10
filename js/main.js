@@ -30,7 +30,7 @@ const globals = {
 const baseUrl = `?campaignId=${globals.campaignId}&loginId=${globals.apiUserId}&password=${globals.apiPassword}`;
 
 const urls = {
-	productUrl: `https://api.konnektive.com/product/query/${baseUrl}`,
+	productUrl: `https://localhost/konnecktive/product`,
 	importLead: `https://api.konnektive.com/leads/import/${baseUrl}`,
 	importOrder: `https://api.konnektive.com/order/import/${baseUrl}`
 };
