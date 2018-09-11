@@ -19,6 +19,8 @@ let message;
 
 //this will likely be set per website.
 const globals = {
+	apiServer: `https://localhost`,
+	crm: `konnektive`,
 	campaignId: '2',
 	apiUserId: 'ddunnom_api',
 	apiPassword: 'LevelIt!!99',
@@ -29,9 +31,16 @@ const globals = {
 
 const baseUrl = `?campaignId=${globals.campaignId}&loginId=${globals.apiUserId}&password=${globals.apiPassword}`;
 
+// direct from konnektive
+// const urls = {
+// 	productUrl: `https://localhost/konnektive/product`,
+// 	importLead: `https://api.konnektive.com/leads/import/${baseUrl}`,
+// 	importOrder: `https://api.konnektive.com/order/import/${baseUrl}`
+// };
+
 const urls = {
-	productUrl: `https://localhost/konnecktive/product`,
-	importLead: `https://api.konnektive.com/leads/import/${baseUrl}`,
+	productUrl: `${globals.apiServer}/${globals.crm}/products/${globals.campaignId}`,
+	importLead: `${globals.apiServer}/${globals.crm}/postLead`,
 	importOrder: `https://api.konnektive.com/order/import/${baseUrl}`
 };
 
@@ -188,13 +197,13 @@ const modal = {
 
 const broadcast = {
 	error: function(data){
-		let jsonData = JSON.parse(data);
+		let jsonData = typeof(data) == 'string' ? JSON.parse(data) : data;
 		if (jsonData){
 
-			let errors = Object.entries(jsonData['message']).map(([key, value]) => {
-				return `<span>${key} ${value}. </span>`; }
-			).join(''); //join removes unwanted commas. darn commas!
-			let html = `<div class="error"><h3>${jsonData['result']}</h3>${errors}</div>`;
+			// let errors = Object.entries(jsonData['message']).map(([key, value]) => {
+			// 	return `<span>${key} ${value}. </span>`; }
+			// ).join(''); //join removes unwanted commas. darn commas!
+			let html = `<div class="error"><h3>${jsonData['result']}</h3>${jsonData['message']}</div>`;
 			$('.modal-message').html(html);
 
 			storage.setError(data);
@@ -525,11 +534,18 @@ const checkout = {
 			data: standardInputs,
 		})
 		.done(function(data){
-			creditCardPage.setRegistrationSpecific(JSON.parse(data));
+			if (JSON.parse(data).result === 'SUCCESS'){
+				creditCardPage.setRegistrationSpecific(JSON.parse(data));
+				return true;
+			}
+			else {
+				broadcast.error(data);
+				return false;
+			}
 		})
 		.fail(function(response){
-			//TODO: Make this fail!
-			console.log('fail');
+			broadcast.error({result: "ERROR", message: response.statusText});
+			return false;
 		});
 	},
 	getStandardInputs: function(){
@@ -554,8 +570,10 @@ const checkout = {
 		if (validate.validateForm('registration'))
         {
         	this.getStandardInputs();
-        	this.postStandardInputs();
-        	message.post('displayCreditCardPage');
+        	if (this.postStandardInputs())
+        	{
+        		message.post('displayCreditCardPage');
+        	}
         	return true;
         } 
         else 

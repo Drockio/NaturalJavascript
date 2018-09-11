@@ -1,6 +1,6 @@
 # Greens
 
-Konnecktive site for selling greens
+Konnektive site for selling greens
 
 ## Getting Started
 Download the [production version][min] or the [development version][max].

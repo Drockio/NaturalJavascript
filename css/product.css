@@ -51,7 +51,7 @@
     justify-content: space-around;
     width: 49%;
     margin: 40px 0;
-    padding: 0 20px 20px 10px;
+    padding: 5px 20px 20px 10px;
     border-top: .5px solid var(--inputBorder);
     border-left: .5px solid var(--inputBorder);
     -webkit-box-shadow: 6px 6px 15px 0px rgba(0,0,0,0.3);
