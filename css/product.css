@@ -41,9 +41,8 @@
     align-self: flex-end;
     margin-top: 5px;
 }
-.productInfo input[type='button'] {
-    background-color: var(--productButton);
-    border: .5px solid var(--productBorder);
+.productInfo input[type='button']:hover {
+
 }
 .product {
     display: flex;

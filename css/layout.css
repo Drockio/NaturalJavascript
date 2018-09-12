@@ -76,7 +76,7 @@
 }
 .container > div {
     display: flex;
-    border: 1px solid #7b7777;
+    border: .5px solid var(--lightBorder);
     justify-content: center;
     min-height: var(--rowHeightMin);
 }
@@ -90,6 +90,9 @@
 .container .banner {
     grid-area: banner;
     min-height: 200px;
+    border-top-right-radius: var(--borderRadius);
+    border-top-left-radius: var(--borderRadius);
+    border-bottom: inherit;
 }
 .container .about {
     grid-area: about;
@@ -118,16 +121,10 @@
 button.navigation {
     height: 4em;
     width: 10em;
-    background-color: #5cb85c;
-    color: #fff;
-    box-shadow: 9px 10px 17px -4px rgba(159,166,159,1);
-    border-radius: 10px;
-    outline: none;
 }
 button.navigation.forward {
     float: right;
     margin-right: 16px;
-
 }
 button.navigation.backward {
     float: left;
