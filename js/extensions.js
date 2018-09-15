@@ -1,0 +1,90 @@
+function setCSSVar(name, value, unit) {
+	var rootStyles = document.styleSheets[0].cssRules[0].style;
+		rootStyles.setProperty(name, value + (unit || ''));
+}
+
+const css = {
+	setVar: function(varName, varValue){
+		var html = document.getElementsByTagName('html')[0];
+		html.style.cssText = "--main-background-color: red";
+	}
+};
+
+//extend javascipts Element with the custom function called onEvent.
+//the name onEvent was chosen because it likely won't collide with future versions
+//of javascript function names to add event listeners since the existing one has existed
+//since around 1995 and there really isn't need for another besides aliasing 
+//(using a name that makes you smile AND what I did here to make you smile).
+Element.prototype.onEvent = function(event, fn){
+	this.addEventListener(event, fn);
+};
+
+Element.prototype.insertHTML = function(html){
+	this.innerHTML = html;
+};
+
+Element.prototype.removeChildren = function (){
+	while (this.firstChild) {
+    	this.removeChild(this.firstChild);
+	}
+};
+
+String.prototype.toHTML = function() {
+    let template = document.createElement('template');
+    let html = this.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.childNodes;
+};
+
+//INPORTANT: Can't assign this to a variable (and then pass it to a function scope).
+// function doTemplate(templateLiteral, string) {
+// 	console.log(templateLiteral);
+// }
+
+// let template = `somebody ${jsonData}`;
+// let json = 'needs a walk';
+// doTemplate(template, json);
+
+
+//todo: see if you can get the followisng template from a handlebars template:
+let _library = {
+	el: '',
+	setOptionList: function(jsonData){
+		let options = this.isJSON(jsonData) ? 
+			jsonData.reduce((selectList, currentOption) => {
+				return selectList += (currentOption.selected) ? 
+						`<option value="${currentOption.value}" selected="selected">${currentOption.name}</option>`:
+						`<option value="${currentOption.value}">${currentOption.name}</option>`;
+				},'') : null;
+		this.el.innerHTML = options; 
+		return options;
+	},
+	walkJSONPath: function(jsonData){
+
+	},
+	isJSON: function(dontKnow){
+		return dontKnow && typeof dontKnow === 'object';
+	},
+	insertHTML: function(html){
+		if (html){
+     		this.el.innerHTML = html;
+     	}
+     	else 
+     	{
+     		console.log('no html to process');
+     	}
+   	}
+};
+
+function dd$(selector){
+	let element = document.querySelector(selector);
+	_library.el = element;
+	if (!_library.el){
+		console.warn(`"${selector}" was not found.`);
+	}
+	//return Object.assign({}, element, _library);
+	return element;
+}
+
+export { dd$ };
+

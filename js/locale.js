@@ -1,18 +1,18 @@
 //TODO: Move the following functions and prototypes to extensions.js when npm test
 //allows includes (instead of require);
 
-Element.prototype.removeChildren = function (){
-	while (this.firstChild) {
-    	this.removeChild(this.firstChild);
-	}
-};
+// Element.prototype.removeChildren = function (){
+// 	while (this.firstChild) {
+//     	this.removeChild(this.firstChild);
+// 	}
+// };
 
-String.prototype.toHTML = function() {
-    let template = document.createElement('template');
-    let html = this.trim(); // Never return a text node of whitespace as the result
-    template.innerHTML = html;
-    return template.content.childNodes;
-};
+// String.prototype.toHTML = function() {
+//     let template = document.createElement('template');
+//     let html = this.trim(); // Never return a text node of whitespace as the result
+//     template.innerHTML = html;
+//     return template.content.childNodes;
+// };
 
 function disable(element){
 	element.classList.add("disabledElement");
@@ -30,17 +30,24 @@ function ensureIsElement(target){
 
 let locale = {
 	getStatesSelectList: function(countryCode){
-		let localeList = [];
-		locale.countries.forEach(item => {
-			let code = Object.entries(item)[1];
-			if (code[1] === countryCode){
-				//console.log(item.locales);
-				//console.log(item['locale-label']);
-				localeList.push(item.locales);
-			}
+		// let localeList = [];
+		// locale.countries.forEach(item => {
+		// 	let code = Object.entries(item)[1];
+		// 	if (code[1] === countryCode){
+		// 		//console.log(item.locales);
+		// 		//console.log(item['locale-label']);
+		// 		localeList.push(item.locales);
+		// 	}
+		// });
+
+		let states = locale.countries.find(item => {
+			return Object.entries(item)[1][1] === countryCode;
 		});
 
-		return localeList[0] ? localeList[0].map(item => `<option value="${item.stateCode}">${item.name}</option>`) : null;
+		console.log(states);
+		debugger;
+		return states.locales;
+		//return localeList[0] ? localeList[0].map(item => `<option value="${item.stateCode}">${item.name}</option>`) : null;
 	},
 	getCountriesSelectList: function(defaultCountryCode){ 
 		return locale.countries.map(item => `<option value="${item.code}"${(item.code === defaultCountryCode) ? 'selected' : ''}>${item.name}</option>`);
