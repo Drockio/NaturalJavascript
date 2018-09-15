@@ -91,7 +91,7 @@ window.onload=function(){
   		message.post('displayHomePage');
   		message.post('displayProducts');
 
-  		message.post('displayCart');
+  		//message.post('displayImportUserPage');
 	});
 };
 

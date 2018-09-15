@@ -53,10 +53,11 @@ const importUserPage = {
 		if (validate.validateForm('registration'))
         {
         	this.getStandardInputs();
-        	if (this.postStandardInputs())
-        	{
+        	//TODO: Put this back in after konnektive import user works.
+        	//if (this.postStandardInputs())
+        	//{
         		message.post('displayCreditCardPage');
-        	}
+        	//}
         	return true;
         } 
         else 
@@ -89,8 +90,12 @@ const importUserPage = {
 		modal.display('Checkout', checkoutFormTop, continueButton, { 'name': 'Back'});
 		shoppingCartPage.displayTotal();
 
-		$('#state').append(locale.getStatesSelectList());
-		$('#country').append(locale.getCountriesSelectList('CA'));
+		$('#country').append(locale.getCountriesSelectList(globals.defaultCountry));
+		locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+
+	  	$('#country').on('change', function(){
+			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+		});
 
 		//retrieve user information if available
 		this.populateStandardInputs();

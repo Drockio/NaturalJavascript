@@ -7,6 +7,7 @@ const globals = {
 	apiPassword: 'LevelIt!!99',
 	//domainName: 'http://localhost',
 	domainName: '*',
+	defaultCountry: 'CA',
 	TAKETHISOUT: 4.44
 };
 
@@ -20,7 +21,8 @@ const baseUrl = `?campaignId=${globals.campaignId}&loginId=${globals.apiUserId}&
 // };
 
 const urls = {
-	productUrl: `${globals.apiServer}/${globals.crm}/products/${globals.campaignId}`,
+	productUrl: `https://api.konnektive.com/product/query/${baseUrl}`,
+	//productUrl: `${globals.apiServer}/${globals.crm}/products/${globals.campaignId}`,
 	importLead: `https://api.konnektive.com/leads/import/${baseUrl}`,
 	//importLead: `${globals.apiServer}/${globals.crm}/postLead`,
 	importOrder: `https://api.konnektive.com/order/import/${baseUrl}`

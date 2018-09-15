@@ -69,3 +69,9 @@ input:-webkit-autofill:focus {
     border-bottom-left-radius: var(--borderRadius);
     border-bottom-right-radius: var(--borderRadius);
 }
+
+.disabledElement {
+    background-color: var(--shroudColor);
+    cursor: not-allowed;
+}
+

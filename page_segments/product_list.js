@@ -37,7 +37,10 @@ const product_list = {
 		    //display results
 		    $('.product-list').empty().append(defaultedMarkup);
 		})
-		.fail(function(response){console.log('error: ' + response.statusText);});
+		.fail(function(jqxhr, textStatus, error){
+			var err = textStatus + ", " + error;
+    		console.log( "Product_list request Failed: " + err );
+		});
 
 		//add to cart links
 	  	$('.product-list').on('click', '.purchase', function(){

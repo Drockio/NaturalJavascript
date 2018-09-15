@@ -1,77 +1,66 @@
+//TODO: Move the following functions and prototypes to extensions.js when npm test
+//allows includes (instead of require);
+
+Element.prototype.removeChildren = function (){
+	while (this.firstChild) {
+    	this.removeChild(this.firstChild);
+	}
+};
+
+String.prototype.toHTML = function() {
+    let template = document.createElement('template');
+    let html = this.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.childNodes;
+};
+
+function disable(element){
+	element.classList.add("disabledElement");
+	element.disabled = true;
+}
+
+function enable(element){
+	element.classList.remove("disabledElement");
+	element.disabled = false;
+}
+
+function ensureIsElement(target){
+	return (typeof target === 'object') ? target[0] : target;
+}
+
 let locale = {
-	getStatesSelectList: function(){
-		return this.states.map(item => `<option value="${item.stateCode}">${item.name}</option>`);
+	getStatesSelectList: function(countryCode){
+		let localeList = [];
+		locale.countries.forEach(item => {
+			let code = Object.entries(item)[1];
+			if (code[1] === countryCode){
+				//console.log(item.locales);
+				//console.log(item['locale-label']);
+				localeList.push(item.locales);
+			}
+		});
+
+		return localeList[0] ? localeList[0].map(item => `<option value="${item.stateCode}">${item.name}</option>`) : null;
 	},
-	getCountriesSelectList: function(defaultCountryCode){
-		return this.countries.map(item => `<option value="${item.code}"${(item.code === defaultCountryCode) ? 'selected' : ''}>${item.name}</option>`);
+	getCountriesSelectList: function(defaultCountryCode){ 
+		return locale.countries.map(item => `<option value="${item.code}"${(item.code === defaultCountryCode) ? 'selected' : ''}>${item.name}</option>`);
 	},
-	months: [
-		{"1":"January"},
-		{"2":"February"},
-		{"3":"March"},
-		{"4":"April"},
-		{"5":"May"},
-		{"6":"June"},
-		{"7":"July"},
-		{"8":"August"},
-		{"9":"September"},
-		{"10":"October"},
-		{"11":"November"},
-		{"12":"December"}
-	],
-	states: [
-		{"name":"Alabama","stateCode":"AL"},
-		{"name":"Alaska","stateCode":"AK"},
-		{"name":"Arizona","stateCode":"AZ"},
-		{"name":"Arkansas","stateCode":"AR"},
-		{"name":"California","stateCode":"CA"},
-		{"name":"Colorado","stateCode":"CO"},
-		{"name":"Connecticut","stateCode":"CT"},
-		{"name":"Delaware","stateCode":"DE"},
-		{"name":"District of Columbia","stateCode":"DC"},
-		{"name":"Florida","stateCode":"FL"},
-		{"name":"Georgia","stateCode":"GA"},
-		{"name":"Hawaii","stateCode":"HI"},
-		{"name":"Idaho","stateCode":"ID"},
-		{"name":"Illinois","stateCode":"IL"},
-		{"name":"Indiana","stateCode":"IN"},
-		{"name":"Iowa","stateCode":"IA"},
-		{"name":"Kansa","stateCode":"KS"},
-		{"name":"Kentucky","stateCode":"KY"},
-		{"name":"Lousiana","stateCode":"LA"},
-		{"name":"Maine","stateCode":"ME"},
-		{"name":"Maryland","stateCode":"MD"},
-		{"name":"Massachusetts","stateCode":"MA"},
-		{"name":"Michigan","stateCode":"MI"},
-		{"name":"Minnesota","stateCode":"MN"},
-		{"name":"Mississippi","stateCode":"MS"},
-		{"name":"Missouri","stateCode":"MO"},
-		{"name":"Montana","stateCode":"MT"},
-		{"name":"Nebraska","stateCode":"NE"},
-		{"name":"Nevada","stateCode":"NV"},
-		{"name":"New Hampshire","stateCode":"NH"},
-		{"name":"New Jersey","stateCode":"NJ"},
-		{"name":"New Mexico","stateCode":"NM"},
-		{"name":"New York","stateCode":"NY"},
-		{"name":"North Carolina","stateCode":"NC"},
-		{"name":"North Dakota","stateCode":"ND"},
-		{"name":"Ohio","stateCode":"OH"},
-		{"name":"Oklahoma","stateCode":"OK"},
-		{"name":"Oregon","stateCode":"OR"},
-		{"name":"Pennsylvania","stateCode":"PA"},
-		{"name":"Rhode Island","stateCode":"RI"},
-		{"name":"South Carolina","stateCode":"SC"},
-		{"name":"South Dakota","stateCode":"SD"},
-		{"name":"Tennessee","stateCode":"TN"},
-		{"name":"Texas","stateCode":"TX"},
-		{"name":"Utah","stateCode":"UT"},
-		{"name":"Vermont","stateCode":"VT"},
-		{"name":"Virginia","stateCode":"VA"},
-		{"name":"Washington","stateCode":"WA"},
-		{"name":"West Virginia","stateCode":"WV"},
-		{"name":"Wisconsin","stateCode":"WI"},
-		{"name":"Wyoming","stateCode":"WY"}
-	],
+	setStatesSelectList: function(countryCode, stateElement, labelElement){
+		let list = locale.getStatesSelectList(countryCode);
+		stateElement = ensureIsElement(stateElement);
+		labelElement = ensureIsElement(labelElement);
+		stateElement.removeChildren();
+		if (list){
+			enable(stateElement);
+			let stateSelectList = list.join('').toHTML();
+			stateSelectList.forEach(item => {
+				stateElement.append(item);
+			});
+		}
+		else {
+			disable(stateElement);
+		}
+	},
 	countries: [
 		{"name": "Afghanistan", "code": "AF"},
 		{"name": "Åland Islands", "code": "AX"},
@@ -111,7 +100,21 @@ let locale = {
 		{"name": "Burundi", "code": "BI"},
 		{"name": "Cambodia", "code": "KH"},
 		{"name": "Cameroon", "code": "CM"},
-		{"name": "Canada", "code": "CA"},
+		{"name": "Canada", "code": "CA", "locale-label": "Province/Territories", "locales": [
+			{"name":"Alberta","stateCode":"AB"},
+			{"name":"British Columbia","stateCode":"BC"},
+			{"name":"Manitoba","stateCode":"MB"},
+			{"name":"New Brunswick","stateCode":"NB"},
+			{"name":"Newfoundland and Labrador","stateCode":"NL"},
+			{"name":"Northwest Territories","stateCode":"NT"},
+			{"name":"Nova Scotia","stateCode":"NS"},
+			{"name":"Nunavut","stateCode":"NU"},
+			{"name":"Ontario","stateCode":"ON"},
+			{"name":"Prince Edward Island","stateCode":"PE"},
+			{"name":"Quebec","stateCode":"QC"},
+			{"name":"Saskatchewan","stateCode":"SK"},
+			{"name":"Yukon","stateCode":"YT"}
+		]},
 		{"name": "Cape Verde", "code": "CV"},
 		{"name": "Cayman Islands", "code": "KY"},
 		{"name": "Central African Republic", "code": "CF"},
@@ -302,7 +305,59 @@ let locale = {
 		{"name": "Ukraine", "code": "UA"},
 		{"name": "United Arab Emirates", "code": "AE"},
 		{"name": "United Kingdom", "code": "GB"},
-		{"name": "United States", "code": "US"},
+		{"name": "United States", "code": "US", "locale-label": "State", "locales": [
+			{"name":"Alabama","stateCode":"AL"},
+			{"name":"Alaska","stateCode":"AK"},
+			{"name":"Arizona","stateCode":"AZ"},
+			{"name":"Arkansas","stateCode":"AR"},
+			{"name":"California","stateCode":"CA"},
+			{"name":"Colorado","stateCode":"CO"},
+			{"name":"Connecticut","stateCode":"CT"},
+			{"name":"Delaware","stateCode":"DE"},
+			{"name":"District of Columbia","stateCode":"DC"},
+			{"name":"Florida","stateCode":"FL"},
+			{"name":"Georgia","stateCode":"GA"},
+			{"name":"Hawaii","stateCode":"HI"},
+			{"name":"Idaho","stateCode":"ID"},
+			{"name":"Illinois","stateCode":"IL"},
+			{"name":"Indiana","stateCode":"IN"},
+			{"name":"Iowa","stateCode":"IA"},
+			{"name":"Kansa","stateCode":"KS"},
+			{"name":"Kentucky","stateCode":"KY"},
+			{"name":"Lousiana","stateCode":"LA"},
+			{"name":"Maine","stateCode":"ME"},
+			{"name":"Maryland","stateCode":"MD"},
+			{"name":"Massachusetts","stateCode":"MA"},
+			{"name":"Michigan","stateCode":"MI"},
+			{"name":"Minnesota","stateCode":"MN"},
+			{"name":"Mississippi","stateCode":"MS"},
+			{"name":"Missouri","stateCode":"MO"},
+			{"name":"Montana","stateCode":"MT"},
+			{"name":"Nebraska","stateCode":"NE"},
+			{"name":"Nevada","stateCode":"NV"},
+			{"name":"New Hampshire","stateCode":"NH"},
+			{"name":"New Jersey","stateCode":"NJ"},
+			{"name":"New Mexico","stateCode":"NM"},
+			{"name":"New York","stateCode":"NY"},
+			{"name":"North Carolina","stateCode":"NC"},
+			{"name":"North Dakota","stateCode":"ND"},
+			{"name":"Ohio","stateCode":"OH"},
+			{"name":"Oklahoma","stateCode":"OK"},
+			{"name":"Oregon","stateCode":"OR"},
+			{"name":"Pennsylvania","stateCode":"PA"},
+			{"name":"Rhode Island","stateCode":"RI"},
+			{"name":"South Carolina","stateCode":"SC"},
+			{"name":"South Dakota","stateCode":"SD"},
+			{"name":"Tennessee","stateCode":"TN"},
+			{"name":"Texas","stateCode":"TX"},
+			{"name":"Utah","stateCode":"UT"},
+			{"name":"Vermont","stateCode":"VT"},
+			{"name":"Virginia","stateCode":"VA"},
+			{"name":"Washington","stateCode":"WA"},
+			{"name":"West Virginia","stateCode":"WV"},
+			{"name":"Wisconsin","stateCode":"WI"},
+			{"name":"Wyoming","stateCode":"WY"}
+		]},
 		{"name": "United States Minor Outlying Islands", "code": "UM"},
 		{"name": "Uruguay", "code": "UY"},
 		{"name": "Uzbekistan", "code": "UZ"},
@@ -316,6 +371,73 @@ let locale = {
 		{"name": "Yemen", "code": "YE"},
 		{"name": "Zambia", "code": "ZM"},
 		{"name": "Zimbabwe", "code": "ZW"}
+	],
+	months: [
+		{"1":"January"},
+		{"2":"February"},
+		{"3":"March"},
+		{"4":"April"},
+		{"5":"May"},
+		{"6":"June"},
+		{"7":"July"},
+		{"8":"August"},
+		{"9":"September"},
+		{"10":"October"},
+		{"11":"November"},
+		{"12":"December"}
+	],
+	states: [
+		{"name":"Alabama","stateCode":"AL"},
+		{"name":"Alaska","stateCode":"AK"},
+		{"name":"Arizona","stateCode":"AZ"},
+		{"name":"Arkansas","stateCode":"AR"},
+		{"name":"California","stateCode":"CA"},
+		{"name":"Colorado","stateCode":"CO"},
+		{"name":"Connecticut","stateCode":"CT"},
+		{"name":"Delaware","stateCode":"DE"},
+		{"name":"District of Columbia","stateCode":"DC"},
+		{"name":"Florida","stateCode":"FL"},
+		{"name":"Georgia","stateCode":"GA"},
+		{"name":"Hawaii","stateCode":"HI"},
+		{"name":"Idaho","stateCode":"ID"},
+		{"name":"Illinois","stateCode":"IL"},
+		{"name":"Indiana","stateCode":"IN"},
+		{"name":"Iowa","stateCode":"IA"},
+		{"name":"Kansa","stateCode":"KS"},
+		{"name":"Kentucky","stateCode":"KY"},
+		{"name":"Lousiana","stateCode":"LA"},
+		{"name":"Maine","stateCode":"ME"},
+		{"name":"Maryland","stateCode":"MD"},
+		{"name":"Massachusetts","stateCode":"MA"},
+		{"name":"Michigan","stateCode":"MI"},
+		{"name":"Minnesota","stateCode":"MN"},
+		{"name":"Mississippi","stateCode":"MS"},
+		{"name":"Missouri","stateCode":"MO"},
+		{"name":"Montana","stateCode":"MT"},
+		{"name":"Nebraska","stateCode":"NE"},
+		{"name":"Nevada","stateCode":"NV"},
+		{"name":"New Hampshire","stateCode":"NH"},
+		{"name":"New Jersey","stateCode":"NJ"},
+		{"name":"New Mexico","stateCode":"NM"},
+		{"name":"New York","stateCode":"NY"},
+		{"name":"North Carolina","stateCode":"NC"},
+		{"name":"North Dakota","stateCode":"ND"},
+		{"name":"Ohio","stateCode":"OH"},
+		{"name":"Oklahoma","stateCode":"OK"},
+		{"name":"Oregon","stateCode":"OR"},
+		{"name":"Pennsylvania","stateCode":"PA"},
+		{"name":"Rhode Island","stateCode":"RI"},
+		{"name":"South Carolina","stateCode":"SC"},
+		{"name":"South Dakota","stateCode":"SD"},
+		{"name":"Tennessee","stateCode":"TN"},
+		{"name":"Texas","stateCode":"TX"},
+		{"name":"Utah","stateCode":"UT"},
+		{"name":"Vermont","stateCode":"VT"},
+		{"name":"Virginia","stateCode":"VA"},
+		{"name":"Washington","stateCode":"WA"},
+		{"name":"West Virginia","stateCode":"WV"},
+		{"name":"Wisconsin","stateCode":"WI"},
+		{"name":"Wyoming","stateCode":"WY"}
 	]
 };
 

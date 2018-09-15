@@ -21,8 +21,12 @@ const creditCardPage = {
 		this.attachYears();
 
 		//alt shipping address
-		$('#state').append(locale.getStatesSelectList());
-		$('#country').append(locale.getCountriesSelectList('CA'));
+		$('#country').append(locale.getCountriesSelectList(globals.defaultCountry));
+		locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+
+	  	$('#country').on('change', function(){
+			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+		});
 
 		$('.navigation.backward').click(function(){
 			message.post('displayImportUserPage');
