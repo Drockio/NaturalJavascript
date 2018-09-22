@@ -1,7 +1,9 @@
 import { urls, globals } from '../js/config.js';
+import { message } from '../js/message.js';
 import { util } from '../js/util.js';
 import { storage } from '../js/crud.js';
 import { locale } from '../js/locale.js';
+import { validate } from '../js/validation.js';
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { shoppingCartPage } from '../page_segments/shoppingCart.js';
@@ -15,14 +17,18 @@ const creditCardPage = {
 		let checkoutFormTemplate = templates.getCheckoutForm({'title': 'Alternate Shipping Information', 'formName': 'altShipping', 'includeEmail': 'true'});
 		let creditCardMarkup = templates.getCreditCardMarkup({productsInCart: productsInCart, shipToChoiceContainer: shipToChoiceContainer, "checkoutForm": checkoutFormTemplate});
 		let continueButton = {'name': 'Place Order', 'attributes': [{'type': 'submit'}]};
+		let standardInputs = storage.getGeneric('standardInputs');
+		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
+		let state = standardInputs['state'];
+
 		modal.display('Checkout', creditCardMarkup, continueButton, { 'name': 'Back'});
 		//shoppingCart.displayTotal();
 		this.attachMonths();
 		this.attachYears();
 
 		//alt shipping address
-		$('#country').append(locale.getCountriesSelectList(globals.defaultCountry));
-		locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+		//$('#country').append(locale.getCountriesSelectList(countryCode));
+		//$('#state').append(locale.getStateSelectList(countryCode, state));
 
 	  	$('#country').on('change', function(){
 			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
@@ -39,7 +45,7 @@ const creditCardPage = {
 		});
 		$('input[name="billShipSame').on('click', creditCardPage.toggleBillShipSame);
 		util.scrollTopModal();
-		this.mockData();
+		//this.mockData();
 	},
 	mockData: function(){
 		//TODO Set validation for credit cards

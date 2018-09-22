@@ -41,6 +41,7 @@ const importUserPage = {
 			"state": util.selectByName("state"), //view link for state
 			"postalCode": util.selectByName("postalCode"),		
 			"country": util.selectByName("country"),
+			"countryCode": document.querySelectorAll('#country option:checked')[0].value,
 			"emailAddress": util.selectByName("emailAddress"), //online campaigns
 			"phoneNumber": util.selectByName("phoneNumber"), 	//phone campaigns
 			"ipAddress": '127.0.0.1',	//TODO: for online campaigns (must validate)
@@ -56,7 +57,7 @@ const importUserPage = {
         	//TODO: Put this back in after konnektive import user works.
         	//if (this.postStandardInputs())
         	//{
-        		message.post('displayCreditCardPage');
+        		//message.post('displayCreditCardPage');
         	//}
         	return true;
         } 
@@ -66,16 +67,13 @@ const importUserPage = {
         	return false;
     	}
 	},
-	populateStandardInputs: function(){
-		let standardInputs = storage.getGeneric('standardInputs');
+	populateStandardInputs: function(standardInputs){
 		util.setUIValueByName('firstName', standardInputs['firstName']);
 		util.setUIValueByName('lastName', standardInputs['lastName']);
 		util.setUIValueByName('address1', standardInputs['address1']);
 		util.setUIValueByName('address2', standardInputs['address2']);
 		util.setUIValueByName('postalCode', standardInputs['postalCode']);
 		util.setUIValueByName('city', standardInputs['city']);
-		util.setUIValueByName('state', standardInputs['state']);				//view link for state
-		util.setUIValueByName('country', standardInputs['country']);
 		util.setUIValueByName('emailAddress', standardInputs['emailAddress']);//online campaigns
 		util.setUIValueByName('phoneNumber', standardInputs['phoneNumber']);
 	},
@@ -85,20 +83,22 @@ const importUserPage = {
 		let checkoutFormTemplate = templates.getCheckoutForm({'title': 'Registration Information', 'formName': 'registration'});
 		let productMarkup = templates.getProductMarkupTemplate(shoppingCart);
 		let checkoutFormTop = templates.getCheckoutFormtop({"checkoutForm": checkoutFormTemplate, productsInCart: productMarkup});
+		let standardInputs = storage.getGeneric('standardInputs');
+		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
+		let state = standardInputs['state'];
 
 		let continueButton = {'name': 'Continue', 'attributes': [{ 'form': 'registration-form' }, {'type': 'submit'}]};
 		modal.display('Checkout', checkoutFormTop, continueButton, { 'name': 'Back'});
 		shoppingCartPage.displayTotal();
 
-		$('#country').append(locale.getCountriesSelectList(globals.defaultCountry));
-		locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+		this.populateStandardInputs(standardInputs);
+		$('#country').append(locale.getCountriesSelectList(countryCode));
+		$('#state').append(locale.getStateSelectList(countryCode, state));
 
 	  	$('#country').on('change', function(){
 			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
 		});
 
-		//retrieve user information if available
-		this.populateStandardInputs();
 		util.scrollTopModal();
 
 		$('.navigation.backward').click(function(){
@@ -110,7 +110,11 @@ const importUserPage = {
 		});
 
 		$('#registration-form').submit(function(event){
-			if (!importUserPage.submitRegistrationForm())
+			if (importUserPage.submitRegistrationForm())
+			{
+				message.post('displayCreditCardPage');
+			}
+			else 
 			{
 				message.post('scrollToTop');
 			}

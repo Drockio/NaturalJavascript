@@ -1,4 +1,5 @@
 const templates = {
+	//DD here is defined in the grunt job that compiles the templates of all freakin' places.
 	getHtmlTemplate: function(name, context) {
 		name = `templates/${name}.handlebars`;
 		return $(DD[name](context)).html();
@@ -31,10 +32,10 @@ const templates = {
 	getShipToChoiceContainer: function(contactInfo){
 		return this.getHtmlTemplate('shipToChoiceContainer', contactInfo);
 	},
-	getThankYouPage: function(jData){
+	getMarkup_thankYouPage: function(jData){
 		return this.getHtmlTemplate('thankYouPage', jData);
 	},
-	getFooterMarkupTemplate: function(jData){
+	getMarkup_footer: function(jData){
 		return this.getHtmlTemplate('footer', jData);
 	}
 };

@@ -95,6 +95,5 @@ window.onload=function(){
 	});
 };
 
-export { creditCardPage };
 
 

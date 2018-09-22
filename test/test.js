@@ -28,9 +28,12 @@ function runCurrentTest(){
 				//let stateSelectList = locale.getStatesSelectList('US');
 				//expect(stateSelectList).to.be.an('array').to.have.lengthOf(50);
 
-				let stateSelectList = locale.getStatesSelectList('CA');
-				expect(stateSelectList).to.be.an('array').to.have.lengthOf(12);
-				console.log(stateSelectList);
+				let countryBlob = locale.getCountryBlob('CA');
+				let stateList = countryBlob.locales;
+				//console.log('statelist typeof: ' + typeof stateList);
+				expect(stateList).to.be.an('array').to.have.lengthOf(13);
+				expect(countryBlob['locale-label']).to.be.an('string');
+				//console.log(countryBlob);
 			})
 		});
 	});

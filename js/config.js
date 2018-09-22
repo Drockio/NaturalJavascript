@@ -7,7 +7,7 @@ const globals = {
 	apiPassword: 'LevelIt!!99',
 	//domainName: 'http://localhost',
 	domainName: '*',
-	defaultCountry: 'CA',
+	defaultCountryCode: 'US',
 	TAKETHISOUT: 4.44
 };
 

@@ -1,18 +1,19 @@
 //TODO: Move the following functions and prototypes to extensions.js when npm test
 //allows includes (instead of require);
+//TODO: Review Konnektive info about state.
 
-// Element.prototype.removeChildren = function (){
-// 	while (this.firstChild) {
-//     	this.removeChild(this.firstChild);
-// 	}
-// };
+Element.prototype.removeChildren = function (){
+	while (this.firstChild) {
+    	this.removeChild(this.firstChild);
+	}
+};
 
-// String.prototype.toHTML = function() {
-//     let template = document.createElement('template');
-//     let html = this.trim(); // Never return a text node of whitespace as the result
-//     template.innerHTML = html;
-//     return template.content.childNodes;
-// };
+String.prototype.toHTML = function() {
+    let template = document.createElement('template');
+    let html = this.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.childNodes;
+};
 
 function disable(element){
 	element.classList.add("disabledElement");
@@ -29,7 +30,7 @@ function ensureIsElement(target){
 }
 
 let locale = {
-	getStatesSelectList: function(countryCode){
+	getCountryBlob: function(countryCode){
 		// let localeList = [];
 		// locale.countries.forEach(item => {
 		// 	let code = Object.entries(item)[1];
@@ -40,29 +41,32 @@ let locale = {
 		// 	}
 		// });
 
-		let states = locale.countries.find(item => {
+		return locale.countries.find(item => {
 			return Object.entries(item)[1][1] === countryCode;
 		});
 
-		console.log(states);
-		debugger;
-		return states.locales;
+		//console.log(states);
+		//debugger;
+		//return states.locales;
 		//return localeList[0] ? localeList[0].map(item => `<option value="${item.stateCode}">${item.name}</option>`) : null;
 	},
-	getCountriesSelectList: function(defaultCountryCode){ 
-		return locale.countries.map(item => `<option value="${item.code}"${(item.code === defaultCountryCode) ? 'selected' : ''}>${item.name}</option>`);
+	getStateSelectList: function(countryCode, stateCode){
+		let localeList = locale.getCountryBlob(countryCode).locales;
+		if (localeList){
+			return localeList ? localeList.map(item => `<option value="${item.stateCode}" ${(item.stateCode === stateCode) ? 'selected' : ''}>${item.name}</option>`) : null;
+		}
+	},
+	getCountriesSelectList: function(countryCode){ 
+		return locale.countries.map(item => `<option value="${item.code}"${(item.code === countryCode) ? 'selected' : ''}>${item.name}</option>`);
 	},
 	setStatesSelectList: function(countryCode, stateElement, labelElement){
-		let list = locale.getStatesSelectList(countryCode);
 		stateElement = ensureIsElement(stateElement);
-		labelElement = ensureIsElement(labelElement);
 		stateElement.removeChildren();
-		if (list){
+		let countryBlob = locale.getCountryBlob(countryCode);
+		if (countryBlob && countryBlob.locales){
+			labelElement = ensureIsElement(labelElement);
 			enable(stateElement);
-			let stateSelectList = list.join('').toHTML();
-			stateSelectList.forEach(item => {
-				stateElement.append(item);
-			});
+			stateElement.innerHTML = locale.getStateSelectList(countryBlob.code);
 		}
 		else {
 			disable(stateElement);
@@ -329,7 +333,7 @@ let locale = {
 			{"name":"Illinois","stateCode":"IL"},
 			{"name":"Indiana","stateCode":"IN"},
 			{"name":"Iowa","stateCode":"IA"},
-			{"name":"Kansa","stateCode":"KS"},
+			{"name":"Kansas","stateCode":"KS"},
 			{"name":"Kentucky","stateCode":"KY"},
 			{"name":"Lousiana","stateCode":"LA"},
 			{"name":"Maine","stateCode":"ME"},
@@ -392,59 +396,6 @@ let locale = {
 		{"10":"October"},
 		{"11":"November"},
 		{"12":"December"}
-	],
-	states: [
-		{"name":"Alabama","stateCode":"AL"},
-		{"name":"Alaska","stateCode":"AK"},
-		{"name":"Arizona","stateCode":"AZ"},
-		{"name":"Arkansas","stateCode":"AR"},
-		{"name":"California","stateCode":"CA"},
-		{"name":"Colorado","stateCode":"CO"},
-		{"name":"Connecticut","stateCode":"CT"},
-		{"name":"Delaware","stateCode":"DE"},
-		{"name":"District of Columbia","stateCode":"DC"},
-		{"name":"Florida","stateCode":"FL"},
-		{"name":"Georgia","stateCode":"GA"},
-		{"name":"Hawaii","stateCode":"HI"},
-		{"name":"Idaho","stateCode":"ID"},
-		{"name":"Illinois","stateCode":"IL"},
-		{"name":"Indiana","stateCode":"IN"},
-		{"name":"Iowa","stateCode":"IA"},
-		{"name":"Kansa","stateCode":"KS"},
-		{"name":"Kentucky","stateCode":"KY"},
-		{"name":"Lousiana","stateCode":"LA"},
-		{"name":"Maine","stateCode":"ME"},
-		{"name":"Maryland","stateCode":"MD"},
-		{"name":"Massachusetts","stateCode":"MA"},
-		{"name":"Michigan","stateCode":"MI"},
-		{"name":"Minnesota","stateCode":"MN"},
-		{"name":"Mississippi","stateCode":"MS"},
-		{"name":"Missouri","stateCode":"MO"},
-		{"name":"Montana","stateCode":"MT"},
-		{"name":"Nebraska","stateCode":"NE"},
-		{"name":"Nevada","stateCode":"NV"},
-		{"name":"New Hampshire","stateCode":"NH"},
-		{"name":"New Jersey","stateCode":"NJ"},
-		{"name":"New Mexico","stateCode":"NM"},
-		{"name":"New York","stateCode":"NY"},
-		{"name":"North Carolina","stateCode":"NC"},
-		{"name":"North Dakota","stateCode":"ND"},
-		{"name":"Ohio","stateCode":"OH"},
-		{"name":"Oklahoma","stateCode":"OK"},
-		{"name":"Oregon","stateCode":"OR"},
-		{"name":"Pennsylvania","stateCode":"PA"},
-		{"name":"Rhode Island","stateCode":"RI"},
-		{"name":"South Carolina","stateCode":"SC"},
-		{"name":"South Dakota","stateCode":"SD"},
-		{"name":"Tennessee","stateCode":"TN"},
-		{"name":"Texas","stateCode":"TX"},
-		{"name":"Utah","stateCode":"UT"},
-		{"name":"Vermont","stateCode":"VT"},
-		{"name":"Virginia","stateCode":"VA"},
-		{"name":"Washington","stateCode":"WA"},
-		{"name":"West Virginia","stateCode":"WV"},
-		{"name":"Wisconsin","stateCode":"WI"},
-		{"name":"Wyoming","stateCode":"WY"}
 	]
 };
 
