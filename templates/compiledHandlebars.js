@@ -47,10 +47,10 @@ this["DD"]["templates/modal.handlebars"] = Handlebars.template({"compiler":[7,">
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</h2>\n        </div>\n        <div class=\"modal-message\"></div>\n        <div class=\"modal-body\">\n        	"
     + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n\n        </div>\n        <div class=\"modal-footer\">"
+    + "\n        	<div class=\"modal-footer\">"
     + ((stack1 = ((helper = (helper = helpers.forwardButton || (depth0 != null ? depth0.forwardButton : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"forwardButton","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + ((stack1 = ((helper = (helper = helpers.backButton || (depth0 != null ? depth0.backButton : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"backButton","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "</div>\n        \n    </div>\n</script>\n\n\n";
+    + "</div>\n        </div>\n    </div>\n</script> \n\n\n";
 },"useData":true});
 
 this["DD"]["templates/product.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

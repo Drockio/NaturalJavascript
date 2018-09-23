@@ -122,14 +122,6 @@ button.navigation {
     height: 4em;
     width: 10em;
 }
-button.navigation.forward {
-    float: right;
-    margin-right: 16px;
-}
-button.navigation.backward {
-    float: left;
-    margin-left: 33px;
-}
 @media (max-width: 1100px) {
     #email-contact select, #email-contact input {
         width: 25em;

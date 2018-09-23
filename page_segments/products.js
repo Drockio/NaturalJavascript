@@ -6,8 +6,8 @@ import { shoppingCartPage } from './shoppingCartPage.js';
 import { shoppingCart } from '../js/shoppingCart.js';
 
 
-const product_list = {
-	load: function(){
+const products = {
+	display: function(){
 		$.getJSON(urls.productUrl, function (response) {
 	    	const result = [];
 	    	const keys = Object.keys(response.message);
@@ -51,4 +51,4 @@ const product_list = {
 	}
 };
 
-export { product_list };
+export { products };

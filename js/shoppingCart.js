@@ -15,50 +15,51 @@ const shoppingCart = {
 
 		return total;
 	},
+	getIndex: function(cart, productId){
+		return cart.findIndex(element => { return element.productId.toString() === productId; });
+	},
 	alterQuantity: function(productId, int){
-			let shoppingCart = storage.getCart();
-			let index = shoppingCart.findIndex(element => { return element.productId.toString() === productId; });
-			shoppingCart[index].quantity = (shoppingCart[index].quantity + int) > 0 ? (shoppingCart[index].quantity + int) : 0;
-			storage.setCart(shoppingCart);
-			//TODO: Declare an event for this and set that way.
-			$(`.product-modifier input[data-productId='${productId}']`).val(shoppingCart[index].quantity);
-			message.post('displayShoppingCartPage');
+		let cart = storage.getCart();
+		let index = shoppingCart.getIndex(cart, productId);
+		cart[index].quantity = (cart[index].quantity + int) > 0 ? (cart[index].quantity + int) : 0;
+		storage.setCart(cart);
+		//.product-modifier is necessary to not alter buttons on product page. Sorry for the janky.
+		$(`.product-modifier input[data-productId='${productId}']`).val(cart[index].quantity);
 	},
 	remove: function(productId){
-			let shoppingCart = storage.getCart();
-			shoppingCart = shoppingCart.filter(item => item.productId.toString() !== productId);
-			storage.setCart(shoppingCart);
-			//TODO: Declare an event for this and set that way.
-			if (shoppingCart.length >= 1) {
-				message.post('displayShoppingCartPage');
-			} 
-			else 
-			{ 
-				$('#main-modal').css('display', 'none');
-				$('body').removeClass('removeScroll');
-			}
+		let cart = storage.getCart();
+		cart = cart.filter(item => item.productId.toString() !== productId);
+		storage.setCart(cart);
+
+		if (cart.length >= 1) {
+			message.post('displayShoppingCartPage');
+		} 
+		else 
+		{ 
+			message.post('hideModal');
+		}
 	},
 	addItemTo: function(productId){
-			let updated = false;
-			let products = storage.getProducts();
-			let shoppingCart = storage.getCart();
+		let updated = false;
+		let products = storage.getProducts();
+		let cart = storage.getCart();
 
-			//already in the cart, increment
-			shoppingCart.map(item => {
-				if (!updated && item.productId === Number(productId))
-				{
-					item.quantity += 1;
-					updated = true;
-				}
-			});
-			//item not found in the cart
-			if (!updated){
-				let chosenProduct = products.filter(item => item.productId === Number(productId));
-				chosenProduct[0].quantity = 1;
-				shoppingCart.push(chosenProduct[0]);
+		//already in the cart, increment
+		cart.map(item => {
+			if (!updated && item.productId === Number(productId))
+			{
+				item.quantity += 1;
+				updated = true;
 			}
-			storage.setCart(shoppingCart);
-		},
+		});
+		//item not found in the cart
+		if (!updated){
+			let chosenProduct = products.filter(item => item.productId === Number(productId));
+			chosenProduct[0].quantity = 1;
+			cart.push(chosenProduct[0]);
+		}
+		storage.setCart(cart);
+	},
 	getCleanedCart: function(){
 		let cart = storage.getCart();
 		let filtered = cart.filter(item => item.quantity > 0);

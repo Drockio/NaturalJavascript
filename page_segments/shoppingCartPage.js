@@ -8,7 +8,6 @@ import { shoppingCart } from '../js/shoppingCart.js';
 
 const shoppingCartPage = {
 	display: function(options){
-		$('body').addClass('removeScroll');
 		const SHOPPING_CART_HEADER = 'Add to Cart';
 		const cart = shoppingCart.getCleanedCart();
 		if (!shoppingCart.isCartEmpty())

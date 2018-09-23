@@ -9,8 +9,87 @@ import { modal } from '../page_segments/modal.js';
 import { shoppingCartPage } from './shoppingCartPage.js';
 import { shoppingCart } from '../js/shoppingCart.js';
 
-const importUserPage = { 
+const importUserPage = {
+	display: function() {
+		let cart = storage.getCart();
+		cart.campaignid = globals.campaignId;
+		let checkoutFormTemplate = templates.getHTML_importUserForm({'title': 'Registration Information', 'formName': 'registration'});
+		let productMarkup = templates.getHTML_products(cart);
+		let checkoutFormTop = templates.getHTML_importUserPage({"checkoutForm": checkoutFormTemplate, productsInCart: productMarkup});
+		let standardInputs = storage.getGeneric('standardInputs');
+		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
+		let state = standardInputs['state'];
+
+		let continueButton = {'name': 'Continue', 'attributes': [{ 'form': 'registration-form' }, {'type': 'submit'}]};
+		modal.display('Checkout', checkoutFormTop, continueButton, { 'name': 'Back'});
+		importUserPage.displayTotal();
+
+		importUserPage.populateStandardInputs(standardInputs);
+		$('#country').append(locale.getCountriesSelectList(countryCode));
+		$('#state').append(locale.getStateSelectList(countryCode, state));
+
+		util.scrollTopModal();
+	},
+	populateStandardInputs: function(standardInputs){
+		//grab previous inputs from storage and populate fields
+		util.setUIValueByName('firstName', standardInputs['firstName']);
+		util.setUIValueByName('lastName', standardInputs['lastName']);
+		util.setUIValueByName('address1', standardInputs['address1']);
+		util.setUIValueByName('address2', standardInputs['address2']);
+		util.setUIValueByName('postalCode', standardInputs['postalCode']);
+		util.setUIValueByName('city', standardInputs['city']);
+		util.setUIValueByName('emailAddress', standardInputs['emailAddress']);//online campaigns
+		util.setUIValueByName('phoneNumber', standardInputs['phoneNumber']);
+	},
+	displayTotal: function() {
+		//display shopping cart total
+		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
+	},
+	addEventListeners: function(){
+		//set the locale when the country changes
+		$('#country').on('change', function(){
+			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+		});
+
+		//remove any error messages if they exist
+		$('#registration-form :input').on('focus', function(){
+			$(this).removeClass('validation-error');
+		});
+
+		//display creditcard page if validate otherwise scroll to top.
+		//validate.validateform displays necessary messages
+		$('#registration-form').submit(function(event){
+			if (importUserPage.submitRegistrationForm())
+			{
+				message.post('displayCreditCardPage');
+			}
+			else 
+			{
+				message.post('scrollToTop');
+			}
+	    });
+	},
+	submitRegistrationForm: function(){
+		//handle results of form validation
+		if (validate.validateForm('registration'))
+        {
+        	//get user input
+        	importUserPage.getStandardInputs();
+        	//TODO: Put this back in after konnektive import user works.
+        	//if (this.postStandardInputs())
+        	//{
+        		//message.post('displayCreditCardPage');
+        	//}
+        	return true;
+        } 
+        else 
+        {
+        	event.preventDefault();
+        	return false;
+    	}
+	},
 	postStandardInputs: function(){
+		//post the results to ecommerce crm
 		let standardInputs = storage.getGeneric('standardInputs');
 		let results = $.ajax({
 			type: "POST",
@@ -33,6 +112,7 @@ const importUserPage = {
 		});
 	},
 	getStandardInputs: function(){
+		//retrieve user input
 		let standardInputs = {
 			"firstName": util.selectByName("firstName"),
 			"lastName": util.selectByName("lastName"),
@@ -50,80 +130,7 @@ const importUserPage = {
 			};
 		storage.setGeneric('standardInputs', standardInputs);
 		return standardInputs;
-	},
-	submitRegistrationForm: function(){
-		if (validate.validateForm('registration'))
-        {
-        	this.getStandardInputs();
-        	//TODO: Put this back in after konnektive import user works.
-        	//if (this.postStandardInputs())
-        	//{
-        		//message.post('displayCreditCardPage');
-        	//}
-        	return true;
-        } 
-        else 
-        {
-        	event.preventDefault();
-        	return false;
-    	}
-	},
-	populateStandardInputs: function(standardInputs){
-		util.setUIValueByName('firstName', standardInputs['firstName']);
-		util.setUIValueByName('lastName', standardInputs['lastName']);
-		util.setUIValueByName('address1', standardInputs['address1']);
-		util.setUIValueByName('address2', standardInputs['address2']);
-		util.setUIValueByName('postalCode', standardInputs['postalCode']);
-		util.setUIValueByName('city', standardInputs['city']);
-		util.setUIValueByName('emailAddress', standardInputs['emailAddress']);//online campaigns
-		util.setUIValueByName('phoneNumber', standardInputs['phoneNumber']);
-	},
-	displayTotal: function() {
-		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
-	},
-	display: function() {
-		let shoppingCart = storage.getCart();
-		shoppingCart.campaignid = globals.campaignId;
-		let checkoutFormTemplate = templates.getHTML_importUserForm({'title': 'Registration Information', 'formName': 'registration'});
-		let productMarkup = templates.getHTML_products(shoppingCart);
-		let checkoutFormTop = templates.getHTML_importUserPage({"checkoutForm": checkoutFormTemplate, productsInCart: productMarkup});
-		let standardInputs = storage.getGeneric('standardInputs');
-		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
-		let state = standardInputs['state'];
-
-		let continueButton = {'name': 'Continue', 'attributes': [{ 'form': 'registration-form' }, {'type': 'submit'}]};
-		modal.display('Checkout', checkoutFormTop, continueButton, { 'name': 'Back'});
-		importUserPage.displayTotal();
-
-		this.populateStandardInputs(standardInputs);
-		$('#country').append(locale.getCountriesSelectList(countryCode));
-		$('#state').append(locale.getStateSelectList(countryCode, state));
-
-	  	$('#country').on('change', function(){
-			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
-		});
-
-		util.scrollTopModal();
-
-		$('.navigation.backward').click(function(){
-			message.post('displayShoppingCartPage');
-		});
-
-		$('#registration-form :input').on('focus', function(){
-			$(this).removeClass('validation-error');
-		});
-
-		$('#registration-form').submit(function(event){
-			if (importUserPage.submitRegistrationForm())
-			{
-				message.post('displayCreditCardPage');
-			}
-			else 
-			{
-				message.post('scrollToTop');
-			}
-	    });
-	},
+	}
 };
 
 export { importUserPage };
