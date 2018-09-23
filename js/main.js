@@ -20,7 +20,7 @@ import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { homePage } from '../page_segments/homePage.js';
 import { product_list } from '../page_segments/product_list.js';
-import { shoppingCartPage } from '../page_segments/shoppingCart.js';
+import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
 import { importUserPage } from '../page_segments/importUserPage.js';
 import { creditCardPage } from '../page_segments/creditCardPage.js';
 import { thankYouPage } from '../page_segments/thankYouPage.js';
@@ -50,13 +50,18 @@ const broadcast = {
 };
 
 const controller = {
+
+	//display pages here.
 	registerPageListeners: function(){
 		message.listen('displayHomePage', function(){homePage.display();});
-		message.listen('displayCart', function(){shoppingCartPage.display();});
+		message.listen('displayProducts', function(){product_list.load();});
+		message.listen('displayShoppingCartPage', function(){ shoppingCartPage
+																	.display() 
+																	.addEventListeners();
+															});
 		message.listen('displayImportUserPage', function(){importUserPage.display();});
 		message.listen('displayCreditCardPage', function(){creditCardPage.display();});
-		message.listen('displayProducts', function(){product_list.load();});
-		message.listen('thankYouPage', function(){thankYouPage.success();});
+		message.listen('thankYouPage', function(){thankYouPage.display();});
 	},
 
 	registerDisplayListeners: function(){
@@ -65,9 +70,10 @@ const controller = {
 		message.listen('scrollToTop', function(){util.scrollToTop();});
 	},
 
+	//set scrolling behavior.
 	registerInteractionListeners: function() {
 		$('#shopping-cart-click').click(function(){
-	    	message.post('displayCart');
+	    	message.post('displayShoppingCartPage');
 	  	});
 
 	  	util.registerScroll('#click-home', '.container');

@@ -2,7 +2,8 @@ import { urls, globals } from '../js/config.js';
 import { message } from '../js/message.js';
 import { storage } from '../js/crud.js'
 import { templates } from '../templates/_templateController.js';
-import { shoppingCartPage } from './shoppingCart.js';
+import { shoppingCartPage } from './shoppingCartPage.js';
+import { shoppingCart } from '../js/shoppingCart.js';
 
 
 const product_list = {
@@ -17,7 +18,7 @@ const product_list = {
 		      	}
 	    	}
 
-	    	//only shop products with in amage
+	    	//only shop products with an image
 		    let filtered = result.filter(item => { return item.productImagePath; });
 		    
 		    //put some values in there 
@@ -32,7 +33,7 @@ const product_list = {
 		    	return item;
 		    });
 
-		    let defaultedMarkup = defaulted.map(item => templates.getMainProduct(item));
+		    let defaultedMarkup = defaulted.map(item => templates.getHTML_product(item));
 
 		    //display results
 		    $('.product-list').empty().append(defaultedMarkup);
@@ -44,8 +45,8 @@ const product_list = {
 
 		//add to cart links
 	  	$('.product-list').on('click', '.purchase', function(){
-	  		shoppingCartPage.addItemTo(this.dataset["productid"] || 0, this.dataset["campaignid"] || 0);
-	  		message.post('displayCart');
+	  		shoppingCart.addItemTo(this.dataset["productid"] || 0, this.dataset["campaignid"] || 0);
+	  		message.post('displayShoppingCartPage');
 	  	});
 	}
 };

@@ -6,23 +6,24 @@ import { locale } from '../js/locale.js';
 import { validate } from '../js/validation.js';
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
-import { shoppingCartPage } from '../page_segments/shoppingCart.js';
+import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
+import { shoppingCart } from '../js/shoppingCart.js';
 
 const creditCardPage = {
 	display: function() {
 		let shoppingCart = storage.getCart();
 		shoppingCart.campaignid = globals.campaignId;
-		let productsInCart = templates.getProductMarkupTemplate(shoppingCart);
-		let shipToChoiceContainer = templates.getShipToChoiceContainer(storage.getGeneric('standardInputs'));
-		let checkoutFormTemplate = templates.getCheckoutForm({'title': 'Alternate Shipping Information', 'formName': 'altShipping', 'includeEmail': 'true'});
-		let creditCardMarkup = templates.getCreditCardMarkup({productsInCart: productsInCart, shipToChoiceContainer: shipToChoiceContainer, "checkoutForm": checkoutFormTemplate});
+		let productsInCart = templates.getHTML_products(shoppingCart);
+		let shipToChoiceContainer = templates.getHTML_shipToAddressChoice(storage.getGeneric('standardInputs'));
+		let checkoutFormTemplate = templates.getHTML_importUserForm({'title': 'Alternate Shipping Information', 'formName': 'altShipping', 'includeEmail': 'true'});
+		let creditCardMarkup = templates.getHTML_creditCardPage({productsInCart: productsInCart, shipToChoiceContainer: shipToChoiceContainer, "checkoutForm": checkoutFormTemplate});
 		let continueButton = {'name': 'Place Order', 'attributes': [{'type': 'submit'}]};
 		let standardInputs = storage.getGeneric('standardInputs');
 		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
 		let state = standardInputs['state'];
 
 		modal.display('Checkout', creditCardMarkup, continueButton, { 'name': 'Back'});
-		//shoppingCart.displayTotal();
+		creditCardPage.displayTotal();
 		this.attachMonths();
 		this.attachYears();
 
@@ -46,6 +47,9 @@ const creditCardPage = {
 		$('input[name="billShipSame').on('click', creditCardPage.toggleBillShipSame);
 		util.scrollTopModal();
 		//this.mockData();
+	},
+	displayTotal: function(){
+		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
 	},
 	mockData: function(){
 		//TODO Set validation for credit cards

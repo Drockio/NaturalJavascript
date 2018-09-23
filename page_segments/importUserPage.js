@@ -6,7 +6,8 @@ import { locale } from '../js/locale.js';
 import { util } from '../js/util.js';
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
-import { shoppingCartPage } from './shoppingCart.js';
+import { shoppingCartPage } from './shoppingCartPage.js';
+import { shoppingCart } from '../js/shoppingCart.js';
 
 const importUserPage = { 
 	postStandardInputs: function(){
@@ -77,19 +78,22 @@ const importUserPage = {
 		util.setUIValueByName('emailAddress', standardInputs['emailAddress']);//online campaigns
 		util.setUIValueByName('phoneNumber', standardInputs['phoneNumber']);
 	},
+	displayTotal: function() {
+		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
+	},
 	display: function() {
 		let shoppingCart = storage.getCart();
 		shoppingCart.campaignid = globals.campaignId;
-		let checkoutFormTemplate = templates.getCheckoutForm({'title': 'Registration Information', 'formName': 'registration'});
-		let productMarkup = templates.getProductMarkupTemplate(shoppingCart);
-		let checkoutFormTop = templates.getCheckoutFormtop({"checkoutForm": checkoutFormTemplate, productsInCart: productMarkup});
+		let checkoutFormTemplate = templates.getHTML_importUserForm({'title': 'Registration Information', 'formName': 'registration'});
+		let productMarkup = templates.getHTML_products(shoppingCart);
+		let checkoutFormTop = templates.getHTML_importUserPage({"checkoutForm": checkoutFormTemplate, productsInCart: productMarkup});
 		let standardInputs = storage.getGeneric('standardInputs');
 		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
 		let state = standardInputs['state'];
 
 		let continueButton = {'name': 'Continue', 'attributes': [{ 'form': 'registration-form' }, {'type': 'submit'}]};
 		modal.display('Checkout', checkoutFormTop, continueButton, { 'name': 'Back'});
-		shoppingCartPage.displayTotal();
+		importUserPage.displayTotal();
 
 		this.populateStandardInputs(standardInputs);
 		$('#country').append(locale.getCountriesSelectList(countryCode));
@@ -102,7 +106,7 @@ const importUserPage = {
 		util.scrollTopModal();
 
 		$('.navigation.backward').click(function(){
-			message.post('displayCart');
+			message.post('displayShoppingCartPage');
 		});
 
 		$('#registration-form :input').on('focus', function(){

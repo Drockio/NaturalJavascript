@@ -4,11 +4,11 @@ import { storage } from '../js/crud.js';
 import { modal } from '../page_segments/modal.js';
 
 const thankYouPage = {
-	success: function(){
+	display: function(){
 		let shoppingCart = storage.getCart();
 		shoppingCart.campaignid = globals.campaignId;
-		let productsInCart = templates.getProductMarkupTemplate(shoppingCart);
-		let thankYouPageTemplate = templates.getMarkup_thankYouPage({productsInCart: productsInCart});
+		let productsInCart = templates.getHTML_products(shoppingCart);
+		let thankYouPageTemplate = templates.getHTML_thankYouPage({productsInCart: productsInCart});
 		modal.display('Thank You!', thankYouPageTemplate, { 'name': 'Close'});
 
 		//These might have defunct info OR they might be useful?
