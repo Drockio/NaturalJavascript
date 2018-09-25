@@ -29,6 +29,9 @@ const importUserPage = {
 		$('#state').append(locale.getStateSelectList(countryCode, state));
 
 		util.scrollTopModal();
+
+		//for chaining js functions
+		return this;
 	},
 	populateStandardInputs: function(standardInputs){
 		//grab previous inputs from storage and populate fields
@@ -49,6 +52,10 @@ const importUserPage = {
 		//set the locale when the country changes
 		$('#country').on('change', function(){
 			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+		});
+
+		$('.navigation.backward').click(function(){
+			message.post('displayShoppingCartPage');
 		});
 
 		//remove any error messages if they exist

@@ -70,8 +70,16 @@ input:-webkit-autofill:focus {
     border-bottom-right-radius: var(--borderRadius);
 }
 
-.disabledElement {
-    background-color: var(--shroudColor);
+button.disabledElement {
     cursor: not-allowed;
+    color: graytext;
+    box-shadow: none;
+    background-color: var(--productButton);
+}
+
+button.disabledElement:hover {
+    color: graytext;
+    box-shadow: none;
+    background-color: var(--productButton);
 }
 

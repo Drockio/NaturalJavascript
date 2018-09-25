@@ -15,13 +15,14 @@
 }
 .container .products {
     grid-area: products;
-    min-height: 350px;
-    /*background-color: hsla(115, 100%, 98%, 1);*/
 }
 .products > div {
     height: 100%;
 }
 .product-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     font-variant: small-caps;
     padding: 16px 0px;
@@ -59,7 +60,7 @@
 }
 .product h3 {
     margin-bottom: 0px;
-    text-align: center;
+    text-align: right;
 }
 .product img {
     max-height: 170px;
@@ -68,11 +69,11 @@
     margin: 0 auto 0 auto;
 }
 .product p {
-    text-align: justify;
+    text-align: right;
 }
 .product p.description {
-    border-top: 1px solid var(--productButton);
-    border-bottom: 1px solid var(--productButton);
+    border-top: 1px solid var(--inputBorder);
+    border-bottom: 1px solid var(--inputBorder);
     padding: 17px 0;
 }
 .productsInCart {
@@ -113,7 +114,7 @@
 }
 .price {
     padding: 0 33px;
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 .grandTotal {
     display: inline-block;
@@ -144,11 +145,16 @@
     display: flex;
     justify-content: center;
     border: 1px solid var(--inputBorder);
+    border-bottom: none;
     background-color: hsl(0,0%,100%,1);
+}
+
+.modal-body .product-container:last-child {
+    border-bottom: 1px solid var(--inputBorder);
 }
 .productsAndTotals .product-container {
     justify-content: center;
-    padding: 50px 10px;
+    padding: 30px 10px;
 }
 .modal-body .product-modifier {
     align-items: center;
@@ -157,9 +163,9 @@
 }
 .product-modifier input {
     border: 1px solid gray;
-    width: 1.5em;
-    font-size: 1.8em;
-    height: 1.8em;
+    width: 40px;
+    font-size: 1.7em;
+    height: 50px;
     text-align: center;
 }
 .modal-body .product-details {
@@ -208,7 +214,7 @@
 }
 .minus, .plus {
     font-size: 1.8em;
-    width: 4em;
+    width: 32px;
 }
 .green-dots {
     background-image: url('../img/green-dots.jpg');
@@ -229,19 +235,23 @@
         justify-content: flex-start;
         align-items: center;
         width: 100%;
+        max-width: 530px;
         padding: 20px 0px;
         margin: 1% 1%;
     }
     .product img {
         max-width: 130px;
-        margin: 0;
+        margin: 0 0 20px 0;
     }
     .product .productInfo {
+        align-items: center;
         min-width: 100px;
         width: 80%;
     }
     .product p.description {
         height: inherit;
+        text-align: center;
+        width: 100%;
     }
     .modal-body .product-container {
         justify-content: center;

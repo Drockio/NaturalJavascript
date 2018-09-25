@@ -1,6 +1,7 @@
 import { urls, globals } from '../js/config.js';
 import { storage } from '../js/crud.js';
 import { util } from '../js/util.js';
+import { element } from '../js/element.js';
 import { message } from '../js/message.js';
 import { modal } from '../page_segments/modal.js';
 import { templates } from '../templates/_templateController.js';
@@ -36,17 +37,31 @@ const shoppingCartPage = {
 		let productMarkupPlusTotals = templates.getHTML_shoppingCartPage(productMarkup);
 		return productMarkupPlusTotals;
 	},
+	setCheckoutButtonStatus: function(total){
+		//lets hide the checkout button if there is a 0 total
+		let _element = new element();
+		let target = $('button.forward')
+		if (total > 0){
+			_element.enable(target[0]);
+		} else {
+			_element.disable(target[0]);
+		}
+	},
 	displayTotal: function(){
-		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
+		let total = shoppingCart.getTotal();
+		$(shoppingCart.displayTotalTarget).text('$' + total);
+		shoppingCartPage.setCheckoutButtonStatus(total);
 	},
 	productId: function(context){
 		return context.closest('[data-productId]').dataset['productid'];
 	},
 	plusItem: function(){
 		shoppingCart.alterQuantity(shoppingCartPage.productId(this), 1);
+		shoppingCartPage.displayTotal();
 	},
 	minusItem: function(){
 		shoppingCart.alterQuantity(shoppingCartPage.productId(this), -1);
+		shoppingCartPage.displayTotal();
 	},
 	removeItem: function(){
 		shoppingCart.remove(shoppingCartPage.productId(this));
