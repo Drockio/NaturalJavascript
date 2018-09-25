@@ -33,7 +33,7 @@ import { util } from './util.js';
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { homePage } from '../page_segments/homePage.js';
-import { products } from '../page_segments/products.js';
+import { productList } from '../page_segments/productList.js';
 import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
 import { importUserPage } from '../page_segments/importUserPage.js';
 import { creditCardPage } from '../page_segments/creditCardPage.js';
@@ -71,7 +71,7 @@ const controller = {
 		message.listen('displayHomePage', function(){ homePage.display(); });
 
 		//add products
-		message.listen('displayProducts', function(){ products.display(); });
+		message.listen('displayProducts', function(){ productList.display(); });
 
 		//setup shoppingcart page 
 		message.listen('displayShoppingCartPage', function(){ shoppingCartPage

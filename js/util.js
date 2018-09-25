@@ -30,6 +30,19 @@ const util = {
 	isNumber: function(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 	},
+
+	arrayFromObjectList: function(objectList){
+	    const result = [];
+		const keys = Object.keys(objectList);
+		for (let prop in keys) {
+	      	if (hasOwnProperty.call(keys, prop)) {
+	        	let item = objectList[keys[prop]];
+	        	result.push(item); 
+	      	}
+		}
+		return result;
+	},
+
 	setUIValueByName: function(identifier, value){
 		if (value && document.querySelector(`[name="${identifier}"]`)){
 			document.querySelector(`[name="${identifier}"]`).value = value;

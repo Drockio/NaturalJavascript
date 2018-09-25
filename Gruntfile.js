@@ -50,7 +50,8 @@ module.exports = function(grunt) {
         tasks: ['jshint:gruntfile']
       },
       js: {
-        files: ['*.js', 'js/*.js', 'test/*.js', 'page_segments/*.js', 'templates/_templateController.js', 'src/**/*.js'],
+        files: ['*.js', 'js/*.js', 'test/*.js', 'page_segments/*.js',
+                'templates/_templateController.js', 'shims/*.js', 'interfaces/*.js'],
         tasks: ['jshint:src']
       },
       options: {

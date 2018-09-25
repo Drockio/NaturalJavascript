@@ -36,6 +36,19 @@ String.prototype.toHTML = function() {
     return template.content.childNodes;
 };
 
+//TODO hook this up here instead of in util.js
+Array.prototype.fromObjectList = function(objectList){
+    const result = [];
+	const keys = Object.keys(objectList);
+	for (let prop in keys) {
+      	if (hasOwnProperty.call(keys, prop)) {
+        	let item = objectList[keys[prop]];
+        	result.push(item); 
+      	}
+	}
+	return result;
+};
+
 //INPORTANT: Can't assign this to a variable (and then pass it to a function scope).
 // function doTemplate(templateLiteral, string) {
 // 	console.log(templateLiteral);
