@@ -1,6 +1,6 @@
 
 let validate = {
-	checkValidation: function(item, regex){
+	checkValidation: function(item, regex){ 
 		let result = regex.test(item);
 		return result;
 	}, 

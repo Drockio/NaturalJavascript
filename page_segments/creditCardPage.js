@@ -10,7 +10,7 @@ import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
 import { shoppingCart } from '../js/shoppingCart.js';
 
 const creditCardPage = {
-	display: function() {
+	display: function() { 
 		let shoppingCart = storage.getCart();
 		shoppingCart.campaignid = globals.campaignId;
 		let productsInCart = templates.getHTML_products(shoppingCart);

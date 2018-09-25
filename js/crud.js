@@ -7,7 +7,7 @@ var storage = {
 	},
 
 	getProducts: function() {
-		return this.getGeneric('products');
+		return this.getGeneric('products'); 
 	},
 	setProducts: function(filtered) {
 		this.setGeneric('products', filtered);

@@ -14,7 +14,7 @@ const products = {
 	    	for (let prop in keys) {
 		      	if (hasOwnProperty.call(keys, prop)) {
 		        	let item = response.message[keys[prop]];
-		        	result.push(item);
+		        	result.push(item); 
 		      	}
 	    	}
 

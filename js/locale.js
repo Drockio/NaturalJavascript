@@ -12,7 +12,7 @@ String.prototype.toHTML = function() {
     let template = document.createElement('template');
     let html = this.trim(); // Never return a text node of whitespace as the result
     template.innerHTML = html;
-    return template.content.childNodes;
+    return template.content.childNodes; 
 };
 
 function disable(element){

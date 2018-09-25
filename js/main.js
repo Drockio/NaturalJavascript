@@ -1,6 +1,7 @@
-//TODO: sessionStorage or sessionStorage? 
+//TODO:
+//- home page segment loader dd$('.footer', 'templateName')
 //- investigate country/local behavior
-//- go through and do a test on broadcast errors on each page
+//- go through and do a test on broadcast errors on each page. put html into a template
 //- add shroud between each page
 //- cool thank you page
 //- Hook importUserPage.postStandardInputs back up
@@ -13,7 +14,7 @@ import { message } from './message.js';
 import { validate } from './validation.js';
 import { storage } from './crud.js';
 import { locale } from './locale.js';
-import { util } from './util.js';
+import { util } from './util.js'; 
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { homePage } from '../page_segments/homePage.js';

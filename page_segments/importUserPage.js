@@ -11,7 +11,7 @@ import { shoppingCart } from '../js/shoppingCart.js';
 
 const importUserPage = {
 	display: function() {
-		let cart = storage.getCart();
+		let cart = storage.getCart(); 
 		cart.campaignid = globals.campaignId;
 		let checkoutFormTemplate = templates.getHTML_importUserForm({'title': 'Registration Information', 'formName': 'registration'});
 		let productMarkup = templates.getHTML_products(cart);

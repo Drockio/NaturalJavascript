@@ -56,7 +56,7 @@ let _library = {
 						`<option value="${currentOption.value}" selected="selected">${currentOption.name}</option>`:
 						`<option value="${currentOption.value}">${currentOption.name}</option>`;
 				},'') : null;
-		this.el.innerHTML = options; 
+		this.el.innerHTML = options;
 		return options;
 	},
 	walkJSONPath: function(jsonData){
@@ -76,7 +76,7 @@ let _library = {
    	}
 };
 
-function dd$(selector){
+function dd$(selector, template){ 
 	let element = document.querySelector(selector);
 	_library.el = element;
 	if (!_library.el){

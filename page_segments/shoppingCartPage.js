@@ -19,7 +19,7 @@ const shoppingCartPage = {
 		}
 		return this;
 	},
-	addEventListeners: function(){
+	addEventListeners: function(){ 
 		$('.modal-footer .navigation').click(function() {
 			message.post('displayImportUserPage');
 		});

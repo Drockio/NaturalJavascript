@@ -6,7 +6,7 @@ const message = {
 		window.parent.postMessage({"action": message, "data": jData},`${globals.domainName}`); 
 	},
 
-	listen: function(action, fn){
+	listen: function(action, fn){ 
 		window.addEventListener("message", function(event){
 			const eventAction = event.data["action"];
 			if (eventAction === action){

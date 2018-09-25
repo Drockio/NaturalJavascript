@@ -13,7 +13,7 @@ const modal = {
 		let modalMarkup = templates.getHTML_modal(attributes);
 
 		//add content
-		$('.modal-content').empty().append(modalMarkup);
+		$('.modal-content').empty().append(modalMarkup); 
 
 		//show modal
 	    $('#main-modal').css('display', 'block');

@@ -13,7 +13,7 @@ const thankYouPage = {
 
 		//These might have defunct info OR they might be useful?
 		$('.error').val(storage.getMessage());
-		$('.message').val(storage.getError());
+		$('.message').val(storage.getError()); 
 	}
 };
 

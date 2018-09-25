@@ -6,7 +6,7 @@ const shoppingCart = {
 	displayTotalTarget: '.grandTotal',
 	getTotal: function(){
 		let shoppingCart = storage.getCart();
-		let total = '$' + shoppingCart.reduce((accumulator,current) => {
+		let total = '$' + shoppingCart.reduce((accumulator,current) => { 
 			if (util.isNumber(current.quantity) && util.isNumber(current.price))
 			{
 				return accumulator + current.quantity * current.price;
