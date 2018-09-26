@@ -33,8 +33,13 @@ Konnektive site for selling greens
 - Add gatherCategories which returns an array of unique categories
 -- params: array of products
 -- returns: a unique array of categories
+- save masterCategory list to local storage
 - Markup category tiles based on gatherCategories
 - Set up event messaging for categories
+- Once you have targeted the right element:
+-- toggle its 'led like light'
+-- remove/add it from/to filtered category list
+-- redisplay product list
 - Create unit tests
 
 ## TODO
