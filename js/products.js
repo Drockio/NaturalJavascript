@@ -20,10 +20,9 @@ const products = {
 
 		//only shop products with an image.
 	    let filteredProducts = productArray.filter(item => { return item.productImagePath; });
-	    
-	    //TODO: Remove this!!!
-	    //CRM isn't providing prices, lets put some fake ones in there for now.
-		productShim.addPrices(filteredProducts);
+
+	    //TODO: Remove shim!!!
+	    products.shim(filteredProducts);
 
 		//store products for use later.
 	    storage.setProducts(filteredProducts);
@@ -32,6 +31,13 @@ const products = {
 	    let defaults = products.setDefaults(filteredProducts);
 
 	    return defaults;
+	},
+	//These are distinct features that the CRM doesn't currently provide, not defaults.
+	shim: function(products){
+	    //CRM isn't providing prices, lets put some fake ones in there for now.
+		productShim.addPrices(products);
+		//CRM isn't providing meta tags, lets put some fake ones in there for now.
+		productShim.addCategories(products);
 	}
 };
 
