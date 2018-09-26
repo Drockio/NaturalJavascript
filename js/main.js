@@ -39,30 +39,6 @@ import { importUserPage } from '../page_segments/importUserPage.js';
 import { creditCardPage } from '../page_segments/creditCardPage.js';
 import { thankYouPage } from '../page_segments/thankYouPage.js';
 
-const broadcast = {
-	error: function(data){
-		let jsonData = typeof(data) === 'string' ? JSON.parse(data) : data;
-		if (jsonData){
-
-			// let errors = Object.entries(jsonData['message']).map(([key, value]) => {
-			// 	return `<span>${key} ${value}. </span>`; }
-			// ).join(''); //join removes unwanted commas. darn commas!
-			let html = `<div class="error"><h3>${jsonData['result']}</h3>${jsonData['message']}</div>`;
-			$('.modal-message').html(html);
-
-			storage.setError(data);
-			util.scrollTopModal();
-		}
-	},
-	message: function(data){
-		console.log(data);
-		//joyous day!
-		//TODO: put loading message on thank you page until this is received.
-		storage.setMessage(data);
-		util.scrollTopModal();
-	}
-};
-
 const controller = {
 
 	//display pages here.

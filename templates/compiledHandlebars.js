@@ -45,7 +45,7 @@ this["DD"]["templates/modal.handlebars"] = Handlebars.template({"compiler":[7,">
 
   return "<script id=\"modal\" type=\"text/x-handlebars-template\">\n	<div>\n		<div class=\"modal-header\">\n          <span class=\"close\">&times;</span>\n          <h2>"
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</h2>\n        </div>\n        <div class=\"modal-message\"></div>\n        <div class=\"modal-body\">\n        	"
+    + "</h2>\n        </div>\n        <div class=\"message-blank\"></div>\n        <div class=\"modal-body\">\n        	"
     + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n        	<div class=\"modal-footer\">"
     + ((stack1 = ((helper = (helper = helpers.forwardButton || (depth0 != null ? depth0.forwardButton : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"forwardButton","hash":{},"data":data}) : helper))) != null ? stack1 : "")

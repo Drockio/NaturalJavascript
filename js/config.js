@@ -21,6 +21,7 @@ const baseUrl = `?campaignId=${globals.campaignId}&loginId=${globals.apiUserId}&
 // };
 
 const urls = {
+	errorProductUrl: `https://api.konnektive.com/product/query/`,
 	productUrl: `https://api.konnektive.com/product/query/${baseUrl}`,
 	//productUrl: `${globals.apiServer}/${globals.crm}/products/${globals.campaignId}`,
 	importLead: `https://api.konnektive.com/leads/import/${baseUrl}`,

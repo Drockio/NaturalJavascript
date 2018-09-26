@@ -5,6 +5,7 @@
     grid-template-areas:
     "header"
     "banner"
+    "messages"
     "products"
     "about"
     "email"
@@ -93,6 +94,10 @@
     border-top-right-radius: var(--borderRadius);
     border-top-left-radius: var(--borderRadius);
     border-bottom: inherit;
+}
+.container .message-blank {
+    grid-area: messages;
+    min-height: initial;
 }
 .container .about {
     grid-area: about;

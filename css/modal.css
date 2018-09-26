@@ -82,7 +82,7 @@
     justify-content: center;
     flex-direction: column;
 }
-.modal-message {
+.message-blank {
     padding: 2px 5%;
 }
 .modal-single-message {
