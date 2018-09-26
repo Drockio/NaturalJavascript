@@ -30,24 +30,32 @@ Konnektive site for selling greens
 # Happy Coding!
 
 ## Derek working on
-- Add gatherCategories which returns an array of unique categories
--- params: array of products
--- returns: a unique array of categories
-- save masterCategory list to local storage
-- Markup category tiles based on gatherCategories
-- Set up event messaging for categories
-- Once you have targeted the right element:
--- toggle its 'led like light'
--- remove/add it from/to filtered category list
--- redisplay product list
-- Create unit tests
+- [ ] add ___gatherCategories___ which returns an array of unique categories
+	- params: array of products
+	- returns: a unique array of categories
+- [ ] save ___masterCategoryArray___ list to local storage
+- [ ] markup category tiles based on gatherCategories
+- [ ] set up event messaging for categories
+- [ ] set up ___applyUserFilters___ functions
+	- params: array of products, ___masterCategoryArray___, minPrice, maxPrice
+	- returns: filtered products
+	- [ ] filtered category list
+	- [ ] price range
+- once you have targeted the right element:
+	- [ ] toggle its 'led like light'
+	- [ ] remove/add it from/to filtered category list
+	- [ ] redisplay product list
+- [ ] create unit tests
 
 ## TODO
-- css separation
+- css separation/cleanup
 - finish js cleanup
 - filtering of products (meta name and price range) - LINQ like
 - investigate country/local behavior
 - push to drockio remote if you haven't been paid.
+- security
+- migrate rest of ajax calls to interfaces
+- finalize backend/language choices
 - home page segment loader dd$('.footer', 'templateName')
 - go through and do a test on broadcast errors on each page. put html into a template
 - add shroud between each page
@@ -60,15 +68,15 @@ Konnektive site for selling greens
 
 ## Finished
 Move finished TODO items to the top of this list:
-- interfaces for talking to controllers - decide where mapping for non-konnektive goes
-- investigate server side git. Right now there is a server.js and api/server.js, we don't need two.
-- Add shim to filterProductList that applies mock categories to products.
-- Move product ajax calls to interface (& set up interfaces)
+- ~~interfaces for talking to controllers - decide where mapping for non-konnektive goes~~
+- ~~investigate server side git. Right now there is a server.js and api/server.js, we don't need two.~~
+- ~~Add shim to filterProductList that applies mock categories to products.~~
+- ~~Move product ajax calls to interface (& set up interfaces)~~
 
 ## Pre-deployment checklist (todos)
 For all of those, leave-it-this-way-in-development-but-change-it-in-production last minute, just because you love me issues:
-- Review shims. Remove if possible.
-- Set proper production urls and passwords
-- Make it shine!
+* Review shims. Remove if possible.
+* Set proper production urls and passwords
+* Make it shine!
 
 
