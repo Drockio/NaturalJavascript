@@ -3,14 +3,9 @@
 Konnektive site for selling greens
 
 ## Getting Started
-Download the [development version][site].
-
-[site]: https://github.com/LevelAds/Greens.git 
-
-## Getting Started
 ### Clone into hosting directory:
 - navigate to hosting directory
-- git clone https://github.com/LevelAds/API.git
+- git clone https://github.com/LevelAds/Greens.git
 - npm install
 - grunt watch
 
