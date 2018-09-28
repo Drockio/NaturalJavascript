@@ -10,6 +10,19 @@ module.exports = function(grunt) {
     },
     //for sass: #1: ruby -v to see if you have ruby installed
     //#2: gem install sass
+    clean: ['_dist/*'],
+    copy: {
+      dist: {
+        files: [
+          {expand: true, src: ['*.html', 'LICENSE-MIT'], dest: '_dist/'},
+          {expand: true, src: ['css/*', 'css/**/*'], dest: '_dist/'},
+          {expand: true, src: ['img/*', 'img/**/*'], dest: '_dist/'},
+          {expand: true, src: ['interfaces/*', 'interfaces/**/*'], dest: '_dist/'},
+          {expand: true, src: ['js/*', 'js/**/*'], dest: '_dist/'},
+          {expand: true, src: ['shims/*', 'shims/**/*'], dest: '_dist/'}
+        ]
+      }
+    },
     sass: {
       dist: {
           files: {
@@ -73,8 +86,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'handlebars']);
+  grunt.registerTask('deploy', ['clean', 'copy']);
 };
