@@ -15,6 +15,7 @@
 }
 .container .products {
     grid-area: products;
+    flex-direction: column;
 }
 .products > div {
     height: 100%;
@@ -41,6 +42,7 @@
     height: 2.3em;
     align-self: flex-end;
     margin-top: 5px;
+    cursor: pointer;
 }
 .productInfo input[type='button']:hover {
 

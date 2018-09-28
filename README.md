@@ -30,13 +30,12 @@ Konnektive site for selling greens
 # Happy Coding!
 
 ## Derek working on
-- [ ] add ___gatherCategories___ which returns an array of unique categories
+- [*] add ___product_categories.gatherAndSave___ which returns an array of unique categories
 	- params: array of products
-	- returns: a unique array of categories
-- [ ] save ___masterCategoryArray___ list to local storage
-- [ ] markup category tiles based on gatherCategories
-- [ ] set up event messaging for categories
-- [ ] set up ___applyUserFilters___ functions
+	- [*] store: ___masterCategoryArray___ to local storage
+- [ ] markup category tiles based on ___masterCategoryArray___
+- [ ] set up event messaging for category tiles
+- [ ] set up ___applyCategoryFilters___ functions
 	- params: array of products, ___masterCategoryArray___, minPrice, maxPrice
 	- returns: filtered products
 	- [ ] filtered category list
@@ -53,6 +52,7 @@ Konnektive site for selling greens
 - filtering of products (meta name and price range) - LINQ like
 - investigate country/local behavior
 - push to drockio remote if you haven't been paid.
+- consider getting rid of fontawesome in place of a couple icons
 - security
 - migrate rest of ajax calls to interfaces
 - finalize backend/language choices

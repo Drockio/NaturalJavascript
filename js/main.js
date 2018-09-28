@@ -34,6 +34,7 @@ import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { homePage } from '../page_segments/homePage.js';
 import { productList } from '../page_segments/productList.js';
+import { categoryList } from '../page_segments/categoryList.js';
 import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
 import { importUserPage } from '../page_segments/importUserPage.js';
 import { creditCardPage } from '../page_segments/creditCardPage.js';
@@ -49,6 +50,9 @@ const controller = {
 		//add products
 		message.listen('displayProducts', function(){ productList.display(); });
 
+		//add categories
+		message.listen('displayCategories', function(){ categoryList.display()
+																	.addEventListeners(); });
 		//setup shoppingcart page 
 		message.listen('displayShoppingCartPage', function(){ shoppingCartPage
 																	.display() 
@@ -106,6 +110,7 @@ window.onload=function(){
   		//initial page loads
   		message.post('displayHomePage');
   		message.post('displayProducts');
+  		message.post('displayCategories');
 
   		//display any page you want to work on here:
   		//message.post('displayImportUserPage');

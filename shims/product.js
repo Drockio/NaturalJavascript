@@ -16,7 +16,7 @@ const productShim = {
 		['orange', 'round', 'four'],
 		['orange', 'round', 'two'],
 		['orange', 'round', 'four', 'extra'],
-		['orange', 'round', 'two', 'extra']
+		['orange', 'round', 'two', 'extra', 'unique']
 	]
 }
 

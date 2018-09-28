@@ -14,30 +14,31 @@ const products = {
 	    });
 	    return defaulted;
 	},
-	filter: function(jDataProducts){
+	build: function(jDataProducts){
 		//we have a list of objects. Let's turn them into an array.
-		let productArray = util.arrayFromObjectList(jDataProducts);
+		let array = util.arrayFromObjectList(jDataProducts);
 
 		//only shop products with an image.
-	    let filteredProducts = productArray.filter(item => { return item.productImagePath; });
+	    let productArray = array.filter(item => { return item.productImagePath; }); 
 
-	    //TODO: Remove shim!!!
-	    products.shim(filteredProducts);
-
-		//store products for use later.
-	    storage.setProducts(filteredProducts);
+	    //TODO: Remove shim!!! This should come from the CRM.
+	    //add price and categories
+	    products.shim(productArray);
 
 	    //return the results with defaults
-	    let defaults = products.setDefaults(filteredProducts);
+	    productArray = products.setDefaults(productArray);
 
-	    return defaults;
+		//store products for use later.
+	    storage.setProducts(productArray);
+
+	    return productArray;
 	},
 	//These are distinct features that the CRM doesn't currently provide, not defaults.
-	shim: function(products){
+	shim: function(productsArray){
 	    //CRM isn't providing prices, lets put some fake ones in there for now.
-		productShim.addPrices(products);
+		productShim.addPrices(productsArray);
 		//CRM isn't providing meta tags, lets put some fake ones in there for now.
-		productShim.addCategories(products);
+		productShim.addCategories(productsArray);
 	}
 };
 

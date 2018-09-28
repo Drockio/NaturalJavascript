@@ -1,5 +1,15 @@
 this["DD"] = this["DD"] || {};
 
+this["DD"]["templates/categories.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<script id=\"categories\" type=\"text/x-handlebars-template\">\n	<div class=\"category\" data-categoryname=\""
+    + alias4(((helper = (helper = helpers.categoryName || (depth0 != null ? depth0.categoryName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"categoryName","hash":{},"data":data}) : helper)))
+    + "\" data-lit=\"true\">\n		<h3>"
+    + alias4(((helper = (helper = helpers.categoryName || (depth0 != null ? depth0.categoryName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"categoryName","hash":{},"data":data}) : helper)))
+    + "</h3>\n		<div class=\"led\"></div>\n	</div>\n</script>";
+},"useData":true});
+
 this["DD"]["templates/creditCardPage.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
 

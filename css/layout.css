@@ -98,6 +98,7 @@
 .container .message-blank {
     grid-area: messages;
     min-height: initial;
+    border: 0;
 }
 .container .about {
     grid-area: about;

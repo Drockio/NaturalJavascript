@@ -13,6 +13,13 @@ var storage = {
 		this.setGeneric('products', filtered);
 	},
 
+	setMasterCategoryArray: function(categoryArray) {
+		storage.setGeneric('masterCategoryArray', categoryArray);
+	},
+	getMasterCategoryArray: function() {
+		return storage.getGeneric('masterCategoryArray');
+	},
+
 	getCart: function() {
 		return this.getGeneric('shoppingCart');
 	},

@@ -31,6 +31,9 @@ const templates = {
 		let result = jData.reduce((accumulator, current) => { return accumulator += this.getHtmlTemplate('products', current); },'');
 		return result;
 	},
+	getHTML_categories: function(jData){
+		return templates.getHtmlTemplate('categories', jData);
+	},
 	getHTML_creditCardPage: function(jData){
 		return this.getHtmlTemplate('creditCardPage', jData);
 	},

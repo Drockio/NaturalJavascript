@@ -1,12 +1,14 @@
 import { products } from '../js/products.js';
+import { product_categories } from '../js/product_categories.js';
 import { broadcast } from '../js/message.js';
 
 const konnektiveInterface = {
 	getProducts: async function(url){
-		let returnVal;
+		let productArray;
 		let result = await $.getJSON(url, function(response){
 			if (response.result === 'SUCCESS'){
-				returnVal = products.filter(response.message);
+				productArray = products.build(response.message);
+				product_categories.gatherAndSave(productArray);
 			}
 			else {
 				broadcast.error({result: "ERROR", message: `error in konnektive.js: ${response.result} - ${response.message}`});
@@ -17,7 +19,7 @@ const konnektiveInterface = {
 		})
 		.catch(function(){});
 
-		return returnVal;
+		return productArray;
 	}
 };
 
