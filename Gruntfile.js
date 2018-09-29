@@ -76,7 +76,7 @@ module.exports = function(grunt) {
     },
     handlebars: {
       compile: {
-        src: 'templates/*.handlebars',
+        src: ['templates/*.handlebars', 'templates/**/*.handlebars'],
         dest: 'templates/compiledHandlebars.js'
       },
       options: {

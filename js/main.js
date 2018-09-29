@@ -51,22 +51,24 @@ const controller = {
 		message.listen('retrieveAndDisplayProducts', function(){ productList.retrieveAndDisplay(); });
 
 		//add products
-		message.listen('displayProducts', function(){ productList.display(); });
-
+		message.listen('displayProducts', function(){ productList
+																.display(); });
 		//add categories
-		message.listen('displayCategories', function(){ categoryList.display()
-																	.addEventListeners(); });
+		message.listen('displayCategories', function(){ categoryList
+																.display()
+																.addEventListeners(); });
 		//setup shoppingcart page 
 		message.listen('displayShoppingCartPage', function(){ shoppingCartPage
-																	.display() 
-																	.addEventListeners(); });
+																.display() 
+																.addEventListeners(); });
 		//setup import user page
 		message.listen('displayImportUserPage', function(){ importUserPage
-																	.display()
-																	.addEventListeners(); });
+																.display()
+																.addEventListeners(); });
 		//setup credit card purchase page
-		message.listen('displayCreditCardPage', function(){ creditCardPage.display(); });
-
+		message.listen('displayCreditCardPage', function(){ creditCardPage
+																.display()
+																.addEventListeners(); });
 		//setup thank you page
 		message.listen('thankYouPage', function(){ thankYouPage.display(); });
 	},
@@ -114,7 +116,7 @@ window.onload=function(){
   		message.post('retrieveAndDisplayProducts');
   		message.post('displayCategories');
 
-  		//message.post('creditCardPage');
+  		message.post('thankYouPage');
 	});
 };
 

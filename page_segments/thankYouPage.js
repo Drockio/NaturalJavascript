@@ -8,7 +8,7 @@ const thankYouPage = {
 		let shoppingCart = storage.getCart();
 		shoppingCart.campaignid = globals.campaignId;
 		let productsInCart = templates.getHTML_products(shoppingCart);
-		let thankYouPageTemplate = templates.getHtml('thankYouPage', ({productsInCart: productsInCart}));
+		let thankYouPageTemplate = templates.getHtml('checkout/thankYouPage', ({productsInCart: productsInCart}));
 		modal.display('Thank You!', thankYouPageTemplate, { 'name': 'Close'});
 
 		//These might have defunct info OR they might be useful?

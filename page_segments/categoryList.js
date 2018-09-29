@@ -7,7 +7,7 @@ const categoryList = {
 	display: function(){
 		const masterCategories = storage.getMasterCategoryArray();
 		
-		let categoryMarkup = masterCategories.map(item => templates.getHtml('categories', ({categoryName: item})));
+		let categoryMarkup = masterCategories.map(item => templates.getHtml('product/productCategories', ({categoryName: item})));
 		
 		//display results
 		$('.category-list').empty().append(categoryMarkup);

@@ -10,11 +10,11 @@ const templates = {
 	},
 
 	getHTML_products: function(jData){
-		let result = jData.reduce((accumulator, current) => { return accumulator += this.getHtml('products', current); },'');
+		let result = jData.reduce((accumulator, current) => { return accumulator += this.getHtml('product/products', current); },'');
 		return result;
 	},
 	getHTML_shoppingCartPage: function(productMarkup){
-		return this.getHtml('shoppingCartPage', {"productMarkup": productMarkup});
+		return this.getHtml('checkout/shoppingCartPage', {"productMarkup": productMarkup});
 	},
 	getHTML_importUserPage: function(jData){
 		return this.getHtml('importUserPage', jData);

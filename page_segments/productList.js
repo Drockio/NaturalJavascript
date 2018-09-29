@@ -26,8 +26,8 @@ const productList = {
 
 			//generate HMTL
 			let productMarkup = (products.length !== 0) ? 
-							products.map(item => templates.getHtml('product', item)):
-							templates.getHtml('productsEmpty');
+							products.map(item => templates.getHtml('product/product', item)):
+							templates.getHtml('product/productsEmpty');
 
 		    //display results
 		    $('.product-list').empty().append(productMarkup);

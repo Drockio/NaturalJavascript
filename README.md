@@ -53,9 +53,8 @@ Konnektive site for selling greens
 - [ ] create unit tests
 
 ## TODO
+- put templates in subfolders
 - css separation/cleanup
-- finish js cleanup
-- filtering of products (meta name and price range) - LINQ like
 - investigate country/local behavior
 - push to drockio remote if you haven't been paid.
 - consider getting rid of fontawesome in place of a couple icons
@@ -74,6 +73,7 @@ Konnektive site for selling greens
 
 ## Finished
 Move finished TODO items to the top of this list:
+- ~~filtering by product category~~
 - ~~interfaces for talking to controllers - decide where mapping for non-konnektive goes~~
 - ~~investigate server side git. Right now there is a server.js and api/server.js, we don't need two.~~
 - ~~Add shim to filterProductList that applies mock categories to products.~~

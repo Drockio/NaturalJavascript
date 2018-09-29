@@ -14,9 +14,9 @@ const creditCardPage = {
 		let shoppingCart = storage.getCart();
 		shoppingCart.campaignid = globals.campaignId;
 		let productsInCart = templates.getHTML_products(shoppingCart);
-		let shipToChoiceContainer = templates.getHtml('shipToAddressChoice', (storage.getGeneric('standardInputs')));
-		let checkoutFormTemplate = templates.getHtml('importUserForm', ({'title': 'Alternate Shipping Information', 'formName': 'altShipping', 'includeEmail': 'true'}));
-		let creditCardMarkup = templates.getHtml('creditCardPage', ({productsInCart: productsInCart, shipToChoiceContainer: shipToChoiceContainer, "checkoutForm": checkoutFormTemplate}));
+		let shipToChoiceContainer = templates.getHtml('checkout/shipToAddressChoice', (storage.getGeneric('standardInputs')));
+		let checkoutFormTemplate = templates.getHtml('checkout/importUserForm', ({'title': 'Alternate Shipping Information', 'formName': 'altShipping', 'includeEmail': 'true'}));
+		let creditCardMarkup = templates.getHtml('checkout/creditCardPage', ({productsInCart: productsInCart, shipToChoiceContainer: shipToChoiceContainer, "checkoutForm": checkoutFormTemplate}));
 		let continueButton = {'name': 'Place Order', 'attributes': [{'type': 'submit'}]};
 		let standardInputs = storage.getGeneric('standardInputs');
 		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
@@ -27,11 +27,10 @@ const creditCardPage = {
 		this.attachMonths();
 		this.attachYears();
 
-		//alt shipping address
-		//$('#country').append(locale.getCountriesSelectList(countryCode));
-		//$('#state').append(locale.getStateSelectList(countryCode, state));
-
-	  	$('#country').on('change', function(){
+		return this;
+	},
+	addEventListeners(){
+		$('#country').on('change', function(){
 			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
 		});
 
@@ -46,26 +45,9 @@ const creditCardPage = {
 		});
 		$('input[name="billShipSame').on('click', creditCardPage.toggleBillShipSame);
 		util.scrollTopModal();
-		//this.mockData();
 	},
 	displayTotal: function(){
 		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
-	},
-	mockData: function(){
-		//TODO Set validation for credit cards
-		util.setUIById('cardNumber_id', '5346131158777180');
-		util.setUIById('firstName_id', 'spanky mc');
-		util.setUIById('lastName_id', 'spankerson');
-		util.setUIById('cardSecurityCode_id', '5577');
-		util.setUIById('first-name', 'anotherPerson');
-		util.setUIById('last-name', 'theirLastName');
-		util.setUIById('address', '2nd best house');
-		util.setUIById('apartment-suite', 'B apartment');
-		util.setUIById('city', 'star prairie');
-		util.setUIById('country', 'CA'); //TODO check to see if you use two letter country and state codes
-		util.setUIById('state', 'MN');
-		util.setUIById('zip', '54020');
-		util.setUIById('phone', '555-1212');
 	},
 	getUrl: function(productsUrlSegement){
 		return urls.importOrder + productsUrlSegement;
@@ -84,7 +66,6 @@ const creditCardPage = {
 	},
 	post: function(ccData, url){
 		message.post('displayShroud');
-		//make ajax call
 		let results = $.ajax({
 			type: "POST",
 			url: url,
