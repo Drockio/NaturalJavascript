@@ -5,21 +5,20 @@ Konnektive site for selling greens
 ## Getting Started
 ### Clone into hosting directory:
 - navigate to hosting directory
-- git clone https://github.com/LevelAds/Greens.git
-- npm install
-- grunt watch
+- pull down source code with `git clone https://github.com/LevelAds/Greens.git`
+- use `npm install` to install all node modules in package.json
 
 ### Create User
 - Create the user 'webserver'. Note: I found it easiest to create one with the Users & Groups interface in windows. su dooesn't seem to work in OSX bash, btw.
 
 ### Change owner:
-- sudo chown -R webserver .
+- `sudo chown -R webserver .`
 
 ### Set file permissions:
-- sudo chmod -R 755 .
+- `sudo chmod -R 755 .`
 
-### Start your webserver
-- Download the [development web server][webserver].
+### Custom https node/express webserver
+- Download the server [here][webserver].
 
 [webserver]: https://github.com/LevelAds/Webserver
 
@@ -27,23 +26,30 @@ Konnektive site for selling greens
 - Create Users/(your_user_name)/.grunt-init/(new_template_name)
 - From a new website director: grunt-init new_template_name
 
+## Development
+- use `grunt watch` to continuously monitor your javascript and compile handlebar templates.
+
 # Happy Coding!
+
+## Deployment
+- use `grunt deploy` to clean the `_dist` directory then copy deployment files there.
+- I find it useful to run `grunt clean` after deploying so `find file` operations don't include `_dist` files.
 
 ## Derek working on
 - [*] add ___product_categories.gatherAndSave___ which returns an array of unique categories
 	- params: array of products
 	- [*] store: ___masterCategoryArray___ to local storage
-- [ ] markup category tiles based on ___masterCategoryArray___
-- [ ] set up event messaging for category tiles
-- [ ] set up ___applyCategoryFilters___ functions
+- [*] markup category tiles based on ___masterCategoryArray___
+- [*] set up event messaging for category tiles
+- [*] set up ___applyCategoryFilters___ functions
 	- params: array of products, ___masterCategoryArray___, minPrice, maxPrice
 	- returns: filtered products
-	- [ ] filtered category list
+	- [*] filtered category list
 	- [ ] price range
 - once you have targeted the right element:
-	- [ ] toggle its 'led like light'
-	- [ ] remove/add it from/to filtered category list
-	- [ ] redisplay product list
+	- [*] toggle its 'led like light'
+	- [*] remove/add it from/to filtered category list
+	- [*] redisplay product list
 - [ ] create unit tests
 
 ## TODO
