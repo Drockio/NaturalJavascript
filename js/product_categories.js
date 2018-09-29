@@ -15,8 +15,41 @@ const product_categories = {
 
 		storage.setMasterCategoryArray(uniqueCategories);
 	},
-	update: function(category, state){
-		categoryArray = storage.getMasterCategoryArray();
+	filter: function(category, state){
+		//categoryArray = storage.getMasterCategoryArray();
+	},
+	updateCategoryElement(categoryElement){
+		let categoryState = categoryElement.dataset.lit;
+		let newCategoryState = categoryState === 'true' ? 'false' : 'true';
+		categoryElement.dataset.lit = newCategoryState;
+	},
+	getEnabledCategories(category_list){
+		let enabledCategories = [];
+		category_list.forEach(item => {
+			if (item.dataset.lit === "true"){
+				enabledCategories.push(item.dataset.categoryname);
+			}
+		});
+		return enabledCategories;
+	},
+	filterProductByCategory(enabledCategories){
+		let filteredProducts = [];
+
+		// filter products based on categories
+		let products = storage.getProducts();
+
+		products.forEach(product => {
+			if (product.categories){
+				enabledCategories.some(category => {
+					if (product.categories.includes(category)){
+						filteredProducts.push(product);
+						return true;
+					}
+				});
+			}
+		});
+
+		return filteredProducts;
 	}
 };
 

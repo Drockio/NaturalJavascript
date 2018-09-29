@@ -36,6 +36,11 @@
 	margin: 4px;
 }
 
+[data-lit="false"] .led {
+	background-color: black;
+	box-shadow: none;
+}
+
 @media (max-width: 850px) {
 	.category-list {
 		flex-direction: column;

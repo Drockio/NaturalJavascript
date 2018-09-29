@@ -1,5 +1,6 @@
 import { storage } from '../js/crud.js'
 import { templates } from '../templates/_templateController.js';
+import { productList } from './productList.js';
 import { product_categories } from '../js/product_categories.js';
 
 const categoryList = {
@@ -15,21 +16,18 @@ const categoryList = {
 	},
 	addEventListeners: function(){
 		$('.category').on('click', function(){
-			//NEW IDEA: Let's just get all the categories & states and then extract the products from that.
+			product_categories.updateCategoryElement(this.closest('[data-categoryName]'));
 
+			// get currently enabled categories
+			let categoryChildren = Array.from(this.closest('.category-list').children);
+			let enabledCategories = product_categories.getEnabledCategories(categoryChildren);
 
-			let categoryElement = this.closest('[data-categoryName]');
-			let categoryChanged = categoryElement.dataset['categoryname'];
-			let categoryState = categoryElement.dataset['lit'];
-			if (categoryElement && categoryChanged && categoryState){
-				let newCategoryState = categoryState === 'true' ? 'false' : 'true';
-				product_categories.update(categoryChange, newCategoryState);
-			}
-			debugger;
-			//locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
+			// get products filtered by category
+			let filteredProducts = product_categories.filterProductByCategory(enabledCategories);
+
+			productList.display(filteredProducts);
 		});
 	}
-
 }
 
 export { categoryList };

@@ -47,6 +47,9 @@ const controller = {
 		//setup home page
 		message.listen('displayHomePage', function(){ homePage.display(); });
 
+		// retrieveAndDisplay products
+		message.listen('retrieveAndDisplayProducts', function(){ productList.retrieveAndDisplay(); });
+
 		//add products
 		message.listen('displayProducts', function(){ productList.display(); });
 
@@ -109,7 +112,7 @@ window.onload=function(){
 
   		//initial page loads
   		message.post('displayHomePage');
-  		message.post('displayProducts');
+  		message.post('retrieveAndDisplayProducts');
   		message.post('displayCategories');
 
   		//display any page you want to work on here:

@@ -16,6 +16,7 @@
 .container .products {
     grid-area: products;
     flex-direction: column;
+    justify-content: flex-start;
 }
 .products > div {
     height: 100%;
@@ -87,6 +88,13 @@
 .productsInCart h2 {
     margin-bottom: 40px;
 }
+.noProduct {
+    padding-top: 40px;
+    height: 300px;
+}
+.noProduct h3 {
+    font-size: 3em;
+}
 .crediCardContainer::first{
     padding-right: ;
 }
@@ -126,9 +134,6 @@
 }
 .modal-body .product-container img {
     max-height: 110px;
-}
-.modal-body .productsInCart h3 {
-    font-size: 1em;
 }
 .modal-body .productsInCart p {
     font-size: 1em;
@@ -177,9 +182,6 @@
     align-items: center;
     background-color: hsla(0,0%,100%,1);
     width: 65%;
-}
-.modal-body .product-details-info h3 {
-    font-size: 1.5em;
 }
 .modal-body .product-details-info p {
     font-size: 1.5em;

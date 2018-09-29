@@ -25,6 +25,10 @@ fieldset, p {
     margin: 2px;
 }
 
+.spacer {
+    padding-top: 10px;
+}
+
 input[type="text"]::placeholder, input[type="email"]::placeholder {
     color: #fff;
 }

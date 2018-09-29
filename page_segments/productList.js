@@ -8,7 +8,7 @@ import { templates } from '../templates/_templateController.js';
 import { konnektiveInterface } from '../interfaces/konnektive.js';
 
 const productList = {
-	display: async function(){
+	retrieveAndDisplay: async function(){
 		//retrieve product list
 		let packedProducts = await konnektiveInterface.getProducts(urls.productUrl);
 
@@ -18,11 +18,16 @@ const productList = {
 		}
 		else 
 		{
-			//TODO: hook up as a prototype from extensions.js
 			let products = util.arrayFromObjectList(packedProducts);
+			productList.display(products);
+		}
+	},
+	display: function(products){
 
 			//generate HMTL
-			let productMarkup = products.map(item => templates.getHTML_product(item));
+			let productMarkup = (products.length !== 0) ? 
+							products.map(item => templates.getHTML_product(item)):
+							templates.getHTML_noProductChosen();
 
 		    //display results
 		    $('.product-list').empty().append(productMarkup);
@@ -32,7 +37,6 @@ const productList = {
 		  		shoppingCart.addItemTo(this.dataset["productid"] || 0, this.dataset["campaignid"] || 0);
 		  		message.post('displayShoppingCartPage');
 		  	});
-		}
 	}
 };
 

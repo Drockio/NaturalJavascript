@@ -2,7 +2,7 @@ const templates = {
 	//DD here is defined in the grunt job that compiles the templates of all freakin' places.
 	getHtmlTemplate: function(name, context) {
 		name = `templates/${name}.handlebars`;
-		return $(DD[name](context)).html();
+		return $(DD[name](context)).html().trim();
 	},
 
 	//Naming convention: get<returnType>_<templateName>
@@ -30,6 +30,9 @@ const templates = {
 	getHTML_products: function(jData){
 		let result = jData.reduce((accumulator, current) => { return accumulator += this.getHtmlTemplate('products', current); },'');
 		return result;
+	},
+	getHTML_noProductChosen: function(jData){
+		return this.getHtmlTemplate('noProductChosen', jData);
 	},
 	getHTML_categories: function(jData){
 		return templates.getHtmlTemplate('categories', jData);
