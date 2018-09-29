@@ -13,9 +13,9 @@ const importUserPage = {
 	display: function() {
 		let cart = storage.getCart(); 
 		cart.campaignid = globals.campaignId;
-		let checkoutFormTemplate = templates.getHTML_importUserForm({'title': 'Registration Information', 'formName': 'registration'});
+		let checkoutFormTemplate = templates.getHtml('importUserForm', ({'title': 'Registration Information', 'formName': 'registration'}));
 		let productMarkup = templates.getHTML_products(cart);
-		let checkoutFormTop = templates.getHTML_importUserPage({"checkoutForm": checkoutFormTemplate, productsInCart: productMarkup});
+		let checkoutFormTop = templates.getHtml('importUserPage', ({"checkoutForm": checkoutFormTemplate, productsInCart: productMarkup}));
 		let standardInputs = storage.getGeneric('standardInputs');
 		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
 		let state = standardInputs['state'];

@@ -4,7 +4,7 @@ import { templates } from '../templates/_templateController.js';
 const homePage = {
 	display: function(){
 		//set up footer
-		let footerContent = templates.getHTML_footer();
+		let footerContent = templates.getHtml('footer');
 		$('footer').empty().append(footerContent);
 	}
 };

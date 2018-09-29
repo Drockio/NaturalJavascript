@@ -63,10 +63,6 @@ this["DD"]["templates/modal.handlebars"] = Handlebars.template({"compiler":[7,">
     + "</div>\n        </div>\n    </div>\n</script> \n\n\n";
 },"useData":true});
 
-this["DD"]["templates/noProductChosen.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<script id=\"noProductChosen\" type=\"text/x-handlebars-template\">\n	<div class=\"noProduct\">\n		<h3>No Product Chosen</h3>\n	</div>\n</script>\n";
-},"useData":true});
-
 this["DD"]["templates/product.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -109,6 +105,10 @@ this["DD"]["templates/products.handlebars"] = Handlebars.template({"compiler":[7
     + " "
     + alias4(((helper = (helper = helpers.price || (depth0 != null ? depth0.price : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"price","hash":{},"data":data}) : helper)))
     + "</p>\n			</div>\n		</div>\n	</div>\n</script>";
+},"useData":true});
+
+this["DD"]["templates/productsEmpty.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<script id=\"productsEmpty\" type=\"text/x-handlebars-template\">\n	<div class=\"productsEmpty\">\n		<h3>No Products Chosen</h3>\n	</div>\n</script>\n";
 },"useData":true});
 
 this["DD"]["templates/productWithModifiers.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

@@ -114,8 +114,7 @@ window.onload=function(){
   		message.post('retrieveAndDisplayProducts');
   		message.post('displayCategories');
 
-  		//display any page you want to work on here:
-  		//message.post('displayImportUserPage');
+  		//message.post('creditCardPage');
 	});
 };
 

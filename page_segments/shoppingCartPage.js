@@ -16,7 +16,7 @@ const shoppingCartPage = {
 			modal.display(SHOPPING_CART_HEADER, shoppingCartPage.getShoppingCartPage(cart), { 'name': 'Checkout'});
 			shoppingCartPage.displayTotal();
 		} else {
-			modal.display(SHOPPING_CART_HEADER, templates.getHTML_shoppingCartEmpty());
+			modal.display(SHOPPING_CART_HEADER, templates.getHtml('shoppingCartEmpty'));
 		}
 		return this;
 	},
@@ -32,7 +32,7 @@ const shoppingCartPage = {
 		let productMarkup = shoppingCart.reduce((accumulator, current) => {
 			current.campaignId = globals.campaignId;
 			current.price = (current.price) ? current.price : 0;
-			return accumulator += templates.getHTML_productWithModifiers(current);
+			return accumulator += templates.getHtml('productWithModifiers', current);
 		},'');
 		let productMarkupPlusTotals = templates.getHTML_shoppingCartPage(productMarkup);
 		return productMarkupPlusTotals;

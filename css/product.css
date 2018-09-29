@@ -88,11 +88,11 @@
 .productsInCart h2 {
     margin-bottom: 40px;
 }
-.noProduct {
+.productsEmpty {
     padding-top: 40px;
     height: 300px;
 }
-.noProduct h3 {
+.productsEmpty h3 {
     font-size: 3em;
 }
 .crediCardContainer::first{

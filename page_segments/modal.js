@@ -10,7 +10,7 @@ const modal = {
 		let attributes = modal.getAttributes(title, pageHTML, forwardButtonJSON, backButtonJSON);
 
 		//get content
-		let modalMarkup = templates.getHTML_modal(attributes);
+		let modalMarkup = templates.getHtml('modal', attributes);
 
 		//add content
 		$('.modal-content').empty().append(modalMarkup); 

@@ -19,7 +19,9 @@ module.exports = function(grunt) {
           {expand: true, src: ['img/*', 'img/**/*'], dest: '_dist/'},
           {expand: true, src: ['interfaces/*', 'interfaces/**/*'], dest: '_dist/'},
           {expand: true, src: ['js/*', 'js/**/*'], dest: '_dist/'},
-          {expand: true, src: ['shims/*', 'shims/**/*'], dest: '_dist/'}
+          {expand: true, src: ['page_segments/*', 'page_segments/**/*'], dest: '_dist/'},
+          {expand: true, src: ['shims/*', 'shims/**/*'], dest: '_dist/'},
+          {expand: true, src: ['templates/*.js'], dest: '_dist/'}
         ]
       }
     },
