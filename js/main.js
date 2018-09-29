@@ -91,7 +91,6 @@ const controller = {
 
 		//first parameter is where a click occurs and second is
 		//where page scrolls to.
-	  	util.registerScroll('#click-home', '.container');
 	  	util.registerScroll('#click-about', '.about');
 	  	util.registerScroll('#click-products', '.products');
 	  	util.registerScroll('#click-contact', '.email');

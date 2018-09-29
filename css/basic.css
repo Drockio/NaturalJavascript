@@ -29,6 +29,10 @@ fieldset, p {
     padding-top: 10px;
 }
 
+.giant {
+    font-size: 3em;
+}
+
 input[type="text"]::placeholder, input[type="email"]::placeholder {
     color: #fff;
 }

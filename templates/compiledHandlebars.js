@@ -23,7 +23,7 @@ this["DD"]["templates/creditCardPage.handlebars"] = Handlebars.template({"compil
 },"useData":true});
 
 this["DD"]["templates/footer.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<script id=\"footer\" type=\"text/x-handlebars-template\">\n    <div class=\"related-links\">\n        <ul>\n            <li>\n                <a href=\"https://store.draxe.com/\" target=\"_blank\">dr. axe</a>\n            </li>\n            <li>\n                <a href=\"https://athleticgreens.com/\" target=\"_blank\">athletic greens</a>\n            </li>\n            <li>\n                <a href=\"https://truenutrition.com/\" target=\"_blank\">truenutrition</a>\n            </li>\n            <li>\n                <a href=\"https://www.truthnutra.com\" target=\"_blank\">truthnutra</a>\n            </li>\n        </ul>\n    </div>\n</script>\n\n";
+    return "<script id=\"footer\" type=\"text/x-handlebars-template\">\n    <div class=\"links\">\n        <ul>\n            <li>\n                <a href=\"https://store.draxe.com/\" target=\"_blank\">dr. axe</a>\n            </li>\n            <li>\n                <a href=\"https://athleticgreens.com/\" target=\"_blank\">athletic greens</a>\n            </li>\n            <li>\n                <a href=\"https://truenutrition.com/\" target=\"_blank\">truenutrition</a>\n            </li>\n            <li>\n                <a href=\"https://www.truthnutra.com\" target=\"_blank\">truthnutra</a>\n            </li> \n        </ul>\n    </div>\n</script>\n\n";
 },"useData":true});
 
 this["DD"]["templates/importUserForm.handlebars"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {

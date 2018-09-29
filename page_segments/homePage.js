@@ -5,7 +5,7 @@ const homePage = {
 	display: function(){
 		//set up footer
 		let footerContent = templates.getHTML_footer();
-		$('.footer').empty().append(footerContent);
+		$('footer').empty().append(footerContent);
 	}
 };
 
