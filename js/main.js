@@ -39,6 +39,7 @@ import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
 import { importUserPage } from '../page_segments/importUserPage.js';
 import { creditCardPage } from '../page_segments/creditCardPage.js';
 import { thankYouPage } from '../page_segments/thankYouPage.js';
+import { termsAndConditionsPage } from '../page_segments/termsAndConditionsPage.js';
 
 const controller = {
 
@@ -71,6 +72,11 @@ const controller = {
 																.addEventListeners(); });
 		//setup thank you page
 		message.listen('thankYouPage', function(){ thankYouPage.display(); });
+
+		// set up terms and conditions page
+		message.listen('displayTermsAndConditionsPage', function(){ termsAndConditionsPage
+																		.display()
+																		.addEventListeners(); });
 	},
 
 	//listen for page events
@@ -91,11 +97,13 @@ const controller = {
 	    	message.post('displayShoppingCartPage');
 	  	});
 
+
+
 		//first parameter is where a click occurs and second is
 		//where page scrolls to.
 	  	util.registerScroll('#click-about', '.about');
 	  	util.registerScroll('#click-products', '.products');
-	  	util.registerScroll('#click-contact', '.email');
+	  	util.registerScroll('#click-contact', '.contact');
 	  	util.registerScroll('.click-top', '.container');
 	}
 };
@@ -116,7 +124,6 @@ window.onload=function(){
   		message.post('retrieveAndDisplayProducts');
   		message.post('displayCategories');
 
-  		message.post('thankYouPage');
 	});
 };
 

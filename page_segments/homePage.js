@@ -4,8 +4,11 @@ import { templates } from '../templates/_templateController.js';
 const homePage = {
 	display: function(){
 		//set up footer
-		let footerContent = templates.getHtml('footer');
-		$('footer').empty().append(footerContent);
+		let footerHtml = templates.getHtml('footer');
+		$('footer').empty().append(footerHtml);
+
+		let headerHtml = templates.getHtml('header');
+		$('header').empty().append(headerHtml);
 	}
 };
 

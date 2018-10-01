@@ -8,7 +8,7 @@
     "messages"
     "products"
     "about"
-    "email"
+    "contact"
     "footer"
     "copyright";
 }
@@ -51,11 +51,7 @@ footer {
 footer div ul{
     flex-direction: row;
     display: flex;
-    justify-content: center;
-}
-
-footer div ul li {
-    margin: 0 40px;
+    justify-content: space-between;
 }
 
 footer .links {
@@ -92,9 +88,6 @@ footer .links {
     border: .5px solid var(--lightBorder);
     justify-content: center;
 }
-.container > div.padding {
-    padding: 0 10px 0 10px;
-}
 .container .header {
     grid-area: header;
     min-height: 140px;
@@ -117,22 +110,14 @@ footer .links {
     align-items: center;
     min-height: 300px;
 }
-.container .email {
-    grid-area: email;
+.container .contact {
+    grid-area: contact;
     background-color: hsla(194, 33%, 31%, 1);
     align-items: center;
     min-height: 300px;
     color: white;
 }
-#email-contact {
-    justify-content: flex-start;
-}
-.email form > select, .email_address input[type="text"] {
-    margin-right: 10px;
-}
-.email input{
-    margin-right: 10px;
-}
+
 #checkoutFormContainer {
     grid-area: checkoutFormContainer;
     display: none;
@@ -226,6 +211,10 @@ button.navigation {
     }
     .modal-body {
         padding: 0 5px;
+    }
+
+    footer div ul {
+        flex-direction: column;
     }
 }
 @media (max-width: 700px) {

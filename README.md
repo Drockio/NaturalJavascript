@@ -53,7 +53,8 @@ Konnektive site for selling greens
 - [ ] create unit tests
 
 ## TODO
-- put templates in subfolders
+- fix `this` references
+- fix credit card page bug
 - css separation/cleanup
 - investigate country/local behavior
 - push to drockio remote if you haven't been paid.
@@ -73,6 +74,7 @@ Konnektive site for selling greens
 
 ## Finished
 Move finished TODO items to the top of this list:
+- ~~put templates in subfolders~~
 - ~~filtering by product category~~
 - ~~interfaces for talking to controllers - decide where mapping for non-konnektive goes~~
 - ~~investigate server side git. Right now there is a server.js and api/server.js, we don't need two.~~

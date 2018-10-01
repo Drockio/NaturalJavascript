@@ -10,7 +10,7 @@ import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
 import { shoppingCart } from '../js/shoppingCart.js';
 
 const creditCardPage = {
-	display: function() { 
+	display: function() {
 		let shoppingCart = storage.getCart();
 		shoppingCart.campaignid = globals.campaignId;
 		let productsInCart = templates.getHTML_products(shoppingCart);
@@ -34,7 +34,7 @@ const creditCardPage = {
 			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
 		});
 
-		$('.navigation.backward').click(function(){
+		$('.navigation.backward').on('click', function(){
 			message.post('displayImportUserPage');
 		});
 		$('button[type="submit"]').on('click', function(){

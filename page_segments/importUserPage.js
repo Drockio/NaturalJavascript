@@ -28,25 +28,9 @@ const importUserPage = {
 		$('#country').append(locale.getCountriesSelectList(countryCode));
 		$('#state').append(locale.getStateSelectList(countryCode, state));
 
-		util.scrollTopModal();
+		//util.scrollTopModal();
 
-		//for chaining js functions
 		return this;
-	},
-	populateStandardInputs: function(standardInputs){
-		//grab previous inputs from storage and populate fields
-		util.setUIValueByName('firstName', standardInputs['firstName']);
-		util.setUIValueByName('lastName', standardInputs['lastName']);
-		util.setUIValueByName('address1', standardInputs['address1']);
-		util.setUIValueByName('address2', standardInputs['address2']);
-		util.setUIValueByName('postalCode', standardInputs['postalCode']);
-		util.setUIValueByName('city', standardInputs['city']);
-		util.setUIValueByName('emailAddress', standardInputs['emailAddress']);//online campaigns
-		util.setUIValueByName('phoneNumber', standardInputs['phoneNumber']);
-	},
-	displayTotal: function() {
-		//display shopping cart total
-		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
 	},
 	addEventListeners: function(){
 		//set the locale when the country changes
@@ -54,9 +38,9 @@ const importUserPage = {
 			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
 		});
 
-		$('.navigation.backward').click(function(){
+		$('.navigation.backward').on('click', (function(){
 			message.post('displayShoppingCartPage');
-		});
+		}));
 
 		//remove any error messages if they exist
 		$('#registration-form :input').on('focus', function(){
@@ -65,7 +49,7 @@ const importUserPage = {
 
 		//display creditcard page if validate otherwise scroll to top.
 		//validate.validateform displays necessary messages
-		$('#registration-form').submit(function(event){
+		$('#registration-form').submit(function(){
 			if (importUserPage.submitRegistrationForm())
 			{
 				message.post('displayCreditCardPage');
@@ -80,20 +64,38 @@ const importUserPage = {
 		//handle results of form validation
 		if (validate.validateForm('registration'))
         {
-        	//get user input
-        	importUserPage.getStandardInputs();
-        	//TODO: Put this back in after konnektive import user works.
-        	//if (this.postStandardInputs())
-        	//{
-        		//message.post('displayCreditCardPage');
-        	//}
+        	// store user input
+        	importUserPage.storeStandardInputs();
+
         	return true;
+        	// enable when konnektive pulls off their poopy pants 
+        	//return importUserPage.postStandardInputs();
         } 
         else 
         {
         	event.preventDefault();
         	return false;
     	}
+	},
+	storeStandardInputs: function(){
+		//retrieve user input
+		let standardInputs = {
+			"firstName": util.selectByName("firstName"),
+			"lastName": util.selectByName("lastName"),
+			"address1": util.selectByName("address1"),
+			"address2": util.selectByName("address2"),
+			"city": util.selectByName("city"),
+			"state": util.selectByName("state"), //view link for state
+			"postalCode": util.selectByName("postalCode"),		
+			"country": util.selectByName("country"),
+			"countryCode": document.querySelectorAll('#country option:checked')[0].value,
+			"emailAddress": util.selectByName("emailAddress"), //online campaigns
+			"phoneNumber": util.selectByName("phoneNumber"), 	//phone campaigns
+			"ipAddress": '127.0.0.1',	//TODO: for online campaigns (must validate)
+			"campaignId": globals.campaignId
+			};
+		storage.setGeneric('standardInputs', standardInputs);
+		return standardInputs;
 	},
 	postStandardInputs: function(){
 		//post the results to ecommerce crm
@@ -118,25 +120,20 @@ const importUserPage = {
 			return false;
 		});
 	},
-	getStandardInputs: function(){
-		//retrieve user input
-		let standardInputs = {
-			"firstName": util.selectByName("firstName"),
-			"lastName": util.selectByName("lastName"),
-			"address1": util.selectByName("address1"),
-			"address2": util.selectByName("address2"),
-			"city": util.selectByName("city"),
-			"state": util.selectByName("state"), //view link for state
-			"postalCode": util.selectByName("postalCode"),		
-			"country": util.selectByName("country"),
-			"countryCode": document.querySelectorAll('#country option:checked')[0].value,
-			"emailAddress": util.selectByName("emailAddress"), //online campaigns
-			"phoneNumber": util.selectByName("phoneNumber"), 	//phone campaigns
-			"ipAddress": '127.0.0.1',	//TODO: for online campaigns (must validate)
-			"campaignId": globals.campaignId
-			};
-		storage.setGeneric('standardInputs', standardInputs);
-		return standardInputs;
+	populateStandardInputs: function(standardInputs){
+		//grab previous inputs from storage and populate fields
+		util.setUIValueByName('firstName', standardInputs['firstName']);
+		util.setUIValueByName('lastName', standardInputs['lastName']);
+		util.setUIValueByName('address1', standardInputs['address1']);
+		util.setUIValueByName('address2', standardInputs['address2']);
+		util.setUIValueByName('postalCode', standardInputs['postalCode']);
+		util.setUIValueByName('city', standardInputs['city']);
+		util.setUIValueByName('emailAddress', standardInputs['emailAddress']);//online campaigns
+		util.setUIValueByName('phoneNumber', standardInputs['phoneNumber']);
+	},
+	displayTotal: function() {
+		//display shopping cart total
+		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
 	}
 };
 
