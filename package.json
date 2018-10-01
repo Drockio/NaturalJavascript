@@ -24,6 +24,8 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-sass": "^1.0.0"
   }

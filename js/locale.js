@@ -2,11 +2,11 @@
 //allows includes (instead of require);
 //TODO: Review Konnektive info about state.
 
-Element.prototype.removeChildren = function (){
-	while (this.firstChild) {
-    	this.removeChild(this.firstChild);
-	}
-};
+// Element.prototype.removeChildren = function (){
+// 	while (this.firstChild) {
+//     	this.removeChild(this.firstChild);
+// 	}
+// };
 
 String.prototype.toHTML = function() {
     let template = document.createElement('template');
@@ -51,9 +51,9 @@ let locale = {
 		//return localeList[0] ? localeList[0].map(item => `<option value="${item.stateCode}">${item.name}</option>`) : null;
 	},
 	getStateSelectList: function(countryCode, stateCode){
-		let localeList = locale.getCountryBlob(countryCode).locales;
-		if (localeList){
-			return localeList ? localeList.map(item => `<option value="${item.stateCode}" ${(item.stateCode === stateCode) ? 'selected' : ''}>${item.name}</option>`) : null;
+		let localeList = locale.getCountryBlob(countryCode);
+		if (localeList.locales){
+			return localeList ? localeList.locales.map(item => `<option value="${item.stateCode}" ${(item.stateCode === stateCode) ? 'selected' : ''}>${item.name}</option>`) : null;
 		}
 	},
 	getCountriesSelectList: function(countryCode){ 
@@ -61,7 +61,7 @@ let locale = {
 	},
 	setStatesSelectList: function(countryCode, stateElement, labelElement){
 		stateElement = ensureIsElement(stateElement);
-		stateElement.removeChildren();
+		//stateElement.removeChildren();
 		let countryBlob = locale.getCountryBlob(countryCode);
 		if (countryBlob && countryBlob.locales){
 			labelElement = ensureIsElement(labelElement);

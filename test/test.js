@@ -40,5 +40,5 @@ function runCurrentTest(){
 }
 
 
-//runTestSuite();
-runCurrentTest();
+runTestSuite();
+//runCurrentTest();

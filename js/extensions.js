@@ -86,10 +86,13 @@ let _library = {
      	{
      		console.log('no html to process');
      	}
+   	}, 
+   	onEvent: function(event, fn){
+   		this.addEventListener(event, fn);
    	}
 };
 
-function dd$(selector, template){ 
+function dd(selector, template){ 
 	let element = document.querySelector(selector);
 	_library.el = element;
 	if (!_library.el){
@@ -99,5 +102,5 @@ function dd$(selector, template){
 	return element;
 }
 
-export { dd$ };
+export { dd };
 

@@ -30,7 +30,10 @@ const util = {
 	isNumber: function(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 	},
-
+	// returns random number with min, max inclusive
+	randomNumber: function(min, max){
+    	return Math.floor(Math.random() * (max - min + 1)) + min;
+	},
 	arrayFromObjectList: function(objectList){
 	    const result = [];
 		const keys = Object.keys(objectList);

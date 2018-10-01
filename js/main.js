@@ -29,7 +29,8 @@ import { message } from './message.js';
 import { validate } from './validation.js';
 import { storage } from './crud.js';
 import { locale } from './locale.js';
-import { util } from './util.js'; 
+import { util } from './util.js';
+import { dd } from './extensions.js'; 
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { homePage } from '../page_segments/homePage.js';
@@ -46,7 +47,9 @@ const controller = {
 	//display pages here.
 	registerPageDisplayListeners: function(){
 		//setup home page
-		message.listen('displayHomePage', function(){ homePage.display(); });
+		message.listen('displayHomePage', function(){ homePage
+														.display()
+														.addEventListeners(); });
 
 		// retrieveAndDisplay products
 		message.listen('retrieveAndDisplayProducts', function(){ productList.retrieveAndDisplay(); });
@@ -88,43 +91,25 @@ const controller = {
 		//scroll to top of page and hide modal
 		message.listen('scrollToTop', function(){ util.scrollToTop(); });
 		message.listen('hideModal', function(){ modal.hide(); });
-	},
-
-	//set scrolling behavior.
-	registerInteractionListeners: function() {
-		//handle shopping cart click
-		$('#shopping-cart-click').on('click', function(){
-	    	message.post('displayShoppingCartPage');
-	  	});
-
-
-
-		//first parameter is where a click occurs and second is
-		//where page scrolls to.
-	  	util.registerScroll('#click-about', '.about');
-	  	util.registerScroll('#click-products', '.products');
-	  	util.registerScroll('#click-contact', '.contact');
-	  	util.registerScroll('.click-top', '.container');
 	}
 };
 
 //main load function
 window.onload=function(){
-  	$(document).ready(function(){
+  	//$(document).ready(function(){
   		//future admin option
   		//let setup = util.getUrlParameter('setup');
-  		
-  		//set up the listeners defined above
+
+  		 //set up the listeners defined above
   		controller.registerPageDisplayListeners();
-  		controller.registerDisplayEventListeners();
-  		controller.registerInteractionListeners();
 
   		//initial page loads
   		message.post('displayHomePage');
   		message.post('retrieveAndDisplayProducts');
   		message.post('displayCategories');
 
-	});
+  		controller.registerDisplayEventListeners();
+	//});
 };
 
 

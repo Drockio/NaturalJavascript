@@ -16,7 +16,7 @@ const shoppingCartPage = {
 			modal.display(SHOPPING_CART_HEADER, shoppingCartPage.getShoppingCartPage(cart), { 'name': 'Checkout'});
 			shoppingCartPage.displayTotal();
 		} else {
-			modal.display(SHOPPING_CART_HEADER, templates.getHtml('shoppingCartEmpty'));
+			modal.display(SHOPPING_CART_HEADER, templates.getHtml('checkout/shoppingCartEmpty'));
 		}
 		return this;
 	},

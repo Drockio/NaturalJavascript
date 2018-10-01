@@ -1,7 +1,7 @@
 const locale = require('../js/locale.js').locale;
 
 const functions = [
-	{'locale.getStatesSelectList': locale.getStatesSelectList},
+	{'locale.getStateSelectList': locale.getStateSelectList},
 	{'locale.getCountriesSelectList': locale.getCountriesSelectList}
 ];
 

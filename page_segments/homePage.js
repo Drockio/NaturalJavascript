@@ -1,4 +1,7 @@
 import { templates } from '../templates/_templateController.js';
+import { dd } from '../js/extensions.js';
+import { util } from '../js/util.js';
+import { message } from '../js/message.js';
 
 //Note, the 'template' of this page IS index.html.
 const homePage = {
@@ -9,6 +12,21 @@ const homePage = {
 
 		let headerHtml = templates.getHtml('header');
 		$('header').empty().append(headerHtml);
+
+		return this;
+	},
+	addEventListeners(){
+		//handle shopping cart click
+	  	dd('#shoppingCartClick').onEvent('click', function(){
+	  		message.post('displayShoppingCartPage');
+	  	});
+
+		//first parameter is where a click occurs and second is
+		//where page scrolls to.
+	  	util.registerScroll('#clickAbout', '.about');
+	  	util.registerScroll('#clickProducts', '.products');
+	  	util.registerScroll('#clickContact', '.contact');
+	  	util.registerScroll('.clickTop', '.container');
 	}
 };
 

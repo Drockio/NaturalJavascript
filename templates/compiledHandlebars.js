@@ -5,7 +5,7 @@ this["DD"]["templates/footer.handlebars"] = Handlebars.template({"compiler":[7,"
 },"useData":true});
 
 this["DD"]["templates/header.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<script id=\"header\" type=\"text/x-handlebars-template\">\n	<h1 class=\"logo\"><a href=\"#\">Greens!</a></h1>\n    <ul class=\"main-nav\">\n        <li><a id=\"click-products\" href=\"#\">Products</a></li>\n        <li><a id=\"click-about\" href=\"#\">About</a></li>\n        <li><a id=\"click-contact\" href=\"#\">Contact</a></li>\n        <li><a id=\"shopping-cart-click\" href=\"#\"><i class=\"fas fa-shopping-cart\"></i></a></li>\n    </ul>\n</script>";
+    return "<script id=\"header\" type=\"text/x-handlebars-template\">\n	<h1 class=\"logo\"><a href=\"#\">Greens!</a></h1>\n    <ul class=\"main-nav\">\n        <li><a id=\"clickProducts\" href=\"#\">Products</a></li>\n        <li><a id=\"clickAbout\" href=\"#\">About</a></li>\n        <li><a id=\"clickContact\" href=\"#\">Contact</a></li>\n        <li><a id=\"shoppingCartClick\" href=\"#\"><i class=\"fas fa-shopping-cart\"></i></a></li>\n    </ul>\n</script>";
 },"useData":true});
 
 this["DD"]["templates/modal.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

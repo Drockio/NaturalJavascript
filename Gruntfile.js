@@ -67,7 +67,7 @@ module.exports = function(grunt) {
       js: {
         files: ['*.js', 'js/*.js', 'test/*.js', 'page_segments/*.js',
                 'templates/_templateController.js', 'shims/*.js', 'interfaces/*.js'],
-        tasks: ['jshint:src']
+        tasks: ['jshint:src', 'copy:dist']
       },
       options: {
         debounceDelay: 500,
