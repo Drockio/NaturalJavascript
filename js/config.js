@@ -7,8 +7,7 @@ const globals = {
 	apiPassword: 'LevelIt!!99',
 	//domainName: 'http://localhost',
 	domainName: '*',
-	defaultCountryCode: 'US',
-	TAKETHISOUT: 4.44
+	defaultCountryCode: 'US'
 };
 
 const baseUrl = `?campaignId=${globals.campaignId}&loginId=${globals.apiUserId}&password=${globals.apiPassword}`;

@@ -8,6 +8,12 @@
 // 	}
 // };
 
+function removeChildren(element){
+	while (element.firstChild){
+		element.removeChild(element.firstChild);
+	}
+}
+
 String.prototype.toHTML = function() {
     let template = document.createElement('template');
     let html = this.trim(); // Never return a text node of whitespace as the result
@@ -16,43 +22,34 @@ String.prototype.toHTML = function() {
 };
 
 function disable(element){
-	element.classList.add("disabledElement");
-	element.disabled = true;
+	if (element && element.classList)
+	{
+		element.classList.add("disabledElement");
+		element.disabled = true;
+	}
 }
 
 function enable(element){
-	element.classList.remove("disabledElement");
-	element.disabled = false;
+	if (element && element.classList)
+	{
+		element.classList.remove("disabledElement");
+		element.disabled = false;
+	}
 }
 
 function ensureIsElement(target){
-	return (typeof target === 'object') ? target[0] : target;
+	return (typeof target === 'object') ? target[0] : null;
 }
 
 let locale = {
 	getCountryBlob: function(countryCode){
-		// let localeList = [];
-		// locale.countries.forEach(item => {
-		// 	let code = Object.entries(item)[1];
-		// 	if (code[1] === countryCode){
-		// 		//console.log(item.locales);
-		// 		//console.log(item['locale-label']);
-		// 		localeList.push(item.locales);
-		// 	}
-		// });
-
 		return locale.countries.find(item => {
 			return Object.entries(item)[1][1] === countryCode;
 		});
-
-		//console.log(states);
-		//debugger;
-		//return states.locales;
-		//return localeList[0] ? localeList[0].map(item => `<option value="${item.stateCode}">${item.name}</option>`) : null;
 	},
 	getStateSelectList: function(countryCode, stateCode){
 		let localeList = locale.getCountryBlob(countryCode);
-		if (localeList.locales){
+		if (localeList && localeList.locales){
 			return localeList ? localeList.locales.map(item => `<option value="${item.stateCode}" ${(item.stateCode === stateCode) ? 'selected' : ''}>${item.name}</option>`) : null;
 		}
 	},
@@ -61,15 +58,17 @@ let locale = {
 	},
 	setStatesSelectList: function(countryCode, stateElement, labelElement){
 		stateElement = ensureIsElement(stateElement);
-		//stateElement.removeChildren();
-		let countryBlob = locale.getCountryBlob(countryCode);
-		if (countryBlob && countryBlob.locales){
-			labelElement = ensureIsElement(labelElement);
-			enable(stateElement);
-			stateElement.innerHTML = locale.getStateSelectList(countryBlob.code);
-		}
-		else {
-			disable(stateElement);
+		if (stateElement){
+			removeChildren(stateElement);
+			let countryBlob = locale.getCountryBlob(countryCode);
+			if (countryBlob && countryBlob.locales){
+				labelElement = ensureIsElement(labelElement);
+				enable(stateElement);
+				stateElement.innerHTML = locale.getStateSelectList(countryBlob.code);
+			}
+			else {
+				disable(stateElement);
+			}
 		}
 	},
 	countries: [
