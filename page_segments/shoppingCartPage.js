@@ -1,7 +1,8 @@
 import { urls, globals } from '../js/config.js';
 import { storage } from '../js/crud.js';
 import { util } from '../js/util.js';
-import { element } from '../js/element.js';
+import { dd$ } from '../js/extensions.js';
+import { dom_element } from '../js/dom_element.js';
 import { message } from '../js/message.js';
 import { modal } from '../page_segments/modal.js';
 import { templates } from '../templates/_templateController.js';
@@ -13,24 +14,27 @@ const shoppingCartPage = {
 		const cart = shoppingCart.getCleanedCart();
 		if (!shoppingCart.isCartEmpty())
 		{
-			modal.display(SHOPPING_CART_HEADER, shoppingCartPage.getShoppingCartPage(cart), { 'name': 'Checkout'});
+			modal
+				.display(SHOPPING_CART_HEADER, shoppingCartPage.getShoppingCartPage(cart), { 'name': 'Checkout'})
+				.addEventListeners();
 			shoppingCartPage.displayTotal();
 		} else {
-			modal.display(SHOPPING_CART_HEADER, templates.getHtml('checkout/shoppingCartEmpty'));
+			modal
+				.display(SHOPPING_CART_HEADER, templates.getHtml('checkout/shoppingCartEmpty'))
+				.addEventListeners();
 		}
 		return this;
 	},
-	addEventListeners: function(){ 
-		$('.modal-footer .navigation').click(function() {
+	addEventListeners: function(){
+		dd$('.modal-footer .navigation').on('click', function() {
 			message.post('displayImportUserPage');
 		});
-		$('.minus').on('click', shoppingCartPage.minusItem);
-		$('.plus').on('click', shoppingCartPage.plusItem);
-		$('.delete').on('click', shoppingCartPage.removeItem);
+		dd$('.minus').on('click', shoppingCartPage.minusItem);
+		dd$('.plus').on('click', shoppingCartPage.plusItem);
+		dd$('.delete').on('click', shoppingCartPage.removeItem);
 	},
 	getShoppingCartPage: function(shoppingCart){
 		let productMarkup = shoppingCart.reduce((accumulator, current) => {
-			current.campaignId = globals.campaignId;
 			current.price = (current.price) ? current.price : 0;
 			return accumulator += templates.getHtml('product/productWithModifiers', current);
 		},'');
@@ -39,28 +43,34 @@ const shoppingCartPage = {
 	},
 	setCheckoutButtonStatus: function(total){
 		//lets hide the checkout button if there is a 0 total
-		let _element = new element();
-		let target = $('button.forward')
+		let target = dd$('button.forward');
 		if (total > 0){
-			_element.enable(target[0]);
+			dom_element.enable(target[0]);
 		} else {
-			_element.disable(target[0]);
+			dom_element.disable(target[0]);
 		}
 	},
 	displayTotal: function(){
 		let total = shoppingCart.getTotal();
-		$(shoppingCart.displayTotalTarget).text('$' + total);
+		dd$(shoppingCart.displayTotalTarget).text('$' + total);
 		shoppingCartPage.setCheckoutButtonStatus(total);
+	},
+	displayQuantity: function(productId, quantity){
+		dd$(`.product-modifier input[data-productId='${productId}']`).val(quantity);
 	},
 	productId: function(context){
 		return context.closest('[data-productId]').dataset['productid'];
 	},
 	plusItem: function(){
-		shoppingCart.alterQuantity(shoppingCartPage.productId(this), 1);
+		let productId = shoppingCartPage.productId(this);
+		let quantity = shoppingCart.alterQuantity(productId, 1);
+		shoppingCartPage.displayQuantity(productId, quantity);
 		shoppingCartPage.displayTotal();
 	},
 	minusItem: function(){
-		shoppingCart.alterQuantity(shoppingCartPage.productId(this), -1);
+		let productId = shoppingCartPage.productId(this);
+		let quantity = shoppingCart.alterQuantity(productId, -1);
+		shoppingCartPage.displayQuantity(productId, quantity);
 		shoppingCartPage.displayTotal();
 	},
 	removeItem: function(){

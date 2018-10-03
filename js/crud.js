@@ -39,22 +39,7 @@ var storage = {
 	},
 	setMessage: function(message){
 		this.setGeneric('message', message);
-	},
-
-	recordForm: function(targetForm) {
-		let target = `#${targetForm} :input`;
-		let arr = [];
-		$(target).each(function(){
-			arr.push({"name": this.name, "value": this.value});
-		});
-		sessionStorage.setItem(targetForm, JSON.stringify(arr));
-	},
-	restoreForm: function(targetForm){
-		let restoreData = JSON.parse(sessionStorage.getItem(targetForm))
-		  .map(item => {
-		  	$(`input[name=${item.name}`).val(item.value);
-		  });
-	},
+	}
 };
 
 export { storage };

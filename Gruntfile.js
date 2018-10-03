@@ -10,18 +10,18 @@ module.exports = function(grunt) {
     },
     //for sass: #1: ruby -v to see if you have ruby installed
     //#2: gem install sass
-    clean: ['_dist/*'],
+    clean: ['../_stage/*'],
     copy: {
       dist: {
         files: [
-          {expand: true, src: ['*.html', 'LICENSE-MIT'], dest: '_dist/'},
-          {expand: true, src: ['css/*', 'css/**/*'], dest: '_dist/'},
-          {expand: true, src: ['img/*', 'img/**/*'], dest: '_dist/'},
-          {expand: true, src: ['interfaces/*', 'interfaces/**/*'], dest: '_dist/'},
-          {expand: true, src: ['js/*', 'js/**/*'], dest: '_dist/'},
-          {expand: true, src: ['page_segments/*', 'page_segments/**/*'], dest: '_dist/'},
-          {expand: true, src: ['shims/*', 'shims/**/*'], dest: '_dist/'},
-          {expand: true, src: ['templates/*.js'], dest: '_dist/'}
+          {expand: true, src: ['*.html', 'LICENSE-MIT'], dest: '../_stage/'},
+          {expand: true, src: ['css/*', 'css/**/*'], dest: '../_stage/'},
+          {expand: true, src: ['img/*', 'img/**/*'], dest: '../_stage/'},
+          {expand: true, src: ['interfaces/*', 'interfaces/**/*'], dest: '../_stage/'},
+          {expand: true, src: ['js/*', 'js/**/*'], dest: '../_stage/'},
+          {expand: true, src: ['page_segments/*', 'page_segments/**/*'], dest: '../_stage/'},
+          {expand: true, src: ['shims/*', 'shims/**/*'], dest: '../_stage/'},
+          {expand: true, src: ['templates/*.js'], dest: '../_stage/'}
         ]
       }
     },
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
       js: {
         files: ['*.js', 'js/*.js', 'test/*.js', 'page_segments/*.js',
                 'templates/_templateController.js', 'shims/*.js', 'interfaces/*.js'],
-        tasks: ['jshint:src', 'copy:dist']
+        tasks: ['jshint:src']
       },
       options: {
         debounceDelay: 500,
@@ -94,5 +94,5 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'handlebars']);
-  grunt.registerTask('deploy', ['clean', 'copy']);
+  grunt.registerTask('stage', ['clean', 'copy']);
 };

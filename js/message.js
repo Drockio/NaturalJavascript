@@ -32,9 +32,7 @@ const broadcast = {
 		}
 	},
 	message: function(data){
-		console.log(data);
-		//joyous day!
-		//TODO: put loading message on thank you page until this is received.
+		console.log(`message: ${data}`);
 		storage.setMessage(data);
 		util.scrollTopModal();
 	}

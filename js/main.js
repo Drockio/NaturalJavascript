@@ -30,7 +30,7 @@ import { validate } from './validation.js';
 import { storage } from './crud.js';
 import { locale } from './locale.js';
 import { util } from './util.js';
-import { dd } from './extensions.js'; 
+import { dd$ } from './extensions.js'; 
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { homePage } from '../page_segments/homePage.js';
@@ -48,11 +48,12 @@ const controller = {
 	registerPageDisplayListeners: function(){
 		//setup home page
 		message.listen('displayHomePage', function(){ homePage
-														.display()
-														.addEventListeners(); });
+																.display()
+																.addEventListeners(); });
 
 		// retrieveAndDisplay products
-		message.listen('retrieveAndDisplayProducts', function(){ productList.retrieveAndDisplay(); });
+		message.listen('retrieveAndDisplayProducts', function(){ productList
+																.retrieveAndDisplay(); });
 
 		//add products
 		message.listen('displayProducts', function(){ productList
@@ -78,8 +79,8 @@ const controller = {
 
 		// set up terms and conditions page
 		message.listen('displayTermsAndConditionsPage', function(){ termsAndConditionsPage
-																		.display()
-																		.addEventListeners(); });
+																.display()
+																.addEventListeners(); });
 	},
 
 	//listen for page events
@@ -96,21 +97,31 @@ const controller = {
 
 //main load function
 window.onload=function(){
-  	//$(document).ready(function(){
-  		//future admin option
-  		//let setup = util.getUrlParameter('setup');
+	//future admin option
+	//let setup = util.getUrlParameter('setup');
 
-  		 //set up the listeners defined above
-  		controller.registerPageDisplayListeners();
+	 //set up the listeners defined above
+	controller.registerPageDisplayListeners();
 
-  		//initial page loads
-  		message.post('displayHomePage');
-  		message.post('retrieveAndDisplayProducts');
-  		message.post('displayCategories');
+	//initial page loads
+	message.post('displayHomePage');
+	message.post('retrieveAndDisplayProducts');
+	message.post('displayCategories');
 
-  		controller.registerDisplayEventListeners();
-	//});
+	controller.registerDisplayEventListeners();
+
+	//message.post('displayCreditCardPage');
 };
+
+window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+    console.log("Wrapper error occured: " + errorMsg);
+    return false;
+};
+
+window.addEventListener("error", function (e) {
+   console.log("Wrapper error occurred: " + e.error.message);
+   return false;
+});
 
 
 

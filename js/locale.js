@@ -1,51 +1,20 @@
-//TODO: Move the following functions and prototypes to extensions.js when npm test
-//allows includes (instead of require);
-//TODO: Review Konnektive info about state.
-
-// Element.prototype.removeChildren = function (){
-// 	while (this.firstChild) {
-//     	this.removeChild(this.firstChild);
-// 	}
-// };
-
-function removeChildren(element){
-	while (element.firstChild){
-		element.removeChild(element.firstChild);
-	}
-}
-
-String.prototype.toHTML = function() {
-    let template = document.createElement('template');
-    let html = this.trim(); // Never return a text node of whitespace as the result
-    template.innerHTML = html;
-    return template.content.childNodes; 
-};
-
-function disable(element){
-	if (element && element.classList)
-	{
-		element.classList.add("disabledElement");
-		element.disabled = true;
-	}
-}
-
-function enable(element){
-	if (element && element.classList)
-	{
-		element.classList.remove("disabledElement");
-		element.disabled = false;
-	}
-}
-
-function ensureIsElement(target){
-	return (typeof target === 'object') ? target[0] : null;
-}
+import { dom_element } from './dom_element.js';
 
 let locale = {
-	getCountryBlob: function(countryCode){
-		return locale.countries.find(item => {
-			return Object.entries(item)[1][1] === countryCode;
-		});
+	setStatesSelectList: function(countryCode, stateElement, labelElement){
+		if (stateElement){
+			stateElement = dom_element.ensureIsElement(stateElement);
+			dom_element.removeChildren(stateElement);
+			let countryBlob = locale.getCountryBlob(countryCode);
+			if (countryBlob && countryBlob.locales){
+				labelElement = dom_element.ensureIsElement(labelElement);
+				dom_element.enable(stateElement);
+				stateElement.innerHTML = locale.getStateSelectList(countryBlob.code);
+			}
+			else {
+				dom_element.disable(stateElement);
+			}
+		}
 	},
 	getStateSelectList: function(countryCode, stateCode){
 		let localeList = locale.getCountryBlob(countryCode);
@@ -53,23 +22,13 @@ let locale = {
 			return localeList ? localeList.locales.map(item => `<option value="${item.stateCode}" ${(item.stateCode === stateCode) ? 'selected' : ''}>${item.name}</option>`) : null;
 		}
 	},
+	getCountryBlob: function(countryCode){
+		return locale.countries.find(item => {
+			return Object.entries(item)[1][1] === countryCode;
+		});
+	},
 	getCountriesSelectList: function(countryCode){ 
 		return locale.countries.map(item => `<option value="${item.code}"${(item.code === countryCode) ? 'selected' : ''}>${item.name}</option>`);
-	},
-	setStatesSelectList: function(countryCode, stateElement, labelElement){
-		stateElement = ensureIsElement(stateElement);
-		if (stateElement){
-			removeChildren(stateElement);
-			let countryBlob = locale.getCountryBlob(countryCode);
-			if (countryBlob && countryBlob.locales){
-				labelElement = ensureIsElement(labelElement);
-				enable(stateElement);
-				stateElement.innerHTML = locale.getStateSelectList(countryBlob.code);
-			}
-			else {
-				disable(stateElement);
-			}
-		}
 	},
 	countries: [
 		{"name": "Afghanistan", "code": "AF"},

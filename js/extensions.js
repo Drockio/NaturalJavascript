@@ -3,13 +3,6 @@ function setCSSVar(name, value, unit) {
 		rootStyles.setProperty(name, value + (unit || ''));
 }
 
-const css = {
-	setVar: function(varName, varValue){
-		var html = document.getElementsByTagName('html')[0];
-		html.style.cssText = "--main-background-color: red";
-	}
-};
-
 //extend javascipts Element with the custom function called onEvent.
 //the name onEvent was chosen because it likely won't collide with future versions
 //of javascript function names to add event listeners since the existing one has existed
@@ -86,21 +79,40 @@ let _library = {
      	{
      		console.log('no html to process');
      	}
-   	}, 
-   	onEvent: function(event, fn){
-   		this.addEventListener(event, fn);
+   	},
+   	appendArray: function(array){
+   		if (array){
+	   		let children = array.join('');
+	   		_library.el.forEach(element => {
+	   			element.innerHTML = children;
+	   		});
+   		}
+   	},
+   	val: function(value){
+   		_library.el.forEach(element => {
+   			element.value = value;
+   		});
+   	},
+   	text: function(value){
+   		_library.el.forEach(element => {
+   			element.textContent = value;
+   		});
+   	},
+   	on: function(event, fn){
+   		_library.el.forEach(element => {
+   			element.addEventListener(event, fn);
+   		});
    	}
 };
 
-function dd(selector, template){ 
-	let element = document.querySelector(selector);
-	_library.el = element;
+function dd$(selector, template){
+	let elements = document.querySelectorAll(selector);
+	_library.el = elements;
 	if (!_library.el){
 		console.warn(`"${selector}" was not found.`);
 	}
-	//return Object.assign({}, element, _library);
-	return element;
+	return Object.assign({}, elements, _library);
 }
 
-export { dd };
+export { dd$ };
 

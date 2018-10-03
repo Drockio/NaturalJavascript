@@ -1,5 +1,5 @@
 import { templates } from '../templates/_templateController.js';
-import { dd } from '../js/extensions.js';
+import { dd$ } from '../js/extensions.js';
 import { util } from '../js/util.js';
 import { message } from '../js/message.js';
 
@@ -17,7 +17,7 @@ const homePage = {
 	},
 	addEventListeners(){
 		//handle shopping cart click
-	  	dd('#shoppingCartClick').onEvent('click', function(){
+	  	dd$('#shoppingCartClick').on('click', function(){
 	  		message.post('displayShoppingCartPage');
 	  	});
 

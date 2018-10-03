@@ -23,8 +23,7 @@ const shoppingCart = {
 		let index = shoppingCart.getIndex(cart, productId);
 		cart[index].quantity = (cart[index].quantity + int) > 0 ? (cart[index].quantity + int) : 0;
 		storage.setCart(cart);
-		//.product-modifier is necessary to not alter buttons on product page. Sorry for the janky.
-		$(`.product-modifier input[data-productId='${productId}']`).val(cart[index].quantity);
+		return cart[index].quantity;
 	},
 	remove: function(productId){
 		let cart = storage.getCart();

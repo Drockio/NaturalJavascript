@@ -1,6 +1,7 @@
 import { urls, globals } from '../js/config.js';
 import { message } from '../js/message.js';
 import { util } from '../js/util.js';
+import { dd$ } from '../js/extensions.js';
 import { storage } from '../js/crud.js';
 import { locale } from '../js/locale.js';
 import { validate } from '../js/validation.js';
@@ -12,42 +13,44 @@ import { shoppingCart } from '../js/shoppingCart.js';
 const creditCardPage = {
 	display: function() {
 		let shoppingCart = storage.getCart();
-		shoppingCart.campaignid = globals.campaignId;
 		let productsInCart = templates.getHTML_products(shoppingCart);
 		let shipToChoiceContainer = templates.getHtml('checkout/shipToAddressChoice', (storage.getGeneric('standardInputs')));
 		let checkoutFormTemplate = templates.getHtml('checkout/importUserForm', ({'title': 'Alternate Shipping Information', 'formName': 'altShipping', 'includeEmail': 'true'}));
 		let creditCardMarkup = templates.getHtml('checkout/creditCardPage', ({productsInCart: productsInCart, shipToChoiceContainer: shipToChoiceContainer, "checkoutForm": checkoutFormTemplate}));
 		let continueButton = {'name': 'Place Order', 'attributes': [{'type': 'submit'}]};
-		let standardInputs = storage.getGeneric('standardInputs');
-		let countryCode = standardInputs['countryCode'] || globals.defaultCountryCode;
-		let state = standardInputs['state'];
 
-		modal.display('Checkout', creditCardMarkup, continueButton, { 'name': 'Back'});
+		modal
+			.display('Checkout', creditCardMarkup, continueButton, { 'name': 'Back'})
+			.addEventListeners();
 		creditCardPage.displayTotal();
-		this.attachMonths();
-		this.attachYears();
+		creditCardPage.attachMonths();
+		creditCardPage.attachYears();
 
 		return this;
 	},
 	addEventListeners(){
-		$('#country').on('change', function(){
+		dd$('#country').on('change', function(){
 			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
 		});
 
-		$('.navigation.backward').on('click', function(){
+		dd$('.navigation.backward').on('click', function(){
 			message.post('displayImportUserPage');
 		});
-		$('button[type="submit"]').on('click', function(){
+		dd$('button[type="submit"]').on('click', function(){
 			creditCardPage.submit();
 		});
-		$('button[name="edit"]').on('click', function(){
+		dd$('button[name="edit"]').on('click', function(){
 			message.post('displayImportUserPage');
 		});
-		$('input[name="billShipSame').on('click', creditCardPage.toggleBillShipSame);
+		dd$('input[name="billShipSame').on('click', creditCardPage.toggleBillShipSame);
 		util.scrollTopModal();
 	},
+	toggleBillShipSame: function(){
+		let display = $(this).val() === "true" ? false : true;
+		$('#checkoutFormContainer').toggle(display);
+	},
 	displayTotal: function(){
-		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
+		dd$(shoppingCart.displayTotalTarget).setText(shoppingCart.getTotal());
 	},
 	getUrl: function(productsUrlSegement){
 		return urls.importOrder + productsUrlSegement;
@@ -107,7 +110,7 @@ const creditCardPage = {
 			};
 			//if (!binaryBillingShipSame)  {ccData = $.extend(ccData, {'billingShipSame': binaryBillingShipSame})}
 			if (addShipData){
-				ccData = $.extend(ccData, this.getAltShippingInputs());
+				ccData = $.extend(ccData, creditCardPage.getAltShippingInputs());
 			}
 
 			//name, address, email phone, campaignId
@@ -115,17 +118,17 @@ const creditCardPage = {
 
 			//TODO QA this to make sure it works
 			//orderId, etc retrieved from Konnektive
-			let registrationInfo = $.extend(standardInputs, this.getRegistrationSpecific());
+			let registrationInfo = $.extend(standardInputs, creditCardPage.getRegistrationSpecific());
 
 			//credit card number, etc..
-			let creditCardInfo = $.extend(registrationInfo, this.getCreditCardPaySource());
+			let creditCardInfo = $.extend(registrationInfo, creditCardPage.getCreditCardPaySource());
 
 			//format products that get sent on URL
-			let productsUrlSegement = this.mapProducts();
+			let productsUrlSegement = creditCardPage.mapProducts();
 
-			let api_url = this.getUrl(productsUrlSegement);
+			let api_url = creditCardPage.getUrl(productsUrlSegement);
 
-			this.post(ccData, api_url);
+			creditCardPage.post(ccData, api_url);
 		}
 	},
 	billShipSameDisplay: function(action){
@@ -134,10 +137,6 @@ const creditCardPage = {
 			display = 'flex';
 		}
 		$('#checkoutFormContainer').css('display', display);
-	},
-	toggleBillShipSame: function(){
-		let display = $(this).val() === "true" ? false : true;
-		$('#checkoutFormContainer').toggle(display);
 	},
 	getAltShippingInputs: function(){
 		let altShippingInputs = {

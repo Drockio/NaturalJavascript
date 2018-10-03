@@ -1,5 +1,6 @@
 import { templates } from '../templates/_templateController.js';
 import { message } from '../js/message.js';
+import { dd$ } from '../js/extensions.js';
 
 const modal = {
 	display: function(title, pageHTML, forwardButtonJSON, backButtonJSON) {
@@ -18,11 +19,10 @@ const modal = {
 		//show modal
 	    $('#main-modal').css('display', 'block');
 
-	    //wire events
-	    modal.addEventListeners();
+	    return this;
 	},
 	addEventListeners(){
-	    $('.close').on('click', function() {
+	    dd$('.close').on('click', function() {
 	        message.post('hideModal');
 	    });
 	},

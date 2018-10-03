@@ -4,6 +4,7 @@ import { validate } from '../js/validation.js';
 import { storage } from '../js/crud.js';
 import { locale } from '../js/locale.js';
 import { util } from '../js/util.js';
+import { dd$ } from '../js/extensions.js';
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { shoppingCartPage } from './shoppingCartPage.js';
@@ -11,8 +12,7 @@ import { shoppingCart } from '../js/shoppingCart.js';
 
 const importUserPage = {
 	display: function() {
-		let cart = storage.getCart(); 
-		cart.campaignid = globals.campaignId;
+		let cart = storage.getCart();
 		let checkoutFormTemplate = templates.getHtml('checkout/importUserForm', ({'title': 'Registration Information', 'formName': 'registration'}));
 		let productMarkup = templates.getHTML_products(cart);
 		let checkoutFormTop = templates.getHtml('checkout/importUserPage', ({"checkoutForm": checkoutFormTemplate, productsInCart: productMarkup}));
@@ -21,24 +21,24 @@ const importUserPage = {
 		let state = standardInputs['state'];
 
 		let continueButton = {'name': 'Continue', 'attributes': [{ 'form': 'registration-form' }, {'type': 'submit'}]};
-		modal.display('Checkout', checkoutFormTop, continueButton, { 'name': 'Back'});
+		modal
+			.display('Checkout', checkoutFormTop, continueButton, { 'name': 'Back'})
+			.addEventListeners();
 		importUserPage.displayTotal();
 
 		importUserPage.populateStandardInputs(standardInputs);
-		$('#country').append(locale.getCountriesSelectList(countryCode));
-		$('#state').append(locale.getStateSelectList(countryCode, state));
-
-		//util.scrollTopModal();
+		dd$('#country').appendArray(locale.getCountriesSelectList(countryCode));
+		dd$('#state').appendArray(locale.getStateSelectList(countryCode, state));
 
 		return this;
 	},
 	addEventListeners: function(){
 		//set the locale when the country changes
-		$('#country').on('change', function(){
+		dd$('#country').on('change', function(){
 			locale.setStatesSelectList($('#country :selected').val(), $('#state'), $('#lblState'));
 		});
 
-		$('.navigation.backward').on('click', (function(){
+		dd$('.navigation.backward').on('click', (function(){
 			message.post('displayShoppingCartPage');
 		}));
 
@@ -133,7 +133,7 @@ const importUserPage = {
 	},
 	displayTotal: function() {
 		//display shopping cart total
-		$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
+		dd$(shoppingCart.displayTotalTarget).text(shoppingCart.getTotal());
 	}
 };
 

@@ -53,14 +53,18 @@ Konnektive site for selling greens
 - [ ] create unit tests
 
 ## TODO
+- Add 0 parameter unit tests to all functions
+- Remove references to jquery
 - fix `this` references
 - fix credit card page bug
 - css separation/cleanup
+- sanitize all input text
 - investigate country/local behavior
 - push to drockio remote if you haven't been paid.
 - consider getting rid of fontawesome in place of a couple icons
 - security
 - migrate rest of ajax calls to interfaces
+- put all UI interaction into event messaging
 - finalize backend/language choices
 - home page segment loader dd$('.footer', 'templateName')
 - go through and do a test on broadcast errors on each page. put html into a template

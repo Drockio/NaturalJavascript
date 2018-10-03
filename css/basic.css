@@ -80,14 +80,14 @@ input:-webkit-autofill:focus {
     border-bottom-right-radius: var(--borderRadius);
 }
 
-button.disabledElement {
+.disabledElement {
     cursor: not-allowed;
     color: graytext;
     box-shadow: none;
     background-color: var(--productButton);
 }
 
-button.disabledElement:hover {
+.disabledElement:hover {
     color: graytext;
     box-shadow: none;
     background-color: var(--productButton);
