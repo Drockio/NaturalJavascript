@@ -1,11 +1,10 @@
-# Greens
-
-Konnektive site for selling greens
+# NaturalJavascript
+Natural javascript development environment.
 
 ## Getting Started
 ### Clone into hosting directory:
 - navigate to hosting directory
-- pull down source code with `git clone https://github.com/LevelAds/Greens.git`
+- pull down source code with `git clone https://github.com/Drockio/NaturalJavascript.git`
 - use `npm install` to install all node modules in package.json
 
 ### Create User
@@ -20,7 +19,7 @@ Konnektive site for selling greens
 ### Custom https node/express webserver
 - Download the server [here][webserver].
 
-[webserver]: https://github.com/LevelAds/Webserver
+[webserver]: https://github.com/Drockio/Webserver
 
 ## (Optional) Create a template to reuse elsewhere:
 - Create Users/(your_user_name)/.grunt-init/(new_template_name)
@@ -91,5 +90,4 @@ For all of those, leave-it-this-way-in-development-but-change-it-in-production l
 * Review shims. Remove if possible.
 * Set proper production urls and passwords
 * Make it shine!
-
 
