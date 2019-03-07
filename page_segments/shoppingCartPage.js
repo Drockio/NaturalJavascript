@@ -1,4 +1,3 @@
-import { urls, globals } from '../js/config.js';
 import { storage } from '../js/crud.js';
 import { util } from '../js/util.js';
 import { dd$ } from '../js/extensions.js';
@@ -12,17 +11,15 @@ const shoppingCartPage = {
 	display: function(options){
 		const SHOPPING_CART_HEADER = 'Add to Cart';
 		const cart = shoppingCart.getCleanedCart();
-		if (!shoppingCart.isCartEmpty())
-		{
-			modal
-				.display(SHOPPING_CART_HEADER, shoppingCartPage.getShoppingCartPage(cart), { 'name': 'Checkout'})
-				.addEventListeners();
-			shoppingCartPage.displayTotal();
-		} else {
-			modal
-				.display(SHOPPING_CART_HEADER, templates.getHtml('checkout/shoppingCartEmpty'))
-				.addEventListeners();
-		}
+
+		modal.display().addEventListeners();
+
+		let shoppingCartHtml = shoppingCart.isCartEmpty() ? 
+								templates.getHtml('checkout/shoppingCartEmpty') : 
+								shoppingCartPage.getShoppingCartPage(cart);
+								
+		dd$('.modal-body .content').insertHTML(shoppingCartHtml);
+
 		return this;
 	},
 	addEventListeners: function(){

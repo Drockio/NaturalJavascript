@@ -24,93 +24,26 @@
 // origin	https://github.com/LevelAds/Greens.git (fetch)
 // origin	https://github.com/LevelAds/Greens.git (push)
 
-import { urls, globals } from '../js/config.js';
-import { message } from './message.js';
 import { validate } from './validation.js';
 import { storage } from './crud.js';
 import { locale } from './locale.js';
 import { util } from './util.js';
 import { dd$ } from './extensions.js'; 
+import { applicationLoad } from '../site/applications.js';
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
-import { homePage } from '../page_segments/homePage.js';
-import { productList } from '../page_segments/productList.js';
-import { categoryList } from '../page_segments/categoryList.js';
 import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
 import { importUserPage } from '../page_segments/importUserPage.js';
 import { creditCardPage } from '../page_segments/creditCardPage.js';
 import { thankYouPage } from '../page_segments/thankYouPage.js';
 import { termsAndConditionsPage } from '../page_segments/termsAndConditionsPage.js';
 
-const controller = {
-
-	//display pages here.
-	registerPageDisplayListeners: function(){
-		//setup home page
-		message.listen('displayHomePage', function(){ homePage
-																.display()
-																.addEventListeners(); });
-
-		// retrieveAndDisplay products
-		message.listen('retrieveAndDisplayProducts', function(){ productList
-																.retrieveAndDisplay(); });
-
-		//add products
-		message.listen('displayProducts', function(){ productList
-																.display(); });
-		//add categories
-		message.listen('displayCategories', function(){ categoryList
-																.display()
-																.addEventListeners(); });
-		//setup shoppingcart page 
-		message.listen('displayShoppingCartPage', function(){ shoppingCartPage
-																.display() 
-																.addEventListeners(); });
-		//setup import user page
-		message.listen('displayImportUserPage', function(){ importUserPage
-																.display()
-																.addEventListeners(); });
-		//setup credit card purchase page
-		message.listen('displayCreditCardPage', function(){ creditCardPage
-																.display()
-																.addEventListeners(); });
-		//setup thank you page
-		message.listen('thankYouPage', function(){ thankYouPage.display(); });
-
-		// set up terms and conditions page
-		message.listen('displayTermsAndConditionsPage', function(){ termsAndConditionsPage
-																.display()
-																.addEventListeners(); });
-	},
-
-	//listen for page events
-	registerDisplayEventListeners: function(){
-		//shroud disables user input during transitions
-		message.listen('displayShroud', function(){ util.enableShroud(); });
-		message.listen('hideShroud', function(){ util.disableShroud(); });
-
-		//scroll to top of page and hide modal
-		message.listen('scrollToTop', function(){ util.scrollToTop(); });
-		message.listen('hideModal', function(){ modal.hide(); });
-	}
-};
-
 //main load function
 window.onload=function(){
 	//future admin option
 	//let setup = util.getUrlParameter('setup');
 
-	 //set up the listeners defined above
-	controller.registerPageDisplayListeners();
-
-	//initial page loads
-	message.post('displayHomePage');
-	message.post('retrieveAndDisplayProducts');
-	message.post('displayCategories');
-
-	controller.registerDisplayEventListeners();
-
-	//message.post('displayCreditCardPage');
+	applicationLoad.chooser('visuals');
 };
 
 window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {

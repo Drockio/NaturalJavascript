@@ -6,10 +6,16 @@ import { message } from '../js/message.js';
 //Note, the 'template' of this page IS index.html.
 const homePage = {
 	display: function(){
+
+		//set up main
+		let product_site_main = templates.getHtml('homePage'); 
+		$('.container').empty().append(product_site_main);
+
 		//set up footer
 		let footerHtml = templates.getHtml('footer');
 		$('footer').empty().append(footerHtml);
 
+		//set up header
 		let headerHtml = templates.getHtml('header');
 		$('header').empty().append(headerHtml);
 

@@ -1,4 +1,4 @@
-import { urls, globals } from '../js/config.js';
+import { urls } from '../interfaces/_interfaceconfig.js';
 import { message } from '../js/message.js';
 import { validate } from '../js/validation.js';
 import { storage } from '../js/crud.js';
@@ -99,6 +99,7 @@ const importUserPage = {
 	},
 	postStandardInputs: function(){
 		//post the results to ecommerce crm
+		//TODO: Move to interrfaces
 		let standardInputs = storage.getGeneric('standardInputs');
 		let results = $.ajax({
 			type: "POST",

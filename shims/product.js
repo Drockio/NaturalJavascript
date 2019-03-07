@@ -1,4 +1,3 @@
-import { globals } from '../js/config.js';
 import { util } from '../js/util.js';
 
 

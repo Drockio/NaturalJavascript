@@ -24,3 +24,4 @@ const konnektiveInterface = {
 };
 
 export { konnektiveInterface };
+

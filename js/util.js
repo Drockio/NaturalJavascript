@@ -1,5 +1,3 @@
-import { locale } from './locale.js';
-
 const util = {
 	disableShroud: function(){
 		$('#shroud').removeClass('shroudEnabled').hide();
@@ -14,7 +12,7 @@ const util = {
 		    scrollTop: $('.modal-content').offset().top
 		}, 1000);
 	},
-	getUrlParameter: function getUrlParameter(sParam) {
+	getUrlParameter: function(sParam) {
 	    let sPageURL = decodeURIComponent(window.location.search.substring(1)),
 	        sURLVariables = sPageURL.split('&'),
 	        arrParameterPair,
@@ -61,25 +59,6 @@ const util = {
 	},
 	getRadio: function(name){
 		return document.querySelector(`input[name="${name}"]:checked`).value;
-	},
-	getListOfMonths: function(language){
-		let accumulator = '';
-		let currentMonth = new Date().getMonth() + 1;
-		locale.months.map(item => {
-			let monthCode = Object.keys(item)[0];
-			let month = Object.values(item)[0];
-			let selected = (Number(monthCode) === currentMonth) ? 'selected' : '';
-			accumulator += `<option value="${monthCode}" ${selected}>${month}</option>`;
-		});
-		return accumulator;
-	},
-	getNextXYears: function(numYears){
-		let year = new Date().getFullYear();
-		let accumulator = '';
-		for (let y = year; y < year + 15; y += 1){
-			accumulator += `<option>${y}</option>`;
-		}
-		return accumulator;
 	},
 	registerScroll: function(triggerElement, targetElement){
 		$(triggerElement).click(function() {

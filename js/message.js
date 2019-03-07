@@ -5,14 +5,15 @@ import { storage } from './crud.js';
 const message = {
 	post: function(message, jData){
 		//note: you could send a JSON object as value of second param.
-		window.parent.postMessage({"action": message, "data": jData},`${globals.domainName}`);
+		window.parent.postMessage({"action": message, "payload": jData},`${globals.domainName}`);
 	},
 
 	listen: function(action, fn){ 
 		window.addEventListener("message", function(event){
 			const eventAction = event.data["action"];
+			const eventData = event.data["payload"];
 			if (eventAction === action){
-				fn();
+				fn(eventData);
 			}
 		});
 	},

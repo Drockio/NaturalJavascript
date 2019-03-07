@@ -1,6 +1,7 @@
-import { urls, globals } from '../js/config.js';
+import { urls } from '../interfaces/_interfaceConfig.js';
 import { message } from '../js/message.js';
 import { util } from '../js/util.js';
+import { time } from '../js/time.js';
 import { dd$ } from '../js/extensions.js';
 import { storage } from '../js/crud.js';
 import { locale } from '../js/locale.js';
@@ -153,11 +154,11 @@ const creditCardPage = {
 		return altShippingInputs;
 	},
 	attachMonths: function(){
-		let monthList = util.getListOfMonths();
+		let monthList = time.getListOfMonths();
 		$('#cardMonth_id').append(monthList);
 	},
 	attachYears: function(){
-		let yearList = util.getNextXYears(12);
+		let yearList = time.getNextXYears(12);
 		$('#cardYear_id').append(yearList);
 	},
 	getPaySource: function(paysource){

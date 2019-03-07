@@ -1,4 +1,3 @@
-import { urls, globals } from './config.js';
 import { util } from './util.js';
 import { storage } from './crud.js';
 import { productShim } from '../shims/product.js';
@@ -9,7 +8,6 @@ const products = {
 	    	item.productName = item.productName || 'Coming Soon';
 	    	item.productDescription = item.productDescription || 'Description Coming Soon';
 	    	item.currencySymbol = item.currencySymbol || 0;
-	    	item.campaignId = globals.campaignId;
 	    	return item;
 	    });
 	    return defaulted;

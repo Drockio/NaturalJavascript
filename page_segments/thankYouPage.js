@@ -1,4 +1,3 @@
-import { urls, globals } from '../js/config.js';
 import { templates } from '../templates/_templateController.js';
 import { storage } from '../js/crud.js';
 import { modal } from '../page_segments/modal.js';

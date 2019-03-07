@@ -53,6 +53,7 @@ Konnektive site for selling greens
 - [ ] create unit tests
 
 ## TODO
+- Create local product display
 - Add 0 parameter unit tests to all functions
 - Remove references to jquery
 - fix `this` references
@@ -71,7 +72,7 @@ Konnektive site for selling greens
 - add shroud between each page
 - cool thank you page
 - Hook importUserPage.postStandardInputs back up
-- Remove references to TAKETHISOUT - it sets a standard price. 
+- Remove references to TAKETHISOUT - it sets a standard price.
 - Use campaign 1 or 6 to display "NO products available"
 - Use campaign 4,9 to work on some alignment issues.
 - Node css plugin to check for unclosed or poorly formatted css? html?
