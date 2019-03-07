@@ -24,12 +24,13 @@
 // origin	https://github.com/LevelAds/Greens.git (fetch)
 // origin	https://github.com/LevelAds/Greens.git (push)
 
+import { globals } from './config.js';
 import { validate } from './validation.js';
 import { storage } from './crud.js';
 import { locale } from './locale.js';
 import { util } from './util.js';
 import { dd$ } from './extensions.js'; 
-import { applicationLoad } from '../site/applications.js';
+import { applicationLoad } from '../applications/_applications.js';
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
@@ -43,7 +44,7 @@ window.onload=function(){
 	//future admin option
 	//let setup = util.getUrlParameter('setup');
 
-	applicationLoad.chooser('visuals');
+	applicationLoad.chooser(globals.defaultApplication);
 };
 
 window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {

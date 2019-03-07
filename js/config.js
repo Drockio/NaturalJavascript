@@ -1,5 +1,12 @@
 //this will likely be set per website.
+
+// defaultApplication options:
+// ===========================
+// greens
+// visuals
+
 var globals = {
+	defaultApplication: 'visuals',
 	apiServer: `https://localhost`,
 	crm: `local`, //choices: konnecktive, local
 	//domainName: 'http://localhost',
