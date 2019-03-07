@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+</head>
+<body>
+	<code id="target">
+
+	</code>
+</body>
+	<script type="text/javascript" src="products/local_products.js"></script>
+	<script type="text/javascript">
+		function getUrlParameter(sParam) {
+		    let sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        arrParameterPair,
+		        result;
+		    sURLVariables.map(sParameterPair => {
+		    	arrParameterPair = sParameterPair.split('=');
+		    	if (arrParameterPair[0] === sParam) {
+		            result = arrParameterPair[1] === undefined ? true : arrParameterPair[1];
+		        }
+		    });
+		    return result;
+		}
+
+		var targetElement = document.getElementById('target');
+		var display = getUrlParameter('display');
+		
+		switch (display){
+			case 'local_products':
+				targetElement.innerHTML = JSON.stringify(local_products);
+				break;
+		}
+	</script>
+</html>
