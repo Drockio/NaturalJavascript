@@ -1,5 +1,5 @@
 const templates = {
-	//DD here is defined in the grunt job that compiles the templates of all freakin' places.
+	//DD is defined in the grunt job that compiles the templates in compiledHandlebars.js.
 	getHtmlTemplate: function(name, context) {
 		name = `templates/${name}.handlebars`;
 		return $(DD[name](context)).html().trim();

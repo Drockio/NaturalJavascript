@@ -3,6 +3,13 @@ import { interfaceConfig } from '../interfaces/_interfaceConfig.js';
 import { greenSiteController } from './greenSiteController.js';
 import { visualsController } from './visualsController.js';
 
+const applications = [
+	{ 	'visuals': 'visuals' },
+	{	'greens': 'greens' },
+	{	'guitar': 'guitar' }
+	
+];
+
 const applicationLoad = {
 	chooser: function(application){
 		switch (application){
@@ -40,4 +47,4 @@ const applicationLoad = {
 	}
 };
 
-export { applicationLoad };
+export { applications, applicationLoad };

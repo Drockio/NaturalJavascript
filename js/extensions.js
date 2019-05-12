@@ -1,13 +1,10 @@
+import { templates } from '../templates/_templateController.js';
+
 function setCSSVar(name, value, unit) {
 	var rootStyles = document.styleSheets[0].cssRules[0].style;
 		rootStyles.setProperty(name, value + (unit || ''));
 }
 
-//extend javascipts Element with the custom function called onEvent.
-//the name onEvent was chosen because it likely won't collide with future versions
-//of javascript function names to add event listeners since the existing one has existed
-//since around 1995 and there really isn't need for another besides aliasing 
-//(using a name that makes you smile AND what I did here to make you smile).
 Element.prototype.onEvent = function(event, fn){
 	this.addEventListener(event, fn);
 };
@@ -20,13 +17,6 @@ Element.prototype.removeChildren = function (){
 	while (this.firstChild) {
     	this.removeChild(this.firstChild);
 	}
-};
-
-String.prototype.toHTML = function() {
-    let template = document.createElement('template');
-    let html = this.trim(); // Never return a text node of whitespace as the result
-    template.innerHTML = html;
-    return template.content.childNodes;
 };
 
 //TODO hook this up here instead of in util.js
@@ -42,6 +32,14 @@ Array.prototype.fromObjectList = function(objectList){
 	return result;
 };
 
+Object.prototype.firstKey = function(object){
+	return Object.entries(object)[0][0];
+};
+
+Object.prototype.firstValue = function(object){
+	return Object.entries(object)[0][1];
+};
+
 //INPORTANT: Can't assign this to a variable (and then pass it to a function scope).
 // function doTemplate(templateLiteral, string) {
 // 	console.log(templateLiteral);
@@ -52,32 +50,42 @@ Array.prototype.fromObjectList = function(objectList){
 // doTemplate(template, json);
 
 
-//todo: see if you can get the followisng template from a handlebars template:
+//todo: see if you can get the following template from a handlebars template:
 let _library = {
 	el: '',
-	setOptionList: function(jsonData){
-		let options = this.isJSON(jsonData) ? 
-			jsonData.reduce((selectList, currentOption) => {
-				return selectList += (currentOption.selected) ? 
-						`<option value="${currentOption.value}" selected="selected">${currentOption.name}</option>`:
-						`<option value="${currentOption.value}">${currentOption.name}</option>`;
-				},'') : null;
-		this.el.innerHTML = options;
-		return options;
+	setTemplate: function(templateName){
+		_library.el.forEach(element => {
+			let templateHtml = templates.getHtml(templateName);
+			element.innerHTML = templateHtml.trim();
+		});
 	},
-	walkJSONPath: function(jsonData){
-
+	setDropDownList: function(array, selectId){
+		if (array){
+			_library.el.forEach(element => {
+				let html = `<select id="${selectId}">`;
+				array.forEach(function(item) {
+					let key = Object.firstKey(item) || "";
+					let value = Object.firstValue(item) || "";
+					html += `<option value="${key}">${value}</option>`;
+				});
+				html += '</select>';
+				element.innerHTML = html;
+	   		});
+	   	}
+	},
+	getDropDownValue: function(){
+		return _library.el[0].selectedOptions[0].value;
 	},
 	isJSON: function(dontKnow){
 		return dontKnow && typeof dontKnow === 'object';
 	},
 	insertHTML: function(html){
 		if (html){
-     		this.el.innerHTML = html;
+     		_library.el[0].innerHTML = html;
      	}
      	else 
      	{
-     		console.log('no html to process');
+     		console.log('no html to process in extensions.js | insertHTML(html)');
      	}
    	},
    	appendArray: function(array){

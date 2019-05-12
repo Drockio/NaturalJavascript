@@ -30,7 +30,7 @@ import { storage } from './crud.js';
 import { locale } from './locale.js';
 import { util } from './util.js';
 import { dd$ } from './extensions.js'; 
-import { applicationLoad } from '../applications/_applications.js';
+import { applications, applicationLoad } from '../applications/_applications.js';
 import { templates } from '../templates/_templateController.js';
 import { modal } from '../page_segments/modal.js';
 import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
@@ -41,10 +41,35 @@ import { termsAndConditionsPage } from '../page_segments/termsAndConditionsPage.
 
 //main load function
 window.onload=function(){
-	//future admin option
+	//TODO: future admin toggle with 'setup' as url "trigger"
 	//let setup = util.getUrlParameter('setup');
 
+
+	//TODO: set up getDropDownList like this:
+	//dd$('#appChooserDDL').getDropDownList(applications);
+
+	//generic application loader
+	//only loads one application at a time
 	applicationLoad.chooser(globals.defaultApplication);
+	
+	//get html for ddl for all applications 
+	let applicationDropDown = dd$('#appChooserDDL').setDropDownList(applications, 'appChoiceDDL');
+
+	dd$('#appChoiceDDL').on('change', function(){
+		//first try: //let selected = $('#appChooserDDL :selected').val();
+
+		let selected = dd$('#appChoiceDDL').getDropDownValue();
+		
+		if (selected){
+			applicationLoad.chooser(selected);
+		}
+	});
+
+	//let applicationDropDown = dropDownList.createHtml(applications);
+	
+	//use html via jquery
+	//$('#appChooserDDL').html(applicationDropDown);
+	//TODO: cleanup this loadm => update to dd$ local and make append inside getDropDownList(...)
 };
 
 window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {

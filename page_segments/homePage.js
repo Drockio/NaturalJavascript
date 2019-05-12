@@ -8,7 +8,7 @@ const homePage = {
 	display: function(){
 
 		//set up main
-		let product_site_main = templates.getHtml('homePage'); 
+		let product_site_main = templates.getHtml('homePage');
 		$('.container').empty().append(product_site_main);
 
 		//set up footer

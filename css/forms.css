@@ -94,6 +94,7 @@ select, input, option {
     display: grid;
     justify-content: space-between;
     grid-template-columns: 48% 48%;
+    grid-column-gap: 2%;
     grid-template-areas: 
         "checkoutForm productsInCart"
 }

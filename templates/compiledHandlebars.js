@@ -28,7 +28,7 @@ this["DD"]["templates/termsAndConditions.handlebars"] = Handlebars.template({"co
 },"useData":true});
 
 this["DD"]["templates/visuals.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<script id=\"visuals\" type=\"text/x-handlebars-template\">\n	Hit Visuals template! \n</script>";
+    return "<script id=\"visuals\" type=\"text/x-handlebars-template\">\n	<canvas id=\"visuals\"></canvas>\n</script>";
 },"useData":true});
 
 this["DD"]["templates/checkout/creditCardPage.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -107,6 +107,10 @@ this["DD"]["templates/checkout/thankYouPage.handlebars"] = Handlebars.template({
   return "<script id=\"thankYouPage\" type=\"text/x-handlebars-template\">\n	<h2>Your products will be on their way shortly</h2>\n		<div class=\"rounded\">\n			"
     + ((stack1 = ((helper = (helper = helpers.productsInCart || (depth0 != null ? depth0.productsInCart : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"productsInCart","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n		</div>\n</script>";
+},"useData":true});
+
+this["DD"]["templates/framework/applicationChooser.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<script id=\"applicationChooser\" type=\"text/x-handlebars-template\">\n	<div id=\"appChooser\">\n		<div id=\"appChooserDDL\"></div>\n	</div>\n</script>";
 },"useData":true});
 
 this["DD"]["templates/product/product.handlebars"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
