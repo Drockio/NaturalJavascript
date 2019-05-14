@@ -4,6 +4,7 @@ import { broadcast } from '../js/message.js';
 
 const konnektiveInterface = {
 	getProducts: async function(url){
+		debugger;
 		let productArray;
 		let result = await $.getJSON(url, function(response){
 			if (response.result === 'SUCCESS'){

@@ -6,9 +6,9 @@
 // visuals
 
 var globals = {
-	defaultApplication: 'visuals', //applications/_applications.js
-	apiServer: `https://localhost`,
-	crm: `local`, //choices: konnecktive, local
+	defaultApplication: 'greens',
+	apiServer: 'https://localhost',
+	crm: 'local', //choices: konnecktive, local
 	//domainName: 'http://localhost',
 	domainName: '*',
 	defaultCountryCode: 'US'

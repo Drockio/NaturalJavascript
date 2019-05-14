@@ -32,13 +32,13 @@ Array.prototype.fromObjectList = function(objectList){
 	return result;
 };
 
-Object.prototype.firstKey = function(object){
-	return Object.entries(object)[0][0];
-};
+// Object.prototype.firstKey = function(item){
+// 	return Object.entries(item)[0][0];
+// };
 
-Object.prototype.firstValue = function(object){
-	return Object.entries(object)[0][1];
-};
+// Object.prototype.firstValue = function(item){
+// 	return Object.entries(item)[0][1];
+// };
 
 //INPORTANT: Can't assign this to a variable (and then pass it to a function scope).
 // function doTemplate(templateLiteral, string) {
@@ -64,8 +64,8 @@ let _library = {
 			_library.el.forEach(element => {
 				let html = `<select id="${selectId}">`;
 				array.forEach(function(item) {
-					let key = Object.firstKey(item) || "";
-					let value = Object.firstValue(item) || "";
+					let key = Object.entries(item)[0][0] || "";
+					let value = Object.entries(item)[0][1] || "";
 					html += `<option value="${key}">${value}</option>`;
 				});
 				html += '</select>';

@@ -1,6 +1,5 @@
 import { util } from './util.js';
 import { storage } from './crud.js';
-import { productShim } from '../shims/product.js';
 
 const products = {
 	setDefaults: function(products){
@@ -17,11 +16,7 @@ const products = {
 		let array = util.arrayFromObjectList(jDataProducts);
 
 		//only shop products with an image.
-	    let productArray = array.filter(item => { return item.productImagePath; }); 
-
-	    //TODO: Remove shim!!! This should come from the CRM.
-	    //add price and categories
-	    products.shim(productArray);
+	    let productArray = array.filter(item => { return item.productImagePath; });
 
 	    //return the results with defaults
 	    productArray = products.setDefaults(productArray);
@@ -34,7 +29,7 @@ const products = {
 	//These are distinct features that the CRM doesn't currently provide, not defaults.
 	shim: function(productsArray){
 	    //CRM isn't providing prices, lets put some fake ones in there for now.
-		productShim.addPrices(productsArray);
+		//productShim.addPrices(productsArray);
 		//CRM isn't providing meta tags, lets put some fake ones in there for now.
 		productShim.addCategories(productsArray);
 	}

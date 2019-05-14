@@ -56,8 +56,6 @@ window.onload=function(){
 	let applicationDropDown = dd$('#appChooserDDL').setDropDownList(applications, 'appChoiceDDL');
 
 	dd$('#appChoiceDDL').on('change', function(){
-		//first try: //let selected = $('#appChooserDDL :selected').val();
-
 		let selected = dd$('#appChoiceDDL').getDropDownValue();
 		
 		if (selected){

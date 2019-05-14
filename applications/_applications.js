@@ -4,8 +4,8 @@ import { greenSiteController } from './greenSiteController.js';
 import { visualsController } from './visualsController.js';
 
 const applications = [
-	{ 	'visuals': 'visuals' },
 	{	'greens': 'greens' },
+	{ 	'visuals': 'visuals' },
 	{	'guitar': 'guitar' }
 	
 ];

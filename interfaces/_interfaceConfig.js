@@ -9,7 +9,7 @@ var interfaceConfig = {
 	chooseInterfaceUrls: function() {
 		switch (globals.crm) {
 			case 'local':
-				//urls.productUrl = 'http://localhost/natural/data/json.html?display=local_products';
+				//urls.productUrl = 'https://localhost/natural/data/json.html?display=local_products';
 				urls.productUrl = 'http://localhost/natural/data/products/local_products.json';
 				interfaces.getProducts = localInterface.getProducts;
 				break;

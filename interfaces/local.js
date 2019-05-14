@@ -11,11 +11,11 @@ const localInterface = {
 				product_categories.gatherAndSave(productArray);
 			}
 			else {
-				broadcast.error({result: "ERROR", message: `error in konnektive.js: ${response.result} - ${response.message}`});
+				broadcast.error({result: "ERROR", message: `error in local.js: ${response.result} - ${response.message}`});
 			}
 		})
 		.fail(function(jqxhr, textStatus, error){
-			broadcast.error({result: "FAIL", message: `error in konnektive.js: ${textStatus} - ${error}`});
+			broadcast.error({result: "FAIL", message: `error in local.js: ${textStatus} - ${error}`});
 		})
 		.catch(function(){});
 
