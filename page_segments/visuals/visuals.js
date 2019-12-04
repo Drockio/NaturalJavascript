@@ -7,7 +7,7 @@ const visuals = {
 		dd$('.container').setTemplate('visuals');
 
 		var context = this.initDrawing();
-		this.drawRectangle(context, 50, 50, 150, 100, 'blue');
+		this.drawRectangle(context, 50, 50, 150, 100, 'blue'); 
 		this.displayText(context, 'Drockio', 60, 80, 'title');
 		this.displayText(context, 'lorum ipsum', 60, 100);
 

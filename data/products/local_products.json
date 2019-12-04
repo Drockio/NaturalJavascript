@@ -1,7 +1,7 @@
 {
 	"result": "SUCCESS",
 	"message": {
-		"item":
+		"items":[
 			{
 			"campaignId": 2,
 			"productId": 67,
@@ -11,6 +11,17 @@
 			"currencySymbol": "$",
 			"price": "5",
 			"categories": ["green", "tasty", "inexpensive"]
+			},
+			{
+			"campaignId": 2,
+			"productId": 69,
+			"productName": "Inexpensive Greens!",
+			"productDescription": "Inexpensive Greens!",
+			"productImagePath": "img/greens.png",
+			"currencySymbol": "$",
+			"price": "2",
+			"categories": ["inexpensive"]
 			}
+		]
 	}
 }

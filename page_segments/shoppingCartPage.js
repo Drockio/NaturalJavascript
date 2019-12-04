@@ -20,6 +20,8 @@ const shoppingCartPage = {
 								
 		dd$('.modal-body .content').insertHTML(shoppingCartHtml);
 
+		shoppingCartPage.displayTotal();
+
 		return this;
 	},
 	addEventListeners: function(){

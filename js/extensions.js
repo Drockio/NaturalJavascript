@@ -46,7 +46,7 @@ Array.prototype.fromObjectList = function(objectList){
 // }
 
 // let template = `somebody ${jsonData}`;
-// let json = 'needs a walk';
+// let json = 'needs a walk'; 
 // doTemplate(template, json);
 
 
@@ -59,14 +59,15 @@ let _library = {
 			element.innerHTML = templateHtml.trim();
 		});
 	},
-	setDropDownList: function(array, selectId){
+	setDropDownList: function(selectId, array, selectedItem){
 		if (array){
 			_library.el.forEach(element => {
 				let html = `<select id="${selectId}">`;
 				array.forEach(function(item) {
 					let key = Object.entries(item)[0][0] || "";
 					let value = Object.entries(item)[0][1] || "";
-					html += `<option value="${key}">${value}</option>`;
+					let selected = value === selectedItem ? "selected" : "";
+					html += `<option value="${key}" ${selected}>${value}</option>`;
 				});
 				html += '</select>';
 				element.innerHTML = html;

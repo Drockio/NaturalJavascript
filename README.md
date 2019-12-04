@@ -29,7 +29,7 @@ TODO: update webserver install in drockio github
 - From a new website director: grunt-init new_template_name
 
 ## Development
-- use `grunt watch` to continuously monitor your javascript and compile handlebar templates.
+- use `grunt watch` to continuously monitor your javascript and compile handlebar templates. You can also start with ddwatch. 
 
 # Happy Coding!
 

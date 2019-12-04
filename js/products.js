@@ -31,7 +31,7 @@ const products = {
 	    //CRM isn't providing prices, lets put some fake ones in there for now.
 		//productShim.addPrices(productsArray);
 		//CRM isn't providing meta tags, lets put some fake ones in there for now.
-		productShim.addCategories(productsArray);
+		//productShim.addCategories(productsArray);
 	}
 };
 

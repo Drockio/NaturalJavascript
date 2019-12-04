@@ -7,7 +7,7 @@ const localInterface = {
 		let productArray;
 		let result = await $.getJSON(url, function(response){
 			if (response.result === 'SUCCESS'){
-				productArray = products.build(response.message);
+				productArray = products.build(response.message.items);
 				product_categories.gatherAndSave(productArray);
 			}
 			else {

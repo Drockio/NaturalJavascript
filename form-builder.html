@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>form builder</title>
+	<script  src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+	<style>
+		body {
+			font-family: arial;
+			font-size: 16px;
+			margin: 1% 9%;
+		}
+		input {
+			display: block;
+			margin-bottom: 10px;
+			width: 50%;
+			height: 2.5em;
+			font-size: 1.1em;
+			padding: 0 15px;
+			font-weight: bold;
+		}
+		select {
+			display: block;
+			margin-bottom: 10px;
+			width: 56%;
+			height: 3em;
+			font-size: 1.1em;
+			font-weight: bold;
+		}
+		option {
+			padding: 0 20px;
+		}
+		label {
+			margin: 10px 0 5px 0;
+			display: block;
+			font-style: italic;
+		}
+		.inputs {
+			margin-left: 32%;
+		}
+		input[type="submit"]{
+			width: 20.1em; 
+			height: 100px;
+		}
+		#example {
+			margin: 26px 0;
+		}
+		#example input {
+			border: 7px solid #da610a;
+		}
+		pre{
+		  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+		  margin-bottom: 10px;
+		  overflow: auto;
+		  width: auto;
+		  padding: 5px;
+		  background-color: #eee;
+		  width: 650px!ie7;
+		  padding-bottom: 20px!ie7;
+		  max-height: 600px;
+		}
+		xmp {
+			text-align: left;
+			font-size: 14px;
+		}
+	</style>
+</head>
+<body>
+	<div class="inputs">
+		<label for="label">Label Name</label>
+		<input type="text" id="label" value="First Name"></input>
+		<label for="value">Value</label>
+		<input id="value" name="send-value" type="text" value=""></input>
+		<label for="name">End point name</label>
+		<input id="name" name="send-name" type="text" value="Name"></input>
+		<label for="errorMessage">Error message</label>
+		<input id="errorMessage" name="errorMessage" type="text" value="Please enter"></input>
+		<label for="type">Type</label>
+		<select id="type">
+			<option>text</option>
+			<option>name</option>
+			<option>city</option>
+			<option>email</option>
+			<option>address</option>
+			<option>zip</option>
+			<option>phone</option>
+		</select>
+		<p id="example"></p>
+	</div>
+	<p id="result"></p>
+
+	<script type="text/javascript">
+			window.onload = function() 
+			{
+				function generateLabel(options)
+				{
+					let type = options.type === 'phone' ? 'tel' : options.type === 'email' ? 'email' : options.type === 'month' ? 'month' : 'text';
+					let actual = `<label for="${options.myFor}">${options.label}</label>
+	<input type="${type}" id="${options.myFor}" name="${options.name}" class="actual" value="${options.value}"></input></xmp></pre>`;
+
+					let code = `<pre><xmp><div class="field">
+		<label for="${options.myFor}">${options.label}</label>
+		<input type="${type}" id="${options.myFor}" name="${options.name}" data-required-type="${type}" data-required-message="${options.errorMessage}"></input>
+	</div></xmp></pre></xmp></pre>`
+
+					options.result.innerHTML = code;
+					options.example.innerHTML = actual;
+				}
+
+				function getInputs()
+				{
+					let options = {
+						label: document.getElementById('label').value,
+						name: document.getElementById('name').value,
+						myFor: document.getElementById('name').value + '_id',
+						type: document.getElementById('type').value,
+						value: document.getElementById('value').value,
+						result: document.getElementById('result'),
+						example: document.getElementById('example'),
+						errorMessage: document.getElementById('errorMessage').value
+					}
+					return options;
+				}
+
+				function bidirectional()
+				{
+					let options = getInputs();
+					let newValue = document.querySelector('#example .actual').value;
+					options.value = newValue;
+					document.getElementById('value').value = newValue;
+					generateLabel(options);
+				}
+
+				function process()
+				{
+					let options = getInputs();
+					generateLabel(options);
+				}
+
+				function registerEvent(id, event, passedFunction)
+				{
+					document.getElementById(id).addEventListener(event, function(){passedFunction()});
+				}
+
+				process();
+
+				registerEvent('label', 'keyup', process);
+				registerEvent('name', 'keyup', process);
+				registerEvent('value', 'keyup', process);
+				registerEvent('name', 'keyup', process);
+				registerEvent('type', 'change', process);
+				registerEvent('errorMessage', 'keyup', process);
+				document.querySelector('#example .actual').addEventListener('keyup', function(){bidirectional()});
+		}
+	</script>
+</body>
+</html>

@@ -2,24 +2,31 @@ import { message } from '../js/message.js';
 import { interfaceConfig } from '../interfaces/_interfaceConfig.js';
 import { greenSiteController } from './greenSiteController.js';
 import { visualsController } from './visualsController.js';
+import { vic20Controller } from './vic20Controller.js';
 
 const applications = [
 	{	'greens': 'greens' },
 	{ 	'visuals': 'visuals' },
-	{	'guitar': 'guitar' }
+	{	'vic20': 'vic20' }
+
+	//future applications
+	//{ 'satellite': 'satellite'},
+	//{	'guitar': 'guitar' },
+	//{	'sandbox': 'sandbox' }
 	
 ];
 
 const applicationLoad = {
 	chooser: function(application){
 		switch (application){
-			// enable/disable visuals application:
 			case 'visuals':
 				applicationLoad.visualSandbox();
 				break;
-			// enable/disable greensite application:
 			case 'greens':
 				applicationLoad.greensSite();
+				break;
+			case 'vic20':
+				applicationLoad.vic20();
 				break;
 		}
 	},
@@ -44,6 +51,14 @@ const applicationLoad = {
 	visualSandbox: function(){
 		visualsController.registerPageDisplayListeners();
 		message.post('displayVisuals');
+	},
+	vic20: function(){
+		vic20Controller.registerPageDisplayListeners();
+		message.post('displayInterface');
+	},
+	sandbox: function(){
+		sandboxController.registerPageDisplayListeners();
+		message.post('displayInterface');
 	}
 };
 

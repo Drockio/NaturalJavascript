@@ -18,8 +18,8 @@ var interfaceConfig = {
 
 				var konnektiveSettings = {
 					campaignId: '2',
-					apiUserId: 'ddunnom_api',
-					apiPassword: 'LevelIt!!99'
+					apiUserId: '',
+					apiPassword: ''
 				}
 
 				const konnektiveBaseUrl = `?campaignId=${konnektiveSettings.campaignId}&loginId=${konnektiveSettings.apiUserId}&password=${konnektiveSettings.apiPassword}`;

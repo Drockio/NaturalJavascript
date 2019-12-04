@@ -53,7 +53,7 @@ window.onload=function(){
 	applicationLoad.chooser(globals.defaultApplication);
 	
 	//get html for ddl for all applications 
-	let applicationDropDown = dd$('#appChooserDDL').setDropDownList(applications, 'appChoiceDDL');
+	let applicationDropDown = dd$('#appChooserDDL').setDropDownList('appChoiceDDL', applications, globals.defaultApplication);
 
 	dd$('#appChoiceDDL').on('change', function(){
 		let selected = dd$('#appChoiceDDL').getDropDownValue();
