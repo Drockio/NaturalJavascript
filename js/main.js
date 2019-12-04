@@ -1,25 +1,3 @@
-//TODO:
-//- css separation
-//- checkin
-//- finish js cleanup
-//- checkin
-//- filtering of products - LINQ like
-//- checkin
-//- investigate country/local behavior
-//- checkin
-//- push to drockio remote if you haven't been paid.
-//- investigate server side git. Right now there is a server.js and api/server.js, we don't need two.
-//- home page segment loader dd$('.footer', 'templateName')
-//- interfaces for talking to controllers - decide where mapping for non-konnektive goes
-//- go through and do a test on broadcast errors on each page. put html into a template
-//- add shroud between each page
-//- cool thank you page
-//- Hook importUserPage.postStandardInputs back up
-//- Remove references to TAKETHISOUT - it sets a standard price. 
-//- Use campaign 1 or 6 to display "NO products available"
-//- Use campaign 4,9 to work on some alignment issues.
-//- Node css plugin to check for unclosed or poorly formatted css? html?
-
 // original git setup:
 // origin	https://github.com/LevelAds/Greens.git (fetch)
 // origin	https://github.com/LevelAds/Greens.git (push)
