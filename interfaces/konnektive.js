@@ -4,21 +4,16 @@ import { broadcast } from '../js/message.js';
 
 const konnektiveInterface = {
 	getProducts: async function(url){
-		debugger;
 		let productArray;
-		let result = await $.getJSON(url, function(response){
-			if (response.result === 'SUCCESS'){
-				productArray = products.build(response.message);
-				product_categories.gatherAndSave(productArray);
-			}
-			else {
-				broadcast.error({result: "ERROR", message: `error in konnektive.js: ${response.result} - ${response.message}`});
-			}
-		})
-		.fail(function(jqxhr, textStatus, error){
-			broadcast.error({result: "FAIL", message: `error in konnektive.js: ${textStatus} - ${error}`});
-		})
-		.catch(function(){});
+		let response = await fetch(url);
+		const responseJson = await response.json();
+		if (!response.ok || responseJson.result !== "SUCCESS"){
+			broadcast.error({result: "ERROR", message: `error in local.js: ${responseJson.result} - ${responseJson.message}`});
+		} else {
+			productArray = products.build(responseJson.message.items);
+			product_categories.gatherAndSave(productArray);
+		}
+
 
 		return productArray;
 	}
