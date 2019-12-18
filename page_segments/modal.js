@@ -3,13 +3,15 @@ import { message } from '../js/message.js';
 import { dd$ } from '../js/extensions.js';
 
 const modal = {
-	//display: function(title, pageHTML, forwardButtonJSON, backButtonJSON) {
-	display: function(){
+
+	display: function(attributes){
+		//[parameter] attributes: title, backButtonText || null, forwardButtonText || null
+
 		//remove main body scrool
 		$('body').addClass('removeScroll');
 
-		//get content
-		let modalMarkup = templates.getHtml('modal');
+		//get html. 
+		let modalMarkup = templates.getHtml('modal', attributes);
 
 		//add content
 		$('.modal-content').empty().append(modalMarkup);
@@ -27,37 +29,23 @@ const modal = {
 	updateModal: function(attributes){
 		dd$('.modalTitle').text(attributes.title);
 	},
-	// getAttributes: function(title, pageHTML, forwardButtonJSON, backButtonJSON){
-	// 	//set up attributes for modal template
-	// 	let attributes = {};
+	setAttributes: function(title, backButton, forwardButton){
+		//set up attributes for modal template
+		let attributes = {};
 
-	// 	//this could potentially use a re-write, it is mostly for safety.
-	// 	attributes.forwardAttributes = (forwardButtonJSON && forwardButtonJSON.attributes) ? modal.extractAttributes(forwardButtonJSON.attributes) : null;
-	// 	attributes.backwardAttributes = (backButtonJSON && backButtonJSON.attributes) ? modal.extractAttributes(backButtonJSON.attributes) : null;
-	// 	attributes.forwardButton = (forwardButtonJSON && forwardButtonJSON.name) ? 
-	// 		`<button class="forward navigation" ${attributes.forwardAttributes || ''}>${forwardButtonJSON.name}</button>` : '';
-	// 	attributes.backButton = (backButtonJSON && backButtonJSON.name) ? 
-	// 		`<button class="backward navigation" ${attributes.backwardAttributes || ""}>${backButtonJSON.name}</button>` : '';
-	// 	attributes.title = title;
-	// 	attributes.html = pageHTML;
+		//this could potentially use a re-write, it is mostly for safety.
+		attributes.forwardButton = forwardButton ? 
+			`<button class="forward navigation">${forwardButton}</button>` : '';
+		attributes.backButton = backButton ? 
+			`<button class="backward navigation">${backButton}</button>` : '';
+		attributes.title = title;
 
-	// 	return attributes;
-	// },
+		return attributes;
+	},
 	//usually triggered by hideModal from main.js
 	hide: function(){
 		$('#main-modal').css('display', 'none');
 		$('body').removeClass('removeScroll');
-	},
-	extractAttributes: function(jData){
-		if (jData){
-			let accumulator = '';
-			jData.map(item => {
-				Object.entries(item).forEach(([key, value]) => {
-					accumulator += (`${key}="${value}" `);
-				});
-			});
-			return accumulator;
-		}
 	}
 };
 

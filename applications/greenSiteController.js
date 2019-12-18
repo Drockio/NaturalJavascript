@@ -1,8 +1,10 @@
+import { globals } from '../js/config.js';
 import { message } from '../js/message.js';
 import { modal } from '../page_segments/modal.js';
 import { homePage } from '../page_segments/homePage.js';
 import { productList } from '../page_segments/productList.js';
 import { categoryList } from '../page_segments/categoryList.js';
+import { importUserPage } from '../page_segments/importUserPage.js';
 import { shoppingCartPage } from '../page_segments/shoppingCartPage.js';
 
 const greenSiteController = {

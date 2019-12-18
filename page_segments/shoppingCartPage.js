@@ -12,7 +12,8 @@ const shoppingCartPage = {
 		const SHOPPING_CART_HEADER = 'Add to Cart';
 		const cart = shoppingCart.getCleanedCart();
 
-		modal.display().addEventListeners();
+		//attributes are: title, backButtonText || null, forwardButtonText || null
+		modal.display(modal.setAttributes('Shopping Cart', null, 'Checkout')).addEventListeners();
 
 		let shoppingCartHtml = shoppingCart.isCartEmpty() ? 
 								templates.getHtml('checkout/shoppingCartEmpty') : 

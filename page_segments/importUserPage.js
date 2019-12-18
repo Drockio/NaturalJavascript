@@ -1,3 +1,4 @@
+import { globals } from '../js/config.js';
 import { urls } from '../interfaces/_interfaceconfig.js';
 import { message } from '../js/message.js';
 import { validate } from '../js/validation.js';

@@ -6,10 +6,13 @@ const localInterface = {
 	getProducts: async function(url){
 		let productArray;
 		let response = await fetch(url);
-		const responseJson = await response.json();
-		if (!response.ok || responseJson.result !== "SUCCESS"){
-			broadcast.error({result: "ERROR", message: `error in local.js: ${responseJson.result} - ${responseJson.message}`});
+		if (!response.ok){
+			broadcast.error({result: "ERROR", message: `error in local.js.`});
 		} else {
+			const responseJson = await response.json();
+			if (responseJson.result !== "SUCCESS"){
+				broadcast.error({result: "ERROR", message: `error in local.js: ${responseJson.result} - ${responseJson.message}`});
+			}
 			productArray = products.build(responseJson.message.items);
 			product_categories.gatherAndSave(productArray);
 		}

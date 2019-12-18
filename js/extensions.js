@@ -81,7 +81,7 @@ let _library = {
 		return dontKnow && typeof dontKnow === 'object';
 	},
 	insertHTML: function(html){
-		if (html){
+		if (html && _library.el[0]){
      		_library.el[0].innerHTML = html;
      	}
      	else 
