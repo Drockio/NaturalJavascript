@@ -22,6 +22,7 @@ const importUserPage = {
 		let state = standardInputs['state'];
 
 		let continueButton = {'name': 'Continue', 'attributes': [{ 'form': 'registration-form' }, {'type': 'submit'}]};
+		
 		modal
 			.display('Checkout', checkoutFormTop, continueButton, { 'name': 'Back'})
 			.addEventListeners();

@@ -70,7 +70,6 @@ const creditCardPage = {
 	},
 	post: function(ccData, url){
 		message.post('displayShroud');
-		debugger;
 		let results = $.ajax({
 			type: "POST",
 			url: url,
